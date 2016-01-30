@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="output" path="bin"/>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry sourcepath="/home/robo/.gradle/caches/modules-2/files-2.1/jaci.openrio.toast/Toast/2.4.4/c3d8aa50cea7aca59cf5929b0cfe4ff5b5faa82d/Toast-2.4.4-sources.jar" kind="lib" path="/home/robo/.gradle/caches/modules-2/files-2.1/jaci.openrio.toast/Toast/2.4.4/9b75ddccccf472ac12241b9fb3c76c6db2336f27/Toast-2.4.4.jar"/>
-</classpath>
