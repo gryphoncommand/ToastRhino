@@ -1,0 +1,8 @@
+<launchConfiguration type='org.eclipse.jdt.launching.remoteJavaApplication'>
+  <stringAttribute key='org.eclipse.jdt.launching.VM_CONNECTOR_ID' value='org.eclipse.jdt.launching.socketAttachConnector' />
+  <stringAttribute key='org.eclipse.jdt.launching.PROJECT_ATTR' value='ToastRhino' />
+  <mapAttribute key='org.eclipse.jdt.launching.CONNECT_MAP'>
+    <mapEntry key='hostname' value='roborio-3966.local' />
+    <mapEntry key='port' value='5910' />
+  </mapAttribute>
+</launchConfiguration>

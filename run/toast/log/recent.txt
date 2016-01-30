@@ -1,0 +1,18 @@
+ ________    ______                 __   
+((       )  /_  __/___  ____ ______/ /_  
+||  o o  |   / / / __ \/ __ `/ ___/ __/  
+||   3   |  / / / /_/ / /_/ (__  ) /_    
+\\_______/ /_/  \____/\__,_/____/\__/    
+
+[29/01/16-11:36:45] [Toast] [Bootstrap] [INFO] Toast Version: 2.4.4
+[29/01/16-11:36:45] [Toast] [Bootstrap] [INFO] Toast Commit Hash: 074932c
+[29/01/16-11:36:45] [Toast] [Core-Initialization] [INFO] Toast Started with Run Arguments: [-sim, --search, --no-color, -ide, ECLIPSE]
+[29/01/16-11:36:45] [Toast] [Pre-Initialization] [INFO] Slicing Loaf...
+[29/01/16-11:36:46] [Toast] [Initialization] [INFO] Nuking Toast...
+platform: /Linux/amd64/
+[29/01/16-11:36:47] [Toast] [Pre-Start] [INFO] Buttering Bread...
+[29/01/16-11:36:47] [Toast|Loader] [Pre-Start] [INFO] Module Loaded: ToastRhino@0.0.1
+[29/01/16-11:36:47] [Toast] [Start] [INFO] Fabricating Sandwich...
+[29/01/16-11:36:47] [Toast] [Start] [INFO] Verdict: TOTE-aly delicious
+[29/01/16-11:36:47] [Toast] [Main] [INFO] Total Initiation Time: 1.815 seconds
+[29/01/16-11:38:20] [Toast] [AWT-EventQueue-0] [INFO] Robot Shutting Down...
