@@ -4,10 +4,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
+//import jaci.openrio.module.grip;
+import jaci.openrio.toast.core.loader.annotation.Branch;
 
 /**
  *
  */
+@Branch(branch = "frc.team3966.toastrhino.commands.ChaseBall", dependency = "GRIP-Wrapper", method = "some_other_module")
 public class ChaseBall extends Command {
 
   NetworkTable GRIPtable;
