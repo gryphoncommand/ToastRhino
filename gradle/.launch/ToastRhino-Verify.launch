@@ -1,6 +1,0 @@
-<launchConfiguration type='org.eclipse.jdt.launching.localJavaApplication'>
-  <stringAttribute key='org.eclipse.jdt.launching.MAIN_TYPE' value='jaci.openrio.toast.core.ToastBootstrap' />
-  <stringAttribute key='org.eclipse.jdt.launching.PROJECT_ATTR' value='ToastRhino' />
-  <stringAttribute key='org.eclipse.jdt.launching.WORKING_DIRECTORY' value='/home/robo/code/3966/ToastRhino/run' />
-  <stringAttribute key='org.eclipse.jdt.launching.PROGRAM_ARGUMENTS' value='-verify -sim --search --no-color -ide ECLIPSE' />
-</launchConfiguration>
