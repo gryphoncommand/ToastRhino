@@ -1,6 +1,9 @@
 sudo: false
 language: java
-install: gradle assemble; git clone https://github.com/LN-STEMpunks/wpilib-mirror.git ~/wpilib
+install:
+  - gradle assemble
+  - git clone https://github.com/LN-STEMpunks/wpilib-mirror.git ~/wpilib
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 script: gradle verify
 jdk: oraclejdk8
 notifications:
