@@ -1,7 +1,7 @@
 # ToastRhino
 [![Build Status](https://travis-ci.org/LN-STEMpunks/ToastRhino.svg?branch=master)](https://travis-ci.org/LN-STEMpunks/ToastRhino)
 
-Rhino robot code, now using Toast and Gradle!
+Rhino robot code, now using [Toast](https://github.com/Open-RIO/ToastAPI) and Gradle!
 
 Although the system becomes much more complex, the Toast API simplifies our code!
 
