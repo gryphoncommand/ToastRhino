@@ -5,8 +5,8 @@ before_install:
 - sudo apt-get update -qq
 - sudo apt-get install g++-4.8 -y
 install:
-- gradle assemble
 - git clone https://github.com/LN-STEMpunks/wpilib-mirror.git ~/wpilib
+- gradle assemble
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 script: gradle verify
 jdk: oraclejdk8
