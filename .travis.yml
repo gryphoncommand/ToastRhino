@@ -1,15 +1,15 @@
 sudo: true
 language: java
 before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update -qq
-  - sudo apt-get install g++-4.8 -y
+- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+- sudo apt-get update -qq
+- sudo apt-get install g++-4.8 -y
 install:
-  - gradle assemble
-  - git clone https://github.com/LN-STEMpunks/wpilib-mirror.git ~/wpilib
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+- gradle assemble
+- git clone https://github.com/LN-STEMpunks/wpilib-mirror.git ~/wpilib
+- if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 script: gradle verify
 jdk: oraclejdk8
 notifications:
   slack:
-    secure: DV80Dq5e7hQgj5wzJAL2pCGO7qxJEAIni9HYaXqfkYD65cIG1PRpU4JbcWoo/x9z6omC4kcXbYXB+WBfl+qptA2+X0COqwX52ghN9HgFYQtNszlM+5d4QJ4AozbCp5q1PlwPkTKuv+08chdRao/vqqGZmpbVcoUFKt/TDuItnW4TxYwvtibIJBC9P2uqHitzp3Bf8EXnYWMw5O2HgyLGdxd12crIRu0YKSlB4GlVGTRN46QxTYi4R2g2PK3iaLvRVrqLkdKzkUlp5/nqS+/Ts+iGYNGWroC0aud0YFAOrGciO0CNkXBuTSUJCCGAPealzX1VRuWmZxxzyq77D2kcGb5pQwswhnxGk7JP69d7dkIduZp5hfoiLAL/kW/fOkdlg9mn9gaD2etgNdjcXe4/zpWkYSHUuJGFM6aOX90kVygFf90rrE9aK5mTyiEdNcDwJ+XnusvKBFGZHBpp9JxTZyKv9VSXRyiVN7MxNVuj/pA5JXdVQkjQ7psuG3IJTLrc790efMDeyyD6451WaZt7ekBXu15B+kZhZBuw71R2VvsnvoyhFeZPMFePYlKXovThYId/aROdE9QB2kevws/IlgdEyu6wruWhvA1M2vmb5dvyU7TwrNm3DV+TWWjoWgr8cvg03bHuSTOhidltgilmECHji2lAxikSy2Hiecl4yqs=
+    secure: N9uqPETJKESB5iZyzYq5iZgR0H/tFO1nf9QdyIZ1hJ4Xx6jIIX78n6HxS2Ky1YOUYfax/y3XAYHEXH8UF5JvZ8f+VeU29lkZIm63dKOX3XW/wNgnl0NY5QRKni6t2CVcUC5+5qclRapoKo48326HCv9o9ExsP8II78PxErfIGBf/N19NtgoeVDjk07Qs6D/hoeZYJ7b/Nn/nD47clPY5Vt+jJM/o4JbOdXz5/feRRJsmezhh0r4anbHWjOrNia5GKEYSh7plu1ZiuxUNt+v8Rl1tRSOTGOusCkHJdMcPUJ1tazJv+JE5m6U+TuwMa0RiLoCod5eZ/DGgmDpTK/DL8r6VR1g5M9sI0rTU7ArXvtNVzvyVh4KHBn/kFwvom/0m8j98sj3BXODJh8ilnHu5uoicYyXaKo4IRamFjk7NKOgVpHQy9GnBo+WQcLy+F3Vjuiemyw4Tw2wLMSb5xTn90bYj7TuYumcVrqqDFjRDZN81e8Gs6FKn6EUsoLIIBPReUVR9oL6StTKKrYe8dWqWJ9uLG0dnjINZzGZhk2gefDt9CE5pu7x8w7RRmUtlJ9R9fQB7U7KFQYR6M116Y0OGojgj2MYD672eN+/PKEjz5oC0qQNDbliMpozim4EkXzMFdjYS20mNGVRYQIIy/NY817UTjYcDuP7E3hOKKDsnguo=
