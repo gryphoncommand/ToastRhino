@@ -23,10 +23,10 @@ public class RobotMap {
 
   // Joysticks
   public static int cstick = 0;
-  
+
   // Encoder full speed
   public static double topspeed = 1000;
-  
+
   // Gyro DIO port
   public static int gyroport = 0;
 

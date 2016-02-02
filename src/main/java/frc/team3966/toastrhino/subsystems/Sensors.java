@@ -1,7 +1,7 @@
 package frc.team3966.toastrhino.subsystems;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotMap;
@@ -31,10 +31,9 @@ public class Sensors extends Subsystem {
   public void dash_gyro() {
     SmartDashboard.putData("Analog 0 Gyro", gyro);
   }
-  
+
   public void dash_all() {
     dash_accel();
     dash_gyro();
   }
 }
-
