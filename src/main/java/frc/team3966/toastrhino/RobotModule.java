@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
+import frc.team3966.toastrhino.commands.Shoot;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Sensors;
@@ -27,6 +28,7 @@ public class RobotModule extends IterativeModule {
 
   Command autonomousCommand;
   Command TankDrive;
+  Command ShootCommand;
   SendableChooser chooser;
 
   @Override
@@ -45,6 +47,7 @@ public class RobotModule extends IterativeModule {
     logger.info("robotInit() started");
     oi = new OI();
     TankDrive = new TankDrive();
+    ShootCommand = new Shoot();
 
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
@@ -119,6 +122,7 @@ public class RobotModule extends IterativeModule {
     // this line or comment it out.
     if (autonomousCommand != null) autonomousCommand.cancel();
     if (TankDrive != null) TankDrive.start();
+    if (ShootCommand != null ) ShootCommand.start();
   }
 
   /**

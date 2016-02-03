@@ -20,6 +20,7 @@ public class RobotMap {
 
   public static final int SLmotor = 2;
   public static final int SRmotor = 3;
+  public static final int Gmotor = 9;
 
   // Joysticks
   public static int cstick = 0;

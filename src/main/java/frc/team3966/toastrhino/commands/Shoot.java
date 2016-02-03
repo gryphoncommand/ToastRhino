@@ -24,6 +24,7 @@ public class Shoot extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
+    RobotModule.shooter.setGripperPos(RobotModule.oi.controller.getRawAxis(4));
   }
 
   // Make this return true when this Command no longer needs to run execute()

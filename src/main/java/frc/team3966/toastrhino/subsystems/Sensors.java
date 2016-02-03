@@ -1,6 +1,7 @@
 package frc.team3966.toastrhino.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,6 +17,7 @@ public class Sensors extends Subsystem {
 
   public static BuiltInAccelerometer accel = new BuiltInAccelerometer();
   public static AnalogGyro gyro = new AnalogGyro(RobotMap.gyroport);
+  public static AnalogInput gripper_pos = new AnalogInput(1);
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
