@@ -26,6 +26,7 @@ public class Shooter extends Subsystem {
 
   private static PIDController gripper = new PIDController(100.0, 0.0, 0.0, gripper_pos, Gmotor);
 
+  /*
   public Shooter() {
     gripper.enable();
     gripper.setInputRange(-0.7, 1.0); //Strange but true
@@ -35,6 +36,7 @@ public class Shooter extends Subsystem {
     gripper.enable();
     Gmotor.setInverted(true);
   }
+  */
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -44,8 +46,8 @@ public class Shooter extends Subsystem {
   public void setGripperPos(double setpoint) {
     gripper.setSetpoint(setpoint);
     SmartDashboard.putData("Gripper", gripper);
-    SmartDashboard.putNumber("Gmotor", Gmotor.getSetpoint());
-    SmartDashboard.putNumber("Gripper Pos", gripper_pos.pidGet());
+    //SmartDashboard.putNumber("Gmotor", Gmotor.getSetpoint());
+    //SmartDashboard.putNumber("Gripper Pos", gripper_pos.pidGet());
     
   }
 }

@@ -3,6 +3,7 @@ package frc.team3966.toastrhino.subsystems;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotMap;
@@ -18,6 +19,7 @@ public class Sensors extends Subsystem {
   public static BuiltInAccelerometer accel = new BuiltInAccelerometer();
   public static AnalogGyro gyro = new AnalogGyro(RobotMap.gyroport);
   public static AnalogInput gripper_pos = new AnalogInput(1);
+  public static PowerDistributionPanel PDP = new PowerDistributionPanel();
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -25,13 +27,15 @@ public class Sensors extends Subsystem {
   }
 
   public void dash_accel() {
-    SmartDashboard.putNumber("Accelerometer X", accel.getX());
-    SmartDashboard.putNumber("Accelerometer Y", accel.getY());
-    SmartDashboard.putNumber("Accelerometer Z", accel.getZ());
+    SmartDashboard.putData("InternalAccelerometer", accel);
   }
 
   public void dash_gyro() {
     SmartDashboard.putData("Analog 0 Gyro", gyro);
+  }
+  
+  public void dash_voltage() {
+    
   }
 
   public void dash_all() {

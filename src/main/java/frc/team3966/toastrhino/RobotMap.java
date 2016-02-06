@@ -13,14 +13,15 @@ public class RobotMap {
 
   // Front Right FR
   // Back Left BL
-  public static final int FRmotor = 4;
-  public static final int BRmotor = 6;
-  public static final int FLmotor = 7;
-  public static final int BLmotor = 1;
+  public static final int FRmotor = 0;
+  public static final int BRmotor = 1;
+  public static final int FLmotor = 2;
+  public static final int BLmotor = 3;
 
-  public static final int SLmotor = 2;
-  public static final int SRmotor = 3;
-  public static final int Gmotor = 9;
+  public static final int SLmotor = 4;
+  public static final int SRmotor = 5;
+  public static final int Gmotor = 6;
+  public static final int Kmotor = 7;
 
   // Joysticks
   public static int cstick = 0;

@@ -28,7 +28,7 @@ public class RobotModule extends IterativeModule {
 
   Command autonomousCommand;
   Command TankDrive;
-  Command ShootCommand;
+  //Command ShootCommand;
   SendableChooser chooser;
 
   @Override
@@ -47,7 +47,7 @@ public class RobotModule extends IterativeModule {
     logger.info("robotInit() started");
     oi = new OI();
     TankDrive = new TankDrive();
-    ShootCommand = new Shoot();
+    //ShootCommand = new Shoot();
 
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
@@ -122,7 +122,7 @@ public class RobotModule extends IterativeModule {
     // this line or comment it out.
     if (autonomousCommand != null) autonomousCommand.cancel();
     if (TankDrive != null) TankDrive.start();
-    if (ShootCommand != null ) ShootCommand.start();
+    //if (ShootCommand != null ) ShootCommand.start();
   }
 
   /**
