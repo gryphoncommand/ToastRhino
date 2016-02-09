@@ -42,4 +42,12 @@ public class Navigation extends Subsystem {
       return false;
     }
   }
+  
+  public double getNorthHeading() {
+    if (navx != null) return navx.getAngle();
+    else {
+      DriverStation.reportError("Tried .getCompassHeading() without navX sensor!", false);
+      return 180;
+    }
+  }
 }

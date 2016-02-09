@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.JumpScare;
+import frc.team3966.toastrhino.commands.PointNorth;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -57,6 +58,7 @@ public class RobotModule extends IterativeModule {
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
     chooser.addObject("Jump Scared", new JumpScare());
+    chooser.addObject("Point North", new PointNorth());
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putBoolean("Initialized", true);
@@ -120,6 +122,7 @@ public class RobotModule extends IterativeModule {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    sensors.dash_all();
   }
 
   @Override
