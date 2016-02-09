@@ -1,5 +1,7 @@
 package frc.team3966.toastrhino;
 
+//import frc.team3966.toastrhino.commands.Shoot;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -7,9 +9,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
-import frc.team3966.toastrhino.commands.Shoot;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
+import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.subsystems.Sensors;
 import frc.team3966.toastrhino.subsystems.Shooter;
 import jaci.openrio.toast.lib.log.Logger;
@@ -22,6 +24,7 @@ public class RobotModule extends IterativeModule {
   public static final Drive drive = new Drive();
   public static final Shooter shooter = new Shooter();
   public static final Sensors sensors = new Sensors();
+  public static final Navigation navigation = new Navigation();
   public static OI oi;
 
   NetworkTable table;
@@ -33,12 +36,13 @@ public class RobotModule extends IterativeModule {
 
   @Override
   public String getModuleName() {
+    DriverStation.reportError("I AM A RHINO", false);
     return "ToastRhino";
   }
 
   @Override
   public String getModuleVersion() {
-    return "0.0.1";
+    return "0.0.2"; // A version higher than 0.0.1????
   }
 
   @Override

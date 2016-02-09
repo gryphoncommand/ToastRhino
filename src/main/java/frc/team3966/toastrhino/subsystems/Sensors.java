@@ -34,12 +34,14 @@ public class Sensors extends Subsystem {
     SmartDashboard.putData("Analog 0 Gyro", gyro);
   }
   
-  public void dash_voltage() {
-    
+  public void dash_power() {
+    SmartDashboard.putNumber("PDP Voltage", PDP.getVoltage());
+    SmartDashboard.putNumber("PDP Total Amps", PDP.getTotalCurrent());
   }
 
   public void dash_all() {
     dash_accel();
     dash_gyro();
+    dash_power();
   }
 }
