@@ -22,7 +22,7 @@ public class Navigation extends Subsystem {
     SmartDashboard.putBoolean("NavX Online", false);
   }
 
-  public static void initNavX() {
+  public void initNavX() {
     try {
       /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
       /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
@@ -35,7 +35,7 @@ public class Navigation extends Subsystem {
     }
   }
   
-  public static boolean isMoving() {
+  public boolean isMoving() {
     if (navx != null) return navx.isMoving();
     else {
       DriverStation.reportError("Tried .isMoving() without navX sensor!", false);
