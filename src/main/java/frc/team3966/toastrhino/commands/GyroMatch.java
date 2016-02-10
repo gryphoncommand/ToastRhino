@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
 
-public class PointNorth extends Command {
+public class GyroMatch extends Command {
 
-  public PointNorth() {
+  public GyroMatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotModule.navigation);
