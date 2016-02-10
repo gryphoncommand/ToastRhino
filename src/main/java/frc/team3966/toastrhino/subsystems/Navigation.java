@@ -59,6 +59,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
+  
   public double getDisplacementY() {
     if (navx != null) return navx.getDisplacementY();
     else {
@@ -66,11 +67,29 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
+  
   public double getDisplacementZ() {
     if (navx != null) return navx.getDisplacementZ();
     else {
       DriverStation.reportError("Tried .getDisplacementZ() without navX sensor!", false);
       return 0.0;
     }
+  }
+  
+  public float getTempC() {
+    if (navx != null) return navx.getTempC();
+    else {
+      DriverStation.reportError("Tried .getTempC() without navX sensor!", false);
+      return 25.0f;
+    }
+  }
+  
+  public double getDisplacementTotal() {
+    double X = 0.0, Y = 0.0, Z = 0.0;
+    X = this.getDisplacementX();
+    Y = this.getDisplacementY();
+    Z = this.getDisplacementZ();
+    
+    return Math.sqrt(X * X + Y * Y + Z * Z);
   }
 }
