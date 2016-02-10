@@ -21,15 +21,15 @@ public class PointNorth extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     SmartDashboard.putBoolean("Scared?", RobotModule.navigation.isMoving());
-    SmartDashboard.putNumber("Compass Heading", RobotModule.navigation.getNorthHeading());
+    SmartDashboard.putNumber("Compass Heading", RobotModule.navigation.getAngle());
 
     //    if ( RobotModule.navigation.getNorthHeading() > 195 ) {
     //      RobotModule.drive.TankDrive(0.3, -0.3);
     //    } else if ( RobotModule.navigation.getNorthHeading() < 165 ) {
     //      RobotModule.drive.TankDrive(-0.3, 0.3);
     //    } else {
-    double leftp = (( RobotModule.navigation.getNorthHeading() - 180 ) / 40.0);
-    double rightp = - (( RobotModule.navigation.getNorthHeading() - 180 ) / 40.0);
+    double leftp = (( RobotModule.navigation.getAngle() - 180 ) / 40.0);
+    double rightp = - (( RobotModule.navigation.getAngle() - 180 ) / 40.0);
     
     leftp = this.ensureRange(leftp, -0.5, 0.5);
     rightp = this.ensureRange(rightp, -0.5, 0.5);

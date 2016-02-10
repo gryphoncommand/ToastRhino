@@ -28,6 +28,7 @@ public class Navigation extends Subsystem {
       /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
       navx = new AHRS(SPI.Port.kMXP);
+      navx.resetDisplacement();
       SmartDashboard.putBoolean("NavX Online", true);
     } catch (RuntimeException ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
@@ -43,11 +44,33 @@ public class Navigation extends Subsystem {
     }
   }
   
-  public double getNorthHeading() {
+  public double getAngle() {
     if (navx != null) return navx.getAngle();
     else {
       DriverStation.reportError("Tried .getCompassHeading() without navX sensor!", false);
       return 180;
+    }
+  }
+  
+  public double getDisplacementX() {
+    if (navx != null) return navx.getDisplacementX();
+    else {
+      DriverStation.reportError("Tried .getDisplacementX() without navX sensor!", false);
+      return 0.0;
+    }
+  }
+  public double getDisplacementY() {
+    if (navx != null) return navx.getDisplacementY();
+    else {
+      DriverStation.reportError("Tried .getDisplacementY() without navX sensor!", false);
+      return 0.0;
+    }
+  }
+  public double getDisplacementZ() {
+    if (navx != null) return navx.getDisplacementZ();
+    else {
+      DriverStation.reportError("Tried .getDisplacementZ() without navX sensor!", false);
+      return 0.0;
     }
   }
 }
