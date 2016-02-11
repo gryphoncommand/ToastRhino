@@ -44,6 +44,14 @@ public class Navigation extends Subsystem {
     }
   }
   
+  public double getYaw() {
+    if (navx != null) return navx.getYaw();
+    else {
+      DriverStation.reportError("Tried .getYaw() without navX sensor!", false);
+      return 0;
+    }
+  }
+  
   public double getAngle() {
     if (navx != null) return navx.getAngle();
     else {
