@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotMap;
+import frc.team3966.toastrhino.RobotModule;
 
 /**
  *

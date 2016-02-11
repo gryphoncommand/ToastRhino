@@ -28,7 +28,7 @@ public class Navigation extends Subsystem {
       /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
       navx = new AHRS(SPI.Port.kMXP);
-      navx.resetDisplacement();
+      //navx.resetDisplacement();
       SmartDashboard.putBoolean("NavX Online", true);
     } catch (RuntimeException ex ) {
       SmartDashboard.putBoolean("NavX Online", false);

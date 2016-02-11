@@ -1,7 +1,6 @@
 package frc.team3966.toastrhino;
 
 //import frc.team3966.toastrhino.commands.Shoot;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -9,8 +8,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
-import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.GyroMatch;
+import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -38,7 +37,6 @@ public class RobotModule extends IterativeModule {
 
   @Override
   public String getModuleName() {
-    DriverStation.reportError("I AM A RHINO", false);
     return "ToastRhino";
   }
 
@@ -53,7 +51,6 @@ public class RobotModule extends IterativeModule {
     logger.info("robotInit() started");
     oi = new OI();
     TankDrive = new TankDrive();
-    //ShootCommand = new Shoot();
 
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
@@ -63,7 +60,7 @@ public class RobotModule extends IterativeModule {
 
     SmartDashboard.putBoolean("Initialized", true);
     SmartDashboard.putBoolean("DB/LED 0", true);
-    
+
     navigation.initNavX();
 
     logger.info("robotInit(); finished");
@@ -78,6 +75,7 @@ public class RobotModule extends IterativeModule {
   public void disabledInit(){
     //if (TankDrive != null) TankDrive.cancel();
     drive.doNothing();
+    logger.info("Disabled.");
   }
 
   @Override
@@ -114,6 +112,7 @@ public class RobotModule extends IterativeModule {
     // schedule the autonomous command (example)
     if (autonomousCommand != null) autonomousCommand.start();
     if (TankDrive != null) TankDrive.cancel();
+    logger.info("Autonomous.");
   }
 
   /**
@@ -151,5 +150,6 @@ public class RobotModule extends IterativeModule {
   @Override
   public void testPeriodic() {
     LiveWindow.run();
+    sensors.dash_all();
   }
 }
