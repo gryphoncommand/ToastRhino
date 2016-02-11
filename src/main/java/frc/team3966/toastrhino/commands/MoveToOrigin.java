@@ -21,12 +21,14 @@ public class MoveToOrigin extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     
-    //RobotModule.drive.TankDrive(rspeed, lspeed);
   }
-
+  
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
-    return false;
+    // Are we close enough to home? results are in meters
+    if (RobotModule.navigation.getDisplacementTotal() < 0.2) // then...
+      return true;
+    else return false;
   }
 
   // Called once after isFinished returns true
