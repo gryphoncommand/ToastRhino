@@ -67,7 +67,7 @@ public class MoveToOrigin extends Command {
   
   private double getDesiredAngle(double x, double y) { //radians
 	  if (y == 0) {
-		  return -90 * Math.signum(x);
+		  return -Math.PI * Math.signum(x) / 2;
 	  } else if (y > 0) {
 		  return (double)(Math.PI - Math.atan(x / y));
 	  } else {
