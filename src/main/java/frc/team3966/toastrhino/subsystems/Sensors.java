@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotMap;
+import frc.team3966.toastrhino.RobotModule;
 
 /**
  *
@@ -38,10 +39,19 @@ public class Sensors extends Subsystem {
     SmartDashboard.putNumber("PDP Voltage", PDP.getVoltage());
     SmartDashboard.putNumber("PDP Total Amps", PDP.getTotalCurrent());
   }
+  
+  public void dash_navx() {
+    SmartDashboard.putNumber("Degrees C", RobotModule.navigation.getTempC());
+    SmartDashboard.putNumber("Yaw", RobotModule.navigation.getYaw());
+    SmartDashboard.putNumber("Roll", RobotModule.navigation.getRoll());
+    SmartDashboard.putNumber("Pitch", RobotModule.navigation.getPitch());
+    SmartDashboard.putNumber("Total Displacement", RobotModule.navigation.getDisplacementTotal());
+  }
 
   public void dash_all() {
     dash_accel();
     dash_gyro();
     dash_power();
+    dash_navx();
   }
 }
