@@ -52,7 +52,7 @@ public class Navigation extends Subsystem {
 			  return Math.PI / 2;
 		  }
 	  }
-	  double atan = Math.atan(x / y);
+	  double atan = Math.atan(Math.abs(x / y));
 	  if (x > 0 && y > 0) {
 		  return - Math.PI + atan;
 	  } 
