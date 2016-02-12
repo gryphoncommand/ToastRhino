@@ -36,6 +36,42 @@ public class Navigation extends Subsystem {
     }
   }
   
+  private double degToRad(double deg) { //converts degrees to radians
+	  return (double)(Math.PI * deg / 180.0);
+  }
+  
+  public double radToDeg(double rad) { //converts radians to degrees
+	  return (double)(180.0 * rad / Math.PI);
+  }
+  
+  public double getDesiredAngle(double x, double y) { //gets the desired yaw (getYaw()) the robot should be pointing at in order to drive straight to point (0, 0) 
+	  if (y == 0) {
+		  if (x > 0) {
+			  return - Math.PI / 2;
+		  } else {
+			  return Math.PI / 2;
+		  }
+	  }
+	  double atan = Math.atan(x / y);
+	  if (x > 0 && y > 0) {
+		  return - Math.PI + atan;
+	  } 
+	  if (x < 0 && y > 0) {
+		  return Math.PI - atan;
+	  }
+	  if (x > 0 && y < 0) {
+		  return -atan;
+	  }
+	  if (x < 0 && y < 0) {
+		  return atan;
+	  }
+	  return 0;
+  }
+  
+  public double getYawAtoB(double ax, double ay, double bx, double by) { //gets yaw to point to point B, assuming you are at point a
+	  return getDesiredAngle(ax - bx, ay - by);
+  }
+  
   public boolean isMoving() {
     if (navx != null) return navx.isMoving();
     else {

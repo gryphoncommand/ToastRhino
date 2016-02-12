@@ -6,6 +6,10 @@ package frc.team3966.toastrhino.util;
  */
 public class FastArithmetic {
 
+	public static boolean isWithinSlop(double val, double slop) { //returns true if val is close to zero, between -slop and slop, i.e. f(.01, 1) = true
+		  return (val <= slop && val >= -slop);
+	  }
+	
 	// returns double precision square root
 	public static double sqrt_d(double n) {
 		double x = n / 2;

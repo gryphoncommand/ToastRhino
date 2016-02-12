@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
 import frc.team3966.toastrhino.subsystems.Navigation;
+import frc.team3966.toastrhino.util.FastArithmetic;
 
 public class MoveToOrigin extends Command {
 	public static double motorSpeed = .5f; //for just driving
@@ -32,14 +33,14 @@ public class MoveToOrigin extends Command {
 	  //algorithm
 	  double x = RobotModule.navigation.getDisplacementX();
 	  double y = RobotModule.navigation.getDisplacementY();
-	  double desireDeg = radToDeg(getDesiredAngle(x, y));
+	  double desireDeg = RobotModule.navigation.radToDeg(RobotModule.navigation.getDesiredAngle(x, y));
 	  double r = Math.sqrt(x * x + y * y);
 	  double curYaw = RobotModule.navigation.getYaw();
 	  double delta = desireDeg - curYaw; //difference in actual and desired
 	  double lspeed = 0;
 	  double rspeed = 0;
 	  
-	  if (isWithinSlop(r, slop)) { //if we are at the origin
+	  if (FastArithmetic.isWithinSlop(r, slop)) { //if we are at the origin
 		  lspeed = 0;
 		  rspeed = 0;
 		  motorSpeed = .5f;
@@ -48,7 +49,7 @@ public class MoveToOrigin extends Command {
 		  rspeed = lspeed;
 	  }
 	  //this method overwrites the above speeds, meaning that we take priority in aiming directly at origin.
-	  if (!isWithinSlop(delta, degSlop)) { //turns right or left, depending if it over-shot or under-shot
+	  if (!FastArithmetic.isWithinSlop(delta, degSlop)) { //turns right or left, depending if it over-shot or under-shot
 		  if (Math.signum(delta) != Math.signum(lastAngleOffset)) {
 			  angleMotorSpeed /= 1.008; //decreases if we overshot it, and then it will reverse direction.
 		  }
@@ -75,41 +76,6 @@ public class MoveToOrigin extends Command {
 	  SmartDashboard.putNumber("Angle turning speed", angleMotorSpeed); //how fast we turn.
   }
   
-  private boolean isWithinSlop(double val, double slop) {
-	  return (val <= slop && val >= -slop);
-  }
-  
-  private double getDesiredAngle(double x, double y) { //radians
-	  if (y == 0) {
-		  if (x > 0) {
-			  return - Math.PI / 2;
-		  } else {
-			  return Math.PI / 2;
-		  }
-	  }
-	  double atan = Math.atan(x / y);
-	  if (x > 0 && y > 0) {
-		  return - Math.PI + atan;
-	  } 
-	  if (x < 0 && y > 0) {
-		  return Math.PI - atan;
-	  }
-	  if (x > 0 && y < 0) {
-		  return -atan;
-	  }
-	  if (x < 0 && y < 0) {
-		  return atan;
-	  }
-	  return 0;
-  }
-  
-  private double degToRad(double deg) {
-	  return (double)(Math.PI * deg / 180.0);
-  }
-  
-  private double radToDeg(double rad) {
-	  return (double)(180.0 * rad / Math.PI);
-  }
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
