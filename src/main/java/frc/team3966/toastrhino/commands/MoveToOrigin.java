@@ -6,9 +6,10 @@ import frc.team3966.toastrhino.RobotModule;
 import frc.team3966.toastrhino.subsystems.Navigation;
 
 public class MoveToOrigin extends Command {
-	public static final double constantMotorSpeed = .5f; //for just driving
-	public static double constantAngleMotorSpeed = .4f; //for turning angles
-
+	public static double motorSpeed = .5f; //for just driving
+	public static double angleMotorSpeed = .5f; //for turning angles
+	public double lastAngleOffset = 0; //how close were we last time?
+	
   public MoveToOrigin() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -18,7 +19,8 @@ public class MoveToOrigin extends Command {
 
   // Called just before this Command runs the first time
   protected void initialize() {
-	  constantAngleMotorSpeed = .5f;
+	  motorSpeed = .5f;
+	  angleMotorSpeed = .5f;
 	  SmartDashboard.putBoolean("isHome?", true);
   }
 
@@ -26,6 +28,8 @@ public class MoveToOrigin extends Command {
   protected void execute() {
 	  double slop = 0.8f;
 	  double degSlop = 3f;
+	  
+	  //algorithm
 	  double x = RobotModule.navigation.getDisplacementX();
 	  double y = RobotModule.navigation.getDisplacementY();
 	  double desireDeg = radToDeg(getDesiredAngle(x, y));
@@ -34,64 +38,69 @@ public class MoveToOrigin extends Command {
 	  double delta = desireDeg - curYaw; //difference in actual and desired
 	  double lspeed = 0;
 	  double rspeed = 0;
+	  
+	  if (isWithinSlop(r, slop)) { //if we are at the origin
+		  lspeed = 0;
+		  rspeed = 0;
+		  motorSpeed = .5f;
+	  } else { //if we are not
+		  lspeed = motorSpeed;
+		  rspeed = lspeed;
+	  }
+	  //this method overwrites the above speeds, meaning that we take priority in aiming directly at origin.
+	  if (!isWithinSlop(delta, degSlop)) { //turns right or left, depending if it over-shot or under-shot
+		  if (Math.signum(delta) != Math.signum(lastAngleOffset)) {
+			  angleMotorSpeed /= 1.008; //decreases if we overshot it, and then it will reverse direction.
+		  }
+		  if (lastAngleOffset > 0) { //turns left
+			  lspeed = -angleMotorSpeed;
+			  rspeed = -lspeed;
+		  } else {//turns right
+			  lspeed = angleMotorSpeed;
+			  rspeed = -lspeed;
+		  }
+
+	  }
+
+	  RobotModule.drive.TankDrive(rspeed, lspeed);
+	  
+	  //keeping track of the last offset
+	  lastAngleOffset = delta;
+	  
+	  //Logging and such
 	  SmartDashboard.putNumber("Displacement X", x);
 	  SmartDashboard.putNumber("Displacement Y", y);
 	  SmartDashboard.putNumber("Yaw", curYaw);
 	  SmartDashboard.putNumber("Desired Yaw", desireDeg);
-	  
-	  if (!(delta <= degSlop && delta >= -degSlop)) {
-		  if (curYaw > desireDeg) { //turn left
-			  lspeed = -constantAngleMotorSpeed;
-		  } else {
-			  lspeed = constantAngleMotorSpeed; //turn right
-		  }
-		  rspeed = -lspeed;
-		  //constantAngleMotorSpeed /= 1.004;
-	  } else {
-		  lspeed = constantMotorSpeed;
-		  rspeed = lspeed;
-	  }
-	  if (r <= slop) { //if we are at origin
-		  lspeed = 0;
-		  rspeed = 0;
-		  if (!(curYaw <= degSlop && curYaw >= -degSlop)) { //if we aren't rotated to our last reset's orientation
-			  lspeed = -constantAngleMotorSpeed * Math.signum(curYaw);
-			  rspeed = -lspeed;
-		  }
-		  SmartDashboard.putBoolean("isHome?", true);
-		  //constantAngleMotorSpeed = .5f;
-	  } else {
-		  SmartDashboard.putBoolean("isHome?", false);
-	  }
-	  RobotModule.drive.TankDrive(-rspeed, -lspeed);
+	  SmartDashboard.putNumber("Angle turning speed", angleMotorSpeed); //how fast we turn.
   }
   
-  
+  private boolean isWithinSlop(double val, double slop) {
+	  return (val <= slop && val >= -slop);
+  }
   
   private double getDesiredAngle(double x, double y) { //radians
-	  double total = 0;
 	  if (y == 0) {
-		  total = - Math.PI * Math.signum(x) / 2;
-	  } else if (y > 0) {
-		  if (x < 0) {
-			  total = (double)(Math.PI - Math.atan(x / y));
+		  if (x > 0) {
+			  return - Math.PI / 2;
 		  } else {
-			  total = (double)(-Math.PI + Math.atan(x / y));
-		  }
-	  } else {
-		  if (x < 0) {
-			  total = (double)(Math.atan(x / y));
-		  } else {
-			  total = (double)(-Math.atan(x / y));
+			  return Math.PI / 2;
 		  }
 	  }
-	  if (total > Math.PI) {
-		  total = - Math.PI + (total % Math.PI);
-	  } else if (total < -Math.PI) {
-		  total = Math.PI - Math.abs((total % Math.PI))
-				  ;
+	  double atan = Math.atan(x / y);
+	  if (x > 0 && y > 0) {
+		  return - Math.PI + atan;
+	  } 
+	  if (x < 0 && y > 0) {
+		  return Math.PI - atan;
 	  }
-	  return total;
+	  if (x > 0 && y < 0) {
+		  return -atan;
+	  }
+	  if (x < 0 && y < 0) {
+		  return atan;
+	  }
+	  return 0;
   }
   
   private double degToRad(double deg) {
