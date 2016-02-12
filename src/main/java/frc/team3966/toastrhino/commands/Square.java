@@ -46,6 +46,8 @@ public class Square extends Command {
 		SmartDashboard.putNumber("Desired Yaw", desireDeg);
 		SmartDashboard.putNumber("Current Side", currentSide);
 
+		// yes this is ugly repeated code.  could be refactored but wanted to keep it as stupid as possible
+		
 		if (currentSide == 0) {
 			if (y <= sideLength) {
 				// we need to keep moving forward
@@ -53,6 +55,7 @@ public class Square extends Command {
 				lspeed = constantMotorSpeed;
 			} else {
 				// we've come to the turn
+				desireDeg = 90;
 				if((desireDeg - curYaw) > degSlop){
 					// need to turn right
 					rspeed = -constantAngleMotorSpeed;
@@ -74,6 +77,7 @@ public class Square extends Command {
 				lspeed = constantMotorSpeed;
 			} else {
 				// we've come to the turn
+				desireDeg = 180;
 				if((desireDeg - curYaw) > degSlop){
 					// need to turn right
 					rspeed = -constantAngleMotorSpeed;
@@ -95,6 +99,7 @@ public class Square extends Command {
 				lspeed = constantMotorSpeed;
 			} else {
 				// we've come to the turn
+				desireDeg = -90;
 				if((desireDeg - curYaw) > degSlop){
 					// need to turn right
 					rspeed = -constantAngleMotorSpeed;
@@ -116,6 +121,7 @@ public class Square extends Command {
 				lspeed = constantMotorSpeed;
 			} else {
 				// we've come to the turn (to get re-positioned)
+				desireDeg = 0;
 				if((desireDeg - curYaw) > degSlop){
 					// need to turn right
 					rspeed = -constantAngleMotorSpeed;
