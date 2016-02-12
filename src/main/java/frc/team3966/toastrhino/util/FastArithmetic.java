@@ -10,6 +10,10 @@ public class FastArithmetic {
 		  return (val <= slop && val >= -slop);
 	  }
 	
+	public static boolean isWithinSlop_yaw(double yaw1, double yaw2, double slop) { //is within slop, on modular groups for yaw
+		return (isWithinSlop(yaw2 - yaw2, slop)) || (isWithinSlop(yaw1 - yaw2 - 360, slop)) || (isWithinSlop(yaw2 - yaw1 - 360, slop));
+	}
+	
 	// returns double precision square root
 	public static double sqrt_d(double n) {
 		double x = n / 2;
