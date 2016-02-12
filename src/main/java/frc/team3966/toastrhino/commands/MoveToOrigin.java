@@ -7,7 +7,7 @@ import frc.team3966.toastrhino.subsystems.Navigation;
 
 public class MoveToOrigin extends Command {
 	public static final double constantMotorSpeed = .5f; //for just driving
-	public static final double constantAngleMotorSpeed = .5f; //for turning angles
+	public static double constantAngleMotorSpeed = .4f; //for turning angles
 
   public MoveToOrigin() {
     // Use requires() here to declare subsystem dependencies
@@ -18,18 +18,20 @@ public class MoveToOrigin extends Command {
 
   // Called just before this Command runs the first time
   protected void initialize() {
+	  constantAngleMotorSpeed = .5f;
 	  SmartDashboard.putBoolean("isHome?", true);
   }
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-	  double slop = .1f;
-	  double degSlop = 1f;
+	  double slop = 0.8f;
+	  double degSlop = 3f;
 	  double x = RobotModule.navigation.getDisplacementX();
 	  double y = RobotModule.navigation.getDisplacementY();
 	  double desireDeg = radToDeg(getDesiredAngle(x, y));
+	  double r = Math.sqrt(x * x + y * y);
 	  double curYaw = RobotModule.navigation.getYaw();
-	  double delta = curYaw - desireDeg; //difference in actual and desired
+	  double delta = desireDeg - curYaw; //difference in actual and desired
 	  double lspeed = 0;
 	  double rspeed = 0;
 	  SmartDashboard.putNumber("Displacement X", x);
@@ -40,16 +42,16 @@ public class MoveToOrigin extends Command {
 	  if (!(delta <= degSlop && delta >= -degSlop)) {
 		  if (curYaw > desireDeg) { //turn left
 			  lspeed = -constantAngleMotorSpeed;
-			  
 		  } else {
 			  lspeed = constantAngleMotorSpeed; //turn right
 		  }
 		  rspeed = -lspeed;
+		  //constantAngleMotorSpeed /= 1.004;
 	  } else {
 		  lspeed = constantMotorSpeed;
 		  rspeed = lspeed;
 	  }
-	  if ((x <= slop && x >= -slop) && (y <= slop && y >= -slop)) { //if we are at origin
+	  if (r <= slop) { //if we are at origin
 		  lspeed = 0;
 		  rspeed = 0;
 		  if (!(curYaw <= degSlop && curYaw >= -degSlop)) { //if we aren't rotated to our last reset's orientation
@@ -57,22 +59,39 @@ public class MoveToOrigin extends Command {
 			  rspeed = -lspeed;
 		  }
 		  SmartDashboard.putBoolean("isHome?", true);
+		  //constantAngleMotorSpeed = .5f;
 	  } else {
 		  SmartDashboard.putBoolean("isHome?", false);
 	  }
-	  RobotModule.drive.TankDrive(rspeed, lspeed);
+	  RobotModule.drive.TankDrive(-rspeed, -lspeed);
   }
   
   
   
   private double getDesiredAngle(double x, double y) { //radians
+	  double total = 0;
 	  if (y == 0) {
-		  return -Math.PI * Math.signum(x) / 2;
+		  total = - Math.PI * Math.signum(x) / 2;
 	  } else if (y > 0) {
-		  return (double)(Math.PI - Math.atan(x / y));
+		  if (x < 0) {
+			  total = (double)(Math.PI - Math.atan(x / y));
+		  } else {
+			  total = (double)(-Math.PI + Math.atan(x / y));
+		  }
 	  } else {
-		  return (double)(Math.atan(x / y));
+		  if (x < 0) {
+			  total = (double)(Math.atan(x / y));
+		  } else {
+			  total = (double)(-Math.atan(x / y));
+		  }
 	  }
+	  if (total > Math.PI) {
+		  total = - Math.PI + (total % Math.PI);
+	  } else if (total < -Math.PI) {
+		  total = Math.PI - Math.abs((total % Math.PI))
+				  ;
+	  }
+	  return total;
   }
   
   private double degToRad(double deg) {
