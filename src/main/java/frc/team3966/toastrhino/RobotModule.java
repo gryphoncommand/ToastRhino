@@ -11,6 +11,7 @@ import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.GyroMatch;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.MoveToOrigin;
+import frc.team3966.toastrhino.commands.Shoot;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -33,7 +34,7 @@ public class RobotModule extends IterativeModule {
 
   Command autonomousCommand;
   Command TankDrive;
-  //Command ShootCommand;
+  Command ShootCommand;
   SendableChooser chooser;
 
   @Override
@@ -60,6 +61,7 @@ public class RobotModule extends IterativeModule {
     
     // Commands
     TankDrive = new TankDrive();
+    ShootCommand = new Shoot();
 
     // Autonomous options
     chooser = new SendableChooser();
