@@ -1,6 +1,5 @@
 package frc.team3966.toastrhino.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,12 +11,16 @@ import frc.team3966.toastrhino.RobotModule;
  */
 public class Sensors extends Subsystem {
 
-  public static BuiltInAccelerometer accel = new BuiltInAccelerometer();
-  public static AnalogInput gripper_pos = new AnalogInput(1);
-  public static PowerDistributionPanel PDP = new PowerDistributionPanel();
+  public static BuiltInAccelerometer accel;
+  public static PowerDistributionPanel PDP;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  
+  public Sensors() {
+    accel = new BuiltInAccelerometer();
+    PDP = new PowerDistributionPanel();
+  }
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
