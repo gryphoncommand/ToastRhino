@@ -23,10 +23,10 @@ public class RobotModule extends IterativeModule {
 
   public static Logger logger;
 
-  public static final Drive drive = new Drive();
-  public static final Shooter shooter = new Shooter();
-  public static final Sensors sensors = new Sensors();
-  public static final Navigation navigation = new Navigation();
+  public static Drive drive;
+  public static Shooter shooter;
+  public static Sensors sensors;
+  public static Navigation navigation;
   public static OI oi;
 
   NetworkTable table;
@@ -52,6 +52,12 @@ public class RobotModule extends IterativeModule {
     logger.info("robotInit() started");
     oi = new OI();
     TankDrive = new TankDrive();
+
+    // Subsystems
+    drive = new Drive();
+    shooter = new Shooter();
+    sensors = new Sensors();
+    navigation = new Navigation();
 
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
