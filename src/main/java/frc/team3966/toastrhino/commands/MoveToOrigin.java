@@ -71,18 +71,17 @@ public class MoveToOrigin extends Command {
     SmartDashboard.putBoolean("I am Home?", isFinished());
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
     
-    //if (!Rotater.onTarget()) {
+    if (Math.abs(Rotater.getError()) < 2) {
       Rotater.enable();
       Rotater.setSetpoint(this.getAngleToOrigin());
-    /*} else {
+    } else {
       Rotater.disable();
-      SmartDashboard.putBoolean("On Target?", true);
       leftp = rightp = RobotModule.navigation.getDisplacementTotal() / 3.0;
       // Our full power is too fast for precision movement.
       leftp = this.ensureRange(leftp, -0.6, 0.6);
       rightp = this.ensureRange(rightp, -0.6, 0.6);
       RobotModule.drive.TankDrive(rightp, leftp);
-    } */
+    }
     
     SmartDashboard.putBoolean("On Target?", (Math.abs(Rotater.getError()) < 2));
     SmartDashboard.putBoolean("I am Home?", isFinished());
