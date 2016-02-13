@@ -34,6 +34,7 @@ public class MoveToBen extends Command {
     }
   }
   
+  // The same kind of dummy class, but to output to rotation
   public class OutputRotation implements PIDOutput {
     @Override
     public void pidWrite(double output) {
