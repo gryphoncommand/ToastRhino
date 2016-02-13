@@ -26,7 +26,6 @@ public class Shooter extends Subsystem {
 
   private static PIDController gripper = new PIDController(100.0, 0.0, 0.0, gripper_pos, Gmotor);
 
-  /*
   public Shooter() {
     gripper.enable();
     gripper.setInputRange(-0.7, 1.0); //Strange but true
@@ -36,7 +35,6 @@ public class Shooter extends Subsystem {
     gripper.enable();
     Gmotor.setInverted(true);
   }
-  */
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
