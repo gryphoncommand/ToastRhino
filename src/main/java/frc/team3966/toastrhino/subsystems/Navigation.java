@@ -29,6 +29,8 @@ public class Navigation extends Subsystem {
       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
       navx = new AHRS(SPI.Port.kMXP);
       navx.resetDisplacement();
+      navx.reset();
+      navx.zeroYaw();
       SmartDashboard.putBoolean("NavX Online", true);
     } catch (RuntimeException ex ) {
       SmartDashboard.putBoolean("NavX Online", false);

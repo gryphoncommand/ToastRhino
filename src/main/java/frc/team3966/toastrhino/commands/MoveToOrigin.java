@@ -9,7 +9,8 @@ import frc.team3966.toastrhino.util.FastArithmetic;
 public class MoveToOrigin extends Command {
 	public static double motorSpeed = .5f; //for just driving
 	public static double angleMotorSpeed = .5f; //for turning angles
-	public double lastAngleOffset = 0; //how close were we last time?
+	public double lastPosOrNeg = 1; //Are we going left or right?
+	public int count = 0; //how many times have we gone?
 	
   public MoveToOrigin() {
     // Use requires() here to declare subsystem dependencies
@@ -20,15 +21,17 @@ public class MoveToOrigin extends Command {
 
   // Called just before this Command runs the first time
   protected void initialize() {
-	  motorSpeed = .75f;
-	  angleMotorSpeed = .75f;
+	  motorSpeed = .4f;
+	  angleMotorSpeed = .4f;
+	  count = 0;
+	  lastPosOrNeg = 1;
 	  SmartDashboard.putBoolean("isHome?", true);
   }
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
 	  double slop = 1f;
-	  double degSlop = 3f;
+	  double degSlop = 14f;
 	  
 	  //algorithm
 	  double x = RobotModule.navigation.getDisplacementX();
@@ -38,36 +41,34 @@ public class MoveToOrigin extends Command {
 	  double curYaw = RobotModule.navigation.getYaw();
 	  double lspeed = 0;
 	  double rspeed = 0;
-	  double angleOffset = desireDeg - curYaw;
 	  
-	  if (FastArithmetic.isWithinSlop(r, slop)) {
+	  /*if (FastArithmetic.isWithinSlop(r, slop)) {
 		  lspeed = 0;
 		  rspeed = lspeed;
 	  } else {
 		  lspeed = motorSpeed;
-	  }
+	  }*/
 	  
-	  if (!FastArithmetic.isWithinSlop_yaw(desireDeg, curYaw, degSlop)) {
-		  if (angleOffset > 0) {
-			  lspeed = -angleMotorSpeed;
-		  } else {
-			  lspeed = angleMotorSpeed;
-		  }
+	  if (!FastArithmetic.isWithinSlop(FastArithmetic.getLesserCoefficient(curYaw, desireDeg), degSlop)) {
+		  double posOrNeg = Math.signum(FastArithmetic.getLesserCoefficient(curYaw, desireDeg)); //do we turn right or left?
+		  lspeed = - posOrNeg * angleMotorSpeed;
 		  rspeed = -lspeed;
-		  if (Math.signum(lastAngleOffset) != Math.signum(angleOffset)) {
+		  if (Math.signum(posOrNeg) != Math.signum(lastPosOrNeg)) {
 			  angleMotorSpeed *= .996;
 		  }
+		  lastPosOrNeg = posOrNeg;
 	  }
 	  
 	  
 	  RobotModule.drive.TankDrive(rspeed, lspeed);
 	  
 	  //keeping track of the last offset
-	  lastAngleOffset = angleOffset;
+	  count++;
 	  
 	  //Logging and such
 	  SmartDashboard.putNumber("Displacement X", x);
 	  SmartDashboard.putNumber("Displacement Y", y);
+	  SmartDashboard.putNumber("Displacement Radius", r);
 	  SmartDashboard.putNumber("Yaw", curYaw);
 	  SmartDashboard.putNumber("Desired Yaw", desireDeg);
 	  SmartDashboard.putNumber("Angle turning speed", angleMotorSpeed); //how fast we turn.
