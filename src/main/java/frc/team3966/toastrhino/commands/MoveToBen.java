@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
 
-public class MoveToOrigin extends Command {
+public class MoveToBen extends Command {
   
   static double yawToOrigin, leftp, rightp;
   static double angle;
@@ -46,7 +46,7 @@ public class MoveToOrigin extends Command {
   
   PIDController Rotater;
   
-  public MoveToOrigin() {
+  public MoveToBen() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotModule.navigation);
