@@ -47,6 +47,22 @@ public class Navigation extends Subsystem {
       warned = true;
     }
   }
+  
+  public boolean isCalibrating() {
+    if (navx != null) return navx.isCalibrating();
+    else {
+      this.warn();
+      return true;
+    }
+  }
+  
+  public boolean isMagneticDisturbance() {
+    if (navx != null) return navx.isMagneticDisturbance();
+    else {
+      this.warn();
+      return true;
+    }
+  }
 
   public boolean isMoving() {
     if (navx != null) return navx.isMoving();
