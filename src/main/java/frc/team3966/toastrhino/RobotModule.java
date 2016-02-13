@@ -51,14 +51,17 @@ public class RobotModule extends IterativeModule {
     logger = new Logger("ToastRhino", Logger.ATTR_DEFAULT);
     logger.info("robotInit() started");
     oi = new OI();
-    TankDrive = new TankDrive();
-
+    
     // Subsystems
     drive = new Drive();
     shooter = new Shooter();
     sensors = new Sensors();
     navigation = new Navigation();
+    
+    // Commands
+    TankDrive = new TankDrive();
 
+    // Autonomous options
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
     chooser.addObject("Jump Scared", new JumpScare());
