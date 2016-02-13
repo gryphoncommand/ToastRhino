@@ -47,8 +47,8 @@ public class MoveToCade extends Command {
 	  } else {
 		  lspeed = motorSpeed;
 	  }*/
-	  if (!FastArithmetic.isWithinSlop(FastArithmetic.getLesserCoefficient(curYaw, desireDeg), degSlop)) {
-		  double posOrNeg = Math.signum(FastArithmetic.getLesserCoefficient(curYaw, desireDeg)); //do we turn right or left?
+	  if (!FastArithmetic.isWithinSlop(FastArithmetic.getLesserDistance(curYaw, desireDeg), degSlop)) {
+		  double posOrNeg = Math.signum(FastArithmetic.getLesserDistance(curYaw, desireDeg)); //do we turn right or left?
 		  lspeed = - posOrNeg * angleMotorSpeed;
 		  rspeed = -lspeed;
 		  if (Math.signum(posOrNeg) != Math.signum(lastPosOrNeg)) {
