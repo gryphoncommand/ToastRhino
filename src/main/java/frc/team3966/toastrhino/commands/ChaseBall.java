@@ -35,7 +35,7 @@ public class ChaseBall extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     GRIPcenterX = GRIPtable.getNumberArray("centerX", defaultArray);
-    if (GRIPcenterX.length > 0) { 
+    if (GRIPcenterX.length > 0) {
       centerX = GRIPcenterX[0];
     } else {
       centerX = defaultArray[0];

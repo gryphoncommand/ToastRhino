@@ -62,12 +62,6 @@ public class MoveToCade extends Command {
 	  
 	  //keeping track of the last offset
 	  count++;
-	  
-	  //Logging and such
-	  SmartDashboard.putNumber("Displacement X", x);
-	  SmartDashboard.putNumber("Displacement Y", y);
-	  SmartDashboard.putNumber("Displacement Radius", r);
-	  SmartDashboard.putNumber("Yaw", curYaw);
 	  SmartDashboard.putNumber("Desired Yaw", desireDeg);
 	  SmartDashboard.putNumber("Angle turning speed", angleMotorSpeed); //how fast we turn.
   }

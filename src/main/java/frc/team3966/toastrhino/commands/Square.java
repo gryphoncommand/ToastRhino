@@ -39,10 +39,6 @@ public class Square extends Command {
 			// e.g. convert 270 -> -90
 			desireDeg -= 360;
 		}
-
-		SmartDashboard.putNumber("Displacement X", x);
-		SmartDashboard.putNumber("Displacement Y", y);
-		SmartDashboard.putNumber("Yaw", curYaw);
 		SmartDashboard.putNumber("Desired Yaw", desireDeg);
 		SmartDashboard.putNumber("Current Side", currentSide);
 
