@@ -20,7 +20,6 @@ public class Navigation extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new MySpecialCommand());
-    SmartDashboard.putBoolean("NavX Online", false);
   }
 
   public void initNavX() {
@@ -81,6 +80,13 @@ public class Navigation extends Subsystem {
     else {
       this.warn();
       return 180;
+    }
+  }
+  public double getCompassHeading() {
+    if (navx != null) return navx.getCompassHeading();
+    else {
+      this.warn();
+      return 0.0;
     }
   }
   public double getYaw() {
