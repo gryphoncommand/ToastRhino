@@ -12,6 +12,7 @@ import frc.team3966.toastrhino.commands.GyroMatch;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
+import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.Shoot;
 import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.TankDrive;
@@ -37,6 +38,7 @@ public class RobotModule extends IterativeModule {
   Command autonomousCommand;
   Command TankDrive;
   Command ShootCommand;
+  Command resetNav;
   SendableChooser chooser;
 
   @Override
@@ -64,6 +66,8 @@ public class RobotModule extends IterativeModule {
     // Commands
     TankDrive = new TankDrive();
     ShootCommand = new Shoot();
+    resetNav = new ResetNavigation();
+    resetNav.setRunWhenDisabled(true);
 
     // Autonomous options
     chooser = new SendableChooser();
@@ -75,6 +79,7 @@ public class RobotModule extends IterativeModule {
     chooser.addObject("Move in Square", new Square());
     SmartDashboard.putData("Auto mode", chooser);
 
+    SmartDashboard.putData("Reset Navigation", resetNav);
     SmartDashboard.putBoolean("Initialized", true);
     SmartDashboard.putBoolean("DB/LED 0", true);
 
@@ -98,6 +103,7 @@ public class RobotModule extends IterativeModule {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putData("Reset Navigation", resetNav);
     sensors.dash_all();
   }
 
