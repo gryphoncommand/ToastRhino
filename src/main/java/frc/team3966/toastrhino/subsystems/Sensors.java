@@ -46,6 +46,8 @@ public class Sensors extends Subsystem {
     SmartDashboard.putNumber("Displacement X", RobotModule.navigation.getDisplacementX());
     SmartDashboard.putNumber("Displacement Y", RobotModule.navigation.getDisplacementY());
     SmartDashboard.putNumber("Displacement Z", RobotModule.navigation.getDisplacementZ());
+    SmartDashboard.putBoolean("Calibrating", RobotModule.navigation.isCalibrating());
+    SmartDashboard.putBoolean("Magnetic Disturbance", RobotModule.navigation.isMagneticDisturbance());
   }
 
   public void dash_all() {

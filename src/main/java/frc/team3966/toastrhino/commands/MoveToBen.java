@@ -70,6 +70,7 @@ public class MoveToBen extends Command {
   protected void execute() {
     SmartDashboard.putBoolean("I am Home?", isFinished());
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
+    SmartDashboard.putData("Rotater PID", Rotater);
     
     if (Math.abs(Rotater.getError()) < 2) {
       Rotater.enable();
