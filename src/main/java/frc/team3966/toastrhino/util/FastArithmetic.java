@@ -112,5 +112,33 @@ public class FastArithmetic {
   public static double radToDeg(double rad) { //converts radians to degrees
     return (double)(180.0 * rad / Math.PI);
   }
+  
+  public static double getDesiredAngle(double x, double y) { //gets the desired yaw (getYaw()) the robot should be pointing at in order to drive straight to point (0, 0)
+    if (y == 0) {
+      if (x > 0) {
+        return - Math.PI / 2;
+      } else {
+        return Math.PI / 2;
+      }
+    }
+    double atan = Math.atan(Math.abs(x / y));
+    if (x > 0 && y > 0) {
+      return - Math.PI + atan;
+    }
+    if (x < 0 && y > 0) {
+      return Math.PI - atan;
+    }
+    if (x > 0 && y < 0) {
+      return -atan;
+    }
+    if (x < 0 && y < 0) {
+      return atan;
+    }
+    return 0;
+  }
+
+  public static double getYawAtoB(double ax, double ay, double bx, double by) { //gets yaw to point to point B, assuming you are at point a
+    return getDesiredAngle(ax - bx, ay - by);
+  }
 
 }

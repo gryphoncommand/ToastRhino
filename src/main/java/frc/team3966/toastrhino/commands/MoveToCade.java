@@ -35,7 +35,7 @@ public class MoveToCade extends Command {
 	  //algorithm
 	  double x = RobotModule.navigation.getDisplacementX();
 	  double y = RobotModule.navigation.getDisplacementY();
-	  double desireDeg = FastArithmetic.radToDeg(RobotModule.navigation.getDesiredAngle(x, y));
+	  double desireDeg = FastArithmetic.radToDeg(FastArithmetic.getDesiredAngle(x, y));
 	  double r = Math.sqrt(x * x + y * y);
 	  double curYaw = RobotModule.navigation.getYaw();
 	  double lspeed = 0;
