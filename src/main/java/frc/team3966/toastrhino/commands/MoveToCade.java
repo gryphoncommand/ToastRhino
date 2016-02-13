@@ -3,16 +3,15 @@ package frc.team3966.toastrhino.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
-import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.util.FastArithmetic;
 
-public class MoveToOrigin extends Command {
+public class MoveToCade extends Command {
 	public static double motorSpeed = .5f; //for just driving
 	public static double angleMotorSpeed = .5f; //for turning angles
 	public double lastPosOrNeg = 1; //Are we going left or right?
 	public int count = 0; //how many times have we gone?
 	
-  public MoveToOrigin() {
+  public MoveToCade() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(RobotModule.navigation);
@@ -36,7 +35,7 @@ public class MoveToOrigin extends Command {
 	  //algorithm
 	  double x = RobotModule.navigation.getDisplacementX();
 	  double y = RobotModule.navigation.getDisplacementY();
-	  double desireDeg = RobotModule.navigation.radToDeg(RobotModule.navigation.getDesiredAngle(x, y));
+	  double desireDeg = FastArithmetic.radToDeg(RobotModule.navigation.getDesiredAngle(x, y));
 	  double r = Math.sqrt(x * x + y * y);
 	  double curYaw = RobotModule.navigation.getYaw();
 	  double lspeed = 0;

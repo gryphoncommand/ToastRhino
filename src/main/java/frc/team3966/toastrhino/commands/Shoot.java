@@ -10,12 +10,9 @@ import frc.team3966.toastrhino.RobotModule;
 public class Shoot extends Command {
 
   NetworkTable GRIPtable;
-  final String goalPath = "TEST"; //networktables string
-
 
   public Shoot() {
     requires(RobotModule.shooter);
-    GRIPtable = NetworkTable.getTable(goalPath);    
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +21,7 @@ public class Shoot extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-    RobotModule.shooter.setGripperPos(RobotModule.oi.controller.getRawAxis(4));
+    RobotModule.logger.info("No shooter to use!");
   }
 
   // Make this return true when this Command no longer needs to run execute()
