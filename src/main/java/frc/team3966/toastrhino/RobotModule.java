@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.GyroMatch;
 import frc.team3966.toastrhino.commands.JumpScare;
+import frc.team3966.toastrhino.commands.MoveToOrigin;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -55,7 +56,8 @@ public class RobotModule extends IterativeModule {
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
     chooser.addObject("Jump Scared", new JumpScare());
-    chooser.addObject("Point North", new GyroMatch());
+    chooser.addObject("Zero Yaw", new GyroMatch());
+    chooser.addObject("Move To Origin", new MoveToOrigin());
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putBoolean("Initialized", true);

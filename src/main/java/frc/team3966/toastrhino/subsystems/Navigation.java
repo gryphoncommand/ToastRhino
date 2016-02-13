@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Navigation extends Subsystem {
-  
+
   private static AHRS navx;
-  
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -35,7 +35,7 @@ public class Navigation extends Subsystem {
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
   }
-  
+
   public boolean isMoving() {
     if (navx != null) return navx.isMoving();
     else {
@@ -43,7 +43,7 @@ public class Navigation extends Subsystem {
       return false;
     }
   }
-  
+
   public double getAngle() {
     if (navx != null) return navx.getAngle();
     else {
@@ -58,7 +58,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
-  
+
   public double getRoll() {
     if (navx != null) return navx.getRoll();
     else {
@@ -66,7 +66,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
-  
+
   public double getPitch() {
     if (navx != null) return navx.getPitch();
     else {
@@ -74,7 +74,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
-  
+
   public double getDisplacementX() {
     if (navx != null) return navx.getDisplacementX();
     else {
@@ -82,7 +82,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
-  
+
   public double getDisplacementY() {
     if (navx != null) return navx.getDisplacementY();
     else {
@@ -90,7 +90,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
-  
+
   public double getDisplacementZ() {
     if (navx != null) return navx.getDisplacementZ();
     else {
@@ -98,7 +98,7 @@ public class Navigation extends Subsystem {
       return 0.0;
     }
   }
-  
+
   public float getTempC() {
     if (navx != null) return navx.getTempC();
     else {
@@ -106,13 +106,13 @@ public class Navigation extends Subsystem {
       return 25.0f;
     }
   }
-  
+
   public double getDisplacementTotal() {
     double X = 0.0, Y = 0.0, Z = 0.0;
     X = this.getDisplacementX();
     Y = this.getDisplacementY();
     Z = this.getDisplacementZ();
-    
+
     return Math.sqrt(X * X + Y * Y + Z * Z);
   }
 

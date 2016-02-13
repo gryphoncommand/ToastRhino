@@ -42,10 +42,14 @@ public class Sensors extends Subsystem {
   
   public void dash_navx() {
     SmartDashboard.putNumber("Degrees C", RobotModule.navigation.getTempC());
+    SmartDashboard.putNumber("Angle", RobotModule.navigation.getAngle());
     SmartDashboard.putNumber("Yaw", RobotModule.navigation.getYaw());
     SmartDashboard.putNumber("Roll", RobotModule.navigation.getRoll());
     SmartDashboard.putNumber("Pitch", RobotModule.navigation.getPitch());
     SmartDashboard.putNumber("Total Displacement", RobotModule.navigation.getDisplacementTotal());
+    SmartDashboard.putNumber("Displacement X", RobotModule.navigation.getDisplacementX());
+    SmartDashboard.putNumber("Displacement Y", RobotModule.navigation.getDisplacementY());
+    SmartDashboard.putNumber("Displacement Z", RobotModule.navigation.getDisplacementZ());
   }
 
   public void dash_all() {
