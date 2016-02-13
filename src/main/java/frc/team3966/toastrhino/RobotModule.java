@@ -1,7 +1,6 @@
 package frc.team3966.toastrhino;
 
 //import frc.team3966.toastrhino.commands.Shoot;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -9,10 +8,12 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
-import frc.team3966.toastrhino.commands.JumpScare;
-import frc.team3966.toastrhino.commands.MoveToOrigin;
-import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.GyroMatch;
+import frc.team3966.toastrhino.commands.JumpScare;
+import frc.team3966.toastrhino.commands.MoveToBen;
+import frc.team3966.toastrhino.commands.MoveToCade;
+import frc.team3966.toastrhino.commands.Shoot;
+import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -25,22 +26,21 @@ public class RobotModule extends IterativeModule {
 
   public static Logger logger;
 
-  public static final Drive drive = new Drive();
-  public static final Shooter shooter = new Shooter();
-  public static final Sensors sensors = new Sensors();
-  public static final Navigation navigation = new Navigation();
+  public static Drive drive;
+  public static Shooter shooter;
+  public static Sensors sensors;
+  public static Navigation navigation;
   public static OI oi;
 
   NetworkTable table;
 
   Command autonomousCommand;
   Command TankDrive;
-  //Command ShootCommand;
+  Command ShootCommand;
   SendableChooser chooser;
 
   @Override
   public String getModuleName() {
-    DriverStation.reportError("I AM A RHINO", false);
     return "ToastRhino";
   }
 
@@ -54,23 +54,33 @@ public class RobotModule extends IterativeModule {
     logger = new Logger("ToastRhino", Logger.ATTR_DEFAULT);
     logger.info("robotInit() started");
     oi = new OI();
-    TankDrive = new TankDrive();
-    //ShootCommand = new Shoot();
 
+    // Subsystems
+    drive = new Drive();
+    shooter = new Shooter();
+    navigation = new Navigation();
+    sensors = new Sensors();
+
+    // Commands
+    TankDrive = new TankDrive();
+    ShootCommand = new Shoot();
+
+    // Autonomous options
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
     chooser.addObject("Jump Scared", new JumpScare());
-    chooser.addObject("Point North", new GyroMatch());
-    chooser.addObject("Move To Origin", new MoveToOrigin());
+    chooser.addObject("Zero Yaw", new GyroMatch());
+    chooser.addObject("Move To Ben", new MoveToBen());
+    chooser.addObject("Move To Cade", new MoveToCade());
     chooser.addObject("Square", new Square());
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putBoolean("Initialized", true);
     SmartDashboard.putBoolean("DB/LED 0", true);
-    
+
     navigation.initNavX();
 
-    logger.info("robotInit(); finished");
+    logger.info("robotInit() finished");
   }
 
   /**
@@ -82,6 +92,7 @@ public class RobotModule extends IterativeModule {
   public void disabledInit(){
     //if (TankDrive != null) TankDrive.cancel();
     drive.doNothing();
+    logger.info("Disabled.");
   }
 
   @Override
@@ -118,6 +129,7 @@ public class RobotModule extends IterativeModule {
     // schedule the autonomous command (example)
     if (autonomousCommand != null) autonomousCommand.start();
     if (TankDrive != null) TankDrive.cancel();
+    logger.info("Autonomous.");
   }
 
   /**
@@ -131,8 +143,9 @@ public class RobotModule extends IterativeModule {
 
   @Override
   public void teleopInit() {
+    logger.info("Teleoperated.");
     // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to 
+    // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
     if (autonomousCommand != null) autonomousCommand.cancel();
@@ -155,5 +168,6 @@ public class RobotModule extends IterativeModule {
   @Override
   public void testPeriodic() {
     LiveWindow.run();
+    sensors.dash_all();
   }
 }

@@ -48,6 +48,13 @@ public class Drive extends Subsystem {
     SmartDashboard.putData("Back Right", BRmotor);
   }
   
+  public void Rotate (double clockwisespeed) {
+    FRmotor.set(clockwisespeed);
+    BRmotor.set(clockwisespeed);
+    FLmotor.set(-clockwisespeed);
+    BLmotor.set(-clockwisespeed);
+  }
+  
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new TankDrive());

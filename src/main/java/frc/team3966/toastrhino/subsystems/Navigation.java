@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Navigation extends Subsystem {
-  
+
   private static AHRS navx;
-  
+  private static boolean warned = false;
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -32,21 +33,22 @@ public class Navigation extends Subsystem {
       navx.reset();
       navx.zeroYaw();
       SmartDashboard.putBoolean("NavX Online", true);
-    } catch (RuntimeException ex ) {
+    } catch (UnsatisfiedLinkError ex ) {
+      SmartDashboard.putBoolean("NavX Online", false);
+    } catch (Exception ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
   }
-  
-  private double degToRad(double deg) { //converts degrees to radians
-	  return (double)(Math.PI * deg / 180.0);
+
+  private void warn() {
+    if (!warned) {
+      DriverStation.reportError("NavX NOT ONLINE!", false);
+      warned = true;
+    }
   }
-  
-  public double radToDeg(double rad) { //converts radians to degrees
-	  return (double)(180.0 * rad / Math.PI);
-  }
-  
-  public double getDesiredAngle(double x, double y) { //gets the desired yaw (getYaw()) the robot should be pointing at in order to drive straight to point (0, 0) 
+
+  public double getDesiredAngle(double x, double y) { //gets the desired yaw (getYaw()) the robot should be pointing at in order to drive straight to point (0, 0)
 	  if (y == 0) {
 		  if (x > 0) {
 			  return - Math.PI / 2;
@@ -57,7 +59,7 @@ public class Navigation extends Subsystem {
 	  double atan = Math.atan(Math.abs(x / y));
 	  if (x > 0 && y > 0) {
 		  return - Math.PI + atan;
-	  } 
+	  }
 	  if (x < 0 && y > 0) {
 		  return Math.PI - atan;
 	  }
@@ -69,73 +71,89 @@ public class Navigation extends Subsystem {
 	  }
 	  return 0;
   }
-  
+
   public double getYawAtoB(double ax, double ay, double bx, double by) { //gets yaw to point to point B, assuming you are at point a
 	  return getDesiredAngle(ax - bx, ay - by);
   }
-  
+
   public boolean isMoving() {
     if (navx != null) return navx.isMoving();
     else {
-      DriverStation.reportError("Tried .isMoving() without navX sensor!", false);
+      this.warn();
       return false;
     }
   }
-  
-  public double getYaw() {
-    if (navx != null) return navx.getYaw();
-    else {
-      DriverStation.reportError("Tried .getYaw() without navX sensor!", false);
-      return 0;
-    }
-  }
-  
+
   public double getAngle() {
     if (navx != null) return navx.getAngle();
     else {
-      DriverStation.reportError("Tried .getCompassHeading() without navX sensor!", false);
+      this.warn();
       return 180;
     }
   }
-  
+  public double getYaw() {
+    if (navx != null) return navx.getYaw();
+    else {
+      this.warn();
+      return 0.0;
+    }
+  }
+
+  public double getRoll() {
+    if (navx != null) return navx.getRoll();
+    else {
+      this.warn();
+      return 0.0;
+    }
+  }
+
+  public double getPitch() {
+    if (navx != null) return navx.getPitch();
+    else {
+      this.warn();
+      return 0.0;
+    }
+  }
+
   public double getDisplacementX() {
     if (navx != null) return navx.getDisplacementX();
     else {
-      DriverStation.reportError("Tried .getDisplacementX() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
-  
+
   public double getDisplacementY() {
     if (navx != null) return navx.getDisplacementY();
     else {
-      DriverStation.reportError("Tried .getDisplacementY() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
-  
+
   public double getDisplacementZ() {
     if (navx != null) return navx.getDisplacementZ();
     else {
-      DriverStation.reportError("Tried .getDisplacementZ() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
-  
+
   public float getTempC() {
     if (navx != null) return navx.getTempC();
     else {
-      DriverStation.reportError("Tried .getTempC() without navX sensor!", false);
+      this.warn();
       return 25.0f;
     }
   }
-  
+
   public double getDisplacementTotal() {
     double X = 0.0, Y = 0.0, Z = 0.0;
     X = this.getDisplacementX();
     Y = this.getDisplacementY();
     Z = this.getDisplacementZ();
-    
+
     return Math.sqrt(X * X + Y * Y + Z * Z);
   }
+
 }
