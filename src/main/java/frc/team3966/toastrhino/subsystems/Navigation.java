@@ -30,6 +30,8 @@ public class Navigation extends Subsystem {
       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
       navx = new AHRS(SPI.Port.kMXP);
       navx.resetDisplacement();
+      navx.reset();
+      navx.zeroYaw();
       SmartDashboard.putBoolean("NavX Online", true);
     } catch (UnsatisfiedLinkError ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
@@ -38,12 +40,40 @@ public class Navigation extends Subsystem {
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
   }
-  
+
   private void warn() {
     if (!warned) {
       DriverStation.reportError("NavX NOT ONLINE!", false);
       warned = true;
     }
+  }
+
+  public double getDesiredAngle(double x, double y) { //gets the desired yaw (getYaw()) the robot should be pointing at in order to drive straight to point (0, 0)
+	  if (y == 0) {
+		  if (x > 0) {
+			  return - Math.PI / 2;
+		  } else {
+			  return Math.PI / 2;
+		  }
+	  }
+	  double atan = Math.atan(Math.abs(x / y));
+	  if (x > 0 && y > 0) {
+		  return - Math.PI + atan;
+	  }
+	  if (x < 0 && y > 0) {
+		  return Math.PI - atan;
+	  }
+	  if (x > 0 && y < 0) {
+		  return -atan;
+	  }
+	  if (x < 0 && y < 0) {
+		  return atan;
+	  }
+	  return 0;
+  }
+
+  public double getYawAtoB(double ax, double ay, double bx, double by) { //gets yaw to point to point B, assuming you are at point a
+	  return getDesiredAngle(ax - bx, ay - by);
   }
 
   public boolean isMoving() {

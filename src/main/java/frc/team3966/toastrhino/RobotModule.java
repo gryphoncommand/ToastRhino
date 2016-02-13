@@ -11,7 +11,9 @@ import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.GyroMatch;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.MoveToBen;
+import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.Shoot;
+import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -52,13 +54,13 @@ public class RobotModule extends IterativeModule {
     logger = new Logger("ToastRhino", Logger.ATTR_DEFAULT);
     logger.info("robotInit() started");
     oi = new OI();
-    
+
     // Subsystems
     drive = new Drive();
     shooter = new Shooter();
     navigation = new Navigation();
     sensors = new Sensors();
-    
+
     // Commands
     TankDrive = new TankDrive();
     ShootCommand = new Shoot();
@@ -68,7 +70,9 @@ public class RobotModule extends IterativeModule {
     chooser.addObject("Chase Ball", new ChaseBall());
     chooser.addObject("Jump Scared", new JumpScare());
     chooser.addObject("Zero Yaw", new GyroMatch());
-    chooser.addObject("Move To Origin", new MoveToBen());
+    chooser.addObject("Move To Ben", new MoveToBen());
+    chooser.addObject("Move To Cade", new MoveToCade());
+    chooser.addObject("Square", new Square());
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putBoolean("Initialized", true);
@@ -141,7 +145,7 @@ public class RobotModule extends IterativeModule {
   public void teleopInit() {
     logger.info("Teleoperated.");
     // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to 
+    // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
     if (autonomousCommand != null) autonomousCommand.cancel();
