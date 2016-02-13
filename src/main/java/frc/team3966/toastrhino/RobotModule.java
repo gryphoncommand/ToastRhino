@@ -56,8 +56,8 @@ public class RobotModule extends IterativeModule {
     // Subsystems
     drive = new Drive();
     shooter = new Shooter();
-    sensors = new Sensors();
     navigation = new Navigation();
+    sensors = new Sensors();
     
     // Commands
     TankDrive = new TankDrive();
@@ -76,7 +76,7 @@ public class RobotModule extends IterativeModule {
 
     navigation.initNavX();
 
-    logger.info("robotInit(); finished");
+    logger.info("robotInit() finished");
   }
 
   /**
@@ -139,6 +139,7 @@ public class RobotModule extends IterativeModule {
 
   @Override
   public void teleopInit() {
+    logger.info("Teleoperated.");
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to 
     // continue until interrupted by another command, remove

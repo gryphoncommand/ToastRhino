@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Navigation extends Subsystem {
 
   private static AHRS navx;
+  private static boolean warned = false;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -30,16 +31,25 @@ public class Navigation extends Subsystem {
       navx = new AHRS(SPI.Port.kMXP);
       navx.resetDisplacement();
       SmartDashboard.putBoolean("NavX Online", true);
-    } catch (RuntimeException ex ) {
+    } catch (UnsatisfiedLinkError ex ) {
+      SmartDashboard.putBoolean("NavX Online", false);
+    } catch (Exception ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+    }
+  }
+  
+  private void warn() {
+    if (!warned) {
+      DriverStation.reportError("NavX NOT ONLINE!", false);
+      warned = true;
     }
   }
 
   public boolean isMoving() {
     if (navx != null) return navx.isMoving();
     else {
-      DriverStation.reportError("Tried .isMoving() without navX sensor!", false);
+      this.warn();
       return false;
     }
   }
@@ -47,14 +57,14 @@ public class Navigation extends Subsystem {
   public double getAngle() {
     if (navx != null) return navx.getAngle();
     else {
-      DriverStation.reportError("Tried .getCompassHeading() without navX sensor!", false);
+      this.warn();
       return 180;
     }
   }
   public double getYaw() {
     if (navx != null) return navx.getYaw();
     else {
-      DriverStation.reportError("Tried .getYaw() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
@@ -62,7 +72,7 @@ public class Navigation extends Subsystem {
   public double getRoll() {
     if (navx != null) return navx.getRoll();
     else {
-      DriverStation.reportError("Tried .getRoll() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
@@ -70,7 +80,7 @@ public class Navigation extends Subsystem {
   public double getPitch() {
     if (navx != null) return navx.getPitch();
     else {
-      DriverStation.reportError("Tried .getPitch() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
@@ -78,7 +88,7 @@ public class Navigation extends Subsystem {
   public double getDisplacementX() {
     if (navx != null) return navx.getDisplacementX();
     else {
-      DriverStation.reportError("Tried .getDisplacementX() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
@@ -86,7 +96,7 @@ public class Navigation extends Subsystem {
   public double getDisplacementY() {
     if (navx != null) return navx.getDisplacementY();
     else {
-      DriverStation.reportError("Tried .getDisplacementY() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
@@ -94,7 +104,7 @@ public class Navigation extends Subsystem {
   public double getDisplacementZ() {
     if (navx != null) return navx.getDisplacementZ();
     else {
-      DriverStation.reportError("Tried .getDisplacementZ() without navX sensor!", false);
+      this.warn();
       return 0.0;
     }
   }
@@ -102,7 +112,7 @@ public class Navigation extends Subsystem {
   public float getTempC() {
     if (navx != null) return navx.getTempC();
     else {
-      DriverStation.reportError("Tried .getTempC() without navX sensor!", false);
+      this.warn();
       return 25.0f;
     }
   }
