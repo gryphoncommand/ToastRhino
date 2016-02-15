@@ -9,7 +9,7 @@ public class AppliedFunctions {
 	final float gravity = 9.81f; // m per s^2
 	final float goalHeight = 2.159f; // m
 
-	/* Shooter constants */
+	/* Arm constants */
 	final float initialv = 5.0f; // m per s
 	final float initialDistance = 5.0f; // m
 	final short firstmeasure_px = 250; // in pixels

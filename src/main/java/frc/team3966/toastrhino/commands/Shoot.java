@@ -12,7 +12,7 @@ public class Shoot extends Command {
   NetworkTable GRIPtable;
 
   public Shoot() {
-    requires(RobotModule.shooter);
+    requires(RobotModule.arm);
   }
 
   // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class Shoot extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-    RobotModule.logger.info("No shooter to use!");
+    RobotModule.logger.info("No arm to use!");
   }
 
   // Make this return true when this Command no longer needs to run execute()

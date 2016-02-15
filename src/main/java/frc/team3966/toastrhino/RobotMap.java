@@ -17,20 +17,38 @@ public class RobotMap {
   public static final int BRmotor = 1;
   public static final int FLmotor = 2;
   public static final int BLmotor = 3;
+  
+  // All 4 motors encoders
+  public static final int FRencH = 0;
+  public static final int BRencH = 4;
+  public static final int FRencL = 1;
+  public static final int BRencL = 5;
+  public static final int FLencH = 2;
+  public static final int BLencH = 6;
+  public static final int FLencL = 3;
+  public static final int BLencL = 7;
+  
+  // Drive PID settings
+  public static final boolean usePID = true;
+  public static final double driveP = 1.0;
+  public static final double driveI = 0.0;
+  public static final double driveD = 0.01;
 
-  public static final int SLmotor = 4;
-  public static final int SRmotor = 5;
-  public static final int Gmotor = 6;
-  public static final int Kmotor = 7;
+  // Arm and arm
+  public static final int SLmotor = 4; // Arm left.
+  public static final int SRmotor = 5; // Arm right.
+  public static final int Amotor = 6; // Arm up/down.
+  public static final int Fspike = 7; // Push ball out.
+  
+  // Arm height encoder
+  public static final int AencH = 8;
+  public static final int AencL = 9;
 
   // Joysticks
   public static int cstick = 0;
 
   // Encoder full speed
   public static double topspeed = 1000;
-
-  // Gyro DIO port
-  public static int gyroport = 0;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
