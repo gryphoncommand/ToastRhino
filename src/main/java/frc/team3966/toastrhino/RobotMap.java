@@ -45,10 +45,10 @@ public class RobotMap {
   public static final int AencL = 9;
 
   // Joysticks
-  public static int cstick = 0;
+  public static final int cstick = 0;
 
   // Encoder full speed
-  public static double topspeed = 1000;
+  public static double topspeed = 2500;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

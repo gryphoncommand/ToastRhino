@@ -20,7 +20,6 @@ public class Drive extends Subsystem {
     public MotorController(int motorpin) {
       super(motorpin);
     }
-
     @Override
     public void pidWrite(double speed) {
       set(speed / RobotMap.topspeed);
@@ -58,12 +57,12 @@ public class Drive extends Subsystem {
       RobotMap.usePID = false;
       this.encoders = false;
       this.pidcontrollers = false;
-      RobotModule.logger.error("Encoders OFFLINE");
-      DriverStation.reportError("Encoders OFFLINE", false);
+      RobotModule.logger.error("Encoder Link Broken");
+      DriverStation.reportError("Encoders DISCONNECTED", false);
     } catch (Exception ex) {
       this.encoders = false;
       this.pidcontrollers = false;
-      RobotModule.logger.error("Error initiating encoders.");
+      RobotModule.logger.error("Exception initiating encoders.");
       DriverStation.reportError("Encoders OFFLINE", false);
     }
 

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team3966.toastrhino.RobotModule;
 
 /**
  *
@@ -32,14 +33,17 @@ public class Navigation extends Subsystem {
       SmartDashboard.putBoolean("NavX Online", true);
     } catch (UnsatisfiedLinkError ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
+      RobotModule.logger.error("NavX link broken.");
     } catch (Exception ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
-      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+      RobotModule.logger.error("Exception initiating NavX.");
+      DriverStation.reportError("Error instantiating navX-MXP: " + ex.getMessage(), true);
     }
   }
 
   private void warn() {
     if (!warned) {
+      RobotModule.logger.warn("Attempted to access nonexistant NavX");
       DriverStation.reportError("NavX NOT ONLINE!", false);
       warned = true;
     }
