@@ -57,16 +57,16 @@ public class Drive extends Subsystem {
     BLctrl.reset();
 
     // Only enable the PID controllers if we are using them.
-    if (!RobotMap.usePID) {
-      FRctrl.disable();
-      BRctrl.disable();
-      FLctrl.disable();
-      BLctrl.disable();
-    } else {
+    if (RobotMap.usePID) {
       FRctrl.enable();
       BRctrl.enable();
       FLctrl.enable();
       BLctrl.enable();
+    } else {
+      FRctrl.disable();
+      BRctrl.disable();
+      FLctrl.disable();
+      BLctrl.disable();
     }
   }
 
@@ -82,16 +82,16 @@ public class Drive extends Subsystem {
   }
 
   public void TankDrive(double rightspeed, double leftspeed) {
-    if (!RobotMap.usePID) {
-      FRmotor.set(rightspeed);
-      BRmotor.set(rightspeed);
-      FLmotor.set(leftspeed);
-      BLmotor.set(leftspeed);
-    } else {
+    if (RobotMap.usePID) {
       FRctrl.setSetpoint(rightspeed);
       BRctrl.setSetpoint(rightspeed);
       FLctrl.setSetpoint(leftspeed);
       BLctrl.setSetpoint(leftspeed);
+    } else {
+      FRmotor.set(rightspeed);
+      BRmotor.set(rightspeed);
+      FLmotor.set(leftspeed);
+      BLmotor.set(leftspeed);
     }
   }
 
@@ -119,6 +119,12 @@ public class Drive extends Subsystem {
     BRmotor.set(0.0);
     FLmotor.set(0.0);
     BLmotor.set(0.0);
+    if (RobotMap.usePID) {
+      FRctrl.setSetpoint(0.0);
+      BRctrl.setSetpoint(0.0);
+      FLctrl.setSetpoint(0.0);
+      BLctrl.setSetpoint(0.0);
+    }
   }
 }
 

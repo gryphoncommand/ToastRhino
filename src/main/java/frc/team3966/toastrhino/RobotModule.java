@@ -15,6 +15,7 @@ import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.Shoot;
 import frc.team3966.toastrhino.commands.Square;
+import frc.team3966.toastrhino.commands.SwitchPID;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
@@ -39,6 +40,7 @@ public class RobotModule extends IterativeModule {
   Command TankDrive;
   Command ShootCommand;
   Command resetNav;
+  Command switchPID;
   SendableChooser chooser;
 
   @Override
@@ -67,6 +69,7 @@ public class RobotModule extends IterativeModule {
     TankDrive = new TankDrive();
     ShootCommand = new Shoot();
     resetNav = new ResetNavigation();
+    switchPID = new SwitchPID();
     resetNav.setRunWhenDisabled(true);
 
     // Autonomous options
@@ -80,6 +83,7 @@ public class RobotModule extends IterativeModule {
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putData("Reset Navigation", resetNav);
+    SmartDashboard.putData("Switch PID", switchPID);
     SmartDashboard.putBoolean("Initialized", true);
     SmartDashboard.putBoolean("DB/LED 0", true);
 
