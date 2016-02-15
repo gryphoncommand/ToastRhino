@@ -13,6 +13,17 @@ public class Drive extends Subsystem {
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  
+  public class MotorController extends VictorSP {
+    public MotorController(int motorpin) {
+      super(motorpin);
+    }
+    
+    @Override
+    public void pidWrite(double speed) {
+      set(speed / RobotMap.topspeed);
+    }
+  }
 
   // Motor Controllers
   private static VictorSP FRmotor = new VictorSP(RobotMap.FRmotor);
@@ -79,6 +90,11 @@ public class Drive extends Subsystem {
     SmartDashboard.putData("Front Right Ctrl", FRctrl);
     SmartDashboard.putData("Back Left Ctrl", BLctrl);
     SmartDashboard.putData("Back Right Ctrl", BRctrl);
+    SmartDashboard.putData("FR Encoder", FRenc);
+    SmartDashboard.putData("BR Encoder", BRenc);
+    SmartDashboard.putData("FL Encoder", FLenc);
+    SmartDashboard.putData("BL Encoder", BLenc);
+    
   }
 
   public void TankDrive(double rightspeed, double leftspeed) {
