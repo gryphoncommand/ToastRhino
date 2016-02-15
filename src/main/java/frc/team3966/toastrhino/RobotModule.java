@@ -70,6 +70,7 @@ public class RobotModule extends IterativeModule {
     ShootCommand = new Shoot();
     resetNav = new ResetNavigation();
     switchPID = new SwitchPID();
+    oi.switchPIDbutton.whenPressed(switchPID);
     resetNav.setRunWhenDisabled(true);
 
     // Autonomous options
@@ -83,7 +84,7 @@ public class RobotModule extends IterativeModule {
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putData("Reset Navigation", resetNav);
-    SmartDashboard.putData("Switch PID", switchPID);
+    //SmartDashboard.putData("Switch PID", switchPID);
     SmartDashboard.putBoolean("Initialized", true);
     SmartDashboard.putBoolean("DB/LED 0", true);
 

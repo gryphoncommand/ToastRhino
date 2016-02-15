@@ -1,24 +1,26 @@
 package frc.team3966.toastrhino.subsystems;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotMap;
+import frc.team3966.toastrhino.RobotModule;
 import frc.team3966.toastrhino.commands.TankDrive;
 
 public class Drive extends Subsystem {
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  
+
   public class MotorController extends VictorSP {
     public MotorController(int motorpin) {
       super(motorpin);
     }
-    
+
     @Override
     public void pidWrite(double speed) {
       set(speed / RobotMap.topspeed);
@@ -32,52 +34,93 @@ public class Drive extends Subsystem {
   private static VictorSP BLmotor = new VictorSP(RobotMap.BLmotor);
 
   // Motor encoders
-  private static Encoder FRenc = new Encoder(RobotMap.FRencH, RobotMap.FRencL, false, EncodingType.k4X);
-  private static Encoder BRenc = new Encoder(RobotMap.BRencH, RobotMap.BRencL, false, EncodingType.k4X);
-  private static Encoder FLenc = new Encoder(RobotMap.FLencH, RobotMap.FLencL, false, EncodingType.k4X);
-  private static Encoder BLenc = new Encoder(RobotMap.BLencH, RobotMap.BLencL, false, EncodingType.k4X);
+  private static Encoder FRenc;
+  private static Encoder BRenc;
+  private static Encoder FLenc;
+  private static Encoder BLenc;
+  protected boolean encoders = true;
 
   // PID Controllers
-  private static PIDController FRctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, FRenc, FRmotor);
-  private static PIDController BRctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, BRenc, BRmotor);
-  private static PIDController FLctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, FLenc, FLmotor);
-  private static PIDController BLctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, BLenc, BLmotor);
+  private static PIDController FRctrl;
+  private static PIDController BRctrl;
+  private static PIDController FLctrl;
+  private static PIDController BLctrl;
+  protected boolean pidcontrollers = true;
 
-  public Drive () {
+  public Drive () {    
+    // Motor encoders
+    try {
+      FRenc = new Encoder(RobotMap.FRencH, RobotMap.FRencL, false, EncodingType.k4X);
+      BRenc = new Encoder(RobotMap.BRencH, RobotMap.BRencL, false, EncodingType.k4X);
+      FLenc = new Encoder(RobotMap.FLencH, RobotMap.FLencL, false, EncodingType.k4X);
+      BLenc = new Encoder(RobotMap.BLencH, RobotMap.BLencL, false, EncodingType.k4X);
+    } catch (UnsatisfiedLinkError ex ) {
+      RobotMap.usePID = false;
+      this.encoders = false;
+      this.pidcontrollers = false;
+      RobotModule.logger.error("Encoders OFFLINE");
+      DriverStation.reportError("Encoders OFFLINE", false);
+    } catch (Exception ex) {
+      this.encoders = false;
+      this.pidcontrollers = false;
+      RobotModule.logger.error("Error initiating encoders.");
+      DriverStation.reportError("Encoders OFFLINE", false);
+    }
+
+    if (this.pidcontrollers) {
+      // PID Controllers
+      FRctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, FRenc, FRmotor);
+      BRctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, BRenc, BRmotor);
+      FLctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, FLenc, FLmotor);
+      BLctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, BLenc, BLmotor);
+    }
+
     FRmotor.setInverted(false);
     BRmotor.setInverted(false);
     FLmotor.setInverted(true);
     BLmotor.setInverted(true);
 
-    // Not continuous.
-    FRctrl.setContinuous(false);
-    BRctrl.setContinuous(false);
-    FLctrl.setContinuous(false);
-    BLctrl.setContinuous(false);
+    if (this.encoders) {
+      // Right vs left
+      FRenc.setReverseDirection(true);
+      BRenc.setReverseDirection(true);
+      FLenc.setReverseDirection(false);
+      BLenc.setReverseDirection(false);
+    }
 
-    // Using the max speed as ratio
-    FRctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
-    BRctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
-    FLctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
-    BLctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
+    if (this.pidcontrollers) {
+      // Not continuous.
+      FRctrl.setContinuous(false);
+      BRctrl.setContinuous(false);
+      FLctrl.setContinuous(false);
+      BLctrl.setContinuous(false);
 
-    // Safer to reset before use.
-    FRctrl.reset();
-    BRctrl.reset();
-    FLctrl.reset();
-    BLctrl.reset();
+      // Using the max speed as ratio
+      FRctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
+      BRctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
+      FLctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
+      BLctrl.setOutputRange(-RobotMap.topspeed, RobotMap.topspeed);
+
+      // Safer to reset before use.
+      FRctrl.reset();
+      BRctrl.reset();
+      FLctrl.reset();
+      BLctrl.reset();
+    }
 
     // Only enable the PID controllers if we are using them.
-    if (RobotMap.usePID) {
-      FRctrl.enable();
-      BRctrl.enable();
-      FLctrl.enable();
-      BLctrl.enable();
-    } else {
-      FRctrl.disable();
-      BRctrl.disable();
-      FLctrl.disable();
-      BLctrl.disable();
+    if (this.pidcontrollers) {
+      if (RobotMap.usePID) {
+        FRctrl.enable();
+        BRctrl.enable();
+        FLctrl.enable();
+        BLctrl.enable();
+      } else {
+        FRctrl.disable();
+        BRctrl.disable();
+        FLctrl.disable();
+        BLctrl.disable();
+      }
     }
   }
 
@@ -86,15 +129,18 @@ public class Drive extends Subsystem {
     SmartDashboard.putData("Front Right", FRmotor);
     SmartDashboard.putData("Back Left", BLmotor);
     SmartDashboard.putData("Back Right", BRmotor);
-    SmartDashboard.putData("Front Left Ctrl", FLctrl);
-    SmartDashboard.putData("Front Right Ctrl", FRctrl);
-    SmartDashboard.putData("Back Left Ctrl", BLctrl);
-    SmartDashboard.putData("Back Right Ctrl", BRctrl);
-    SmartDashboard.putData("FR Encoder", FRenc);
-    SmartDashboard.putData("BR Encoder", BRenc);
-    SmartDashboard.putData("FL Encoder", FLenc);
-    SmartDashboard.putData("BL Encoder", BLenc);
-    
+    if (this.pidcontrollers) {
+      SmartDashboard.putData("Front Left Ctrl", FLctrl);
+      SmartDashboard.putData("Front Right Ctrl", FRctrl);
+      SmartDashboard.putData("Back Left Ctrl", BLctrl);
+      SmartDashboard.putData("Back Right Ctrl", BRctrl);
+    }
+    if (this.encoders) {
+      SmartDashboard.putData("FR Encoder", FRenc);
+      SmartDashboard.putData("BR Encoder", BRenc);
+      SmartDashboard.putData("FL Encoder", FLenc);
+      SmartDashboard.putData("BL Encoder", BLenc);
+    }
   }
 
   public void TankDrive(double rightspeed, double leftspeed) {
