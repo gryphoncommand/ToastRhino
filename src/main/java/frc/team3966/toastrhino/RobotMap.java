@@ -29,7 +29,7 @@ public class RobotMap {
   public static final int BLencL = 7;
   
   // Drive PID settings
-  public static final boolean usePID = true;
+  public static boolean usePID = true;
   public static final double driveP = 1.0;
   public static final double driveI = 0.0;
   public static final double driveD = 0.01;

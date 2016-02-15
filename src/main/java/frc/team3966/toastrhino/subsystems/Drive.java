@@ -93,17 +93,20 @@ public class Drive extends Subsystem {
       FLctrl.setSetpoint(leftspeed);
       BLctrl.setSetpoint(leftspeed);
     }
-
-    this.dash_all();
   }
 
   public void Rotate (double clockwisespeed) {
-    FRmotor.set(clockwisespeed);
-    BRmotor.set(clockwisespeed);
-    FLmotor.set(-clockwisespeed);
-    BLmotor.set(-clockwisespeed);
-
-    this.dash_all();
+    if (!RobotMap.usePID) {
+      FRmotor.set(clockwisespeed);
+      BRmotor.set(clockwisespeed);
+      FLmotor.set(-clockwisespeed);
+      BLmotor.set(-clockwisespeed);
+    } else {
+      FRctrl.setSetpoint(clockwisespeed);
+      BRctrl.setSetpoint(clockwisespeed);
+      FLctrl.setSetpoint(-clockwisespeed);
+      BLctrl.setSetpoint(-clockwisespeed);
+    }
   }
 
   public void initDefaultCommand() {
