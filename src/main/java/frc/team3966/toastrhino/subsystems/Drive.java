@@ -82,8 +82,8 @@ public class Drive extends Subsystem {
 
     if (this.encoders) {
       // Right vs left
-      FRenc.setReverseDirection(true);
-      BRenc.setReverseDirection(true);
+      FRenc.setReverseDirection(false);
+      BRenc.setReverseDirection(false);
       FLenc.setReverseDirection(false);
       BLenc.setReverseDirection(false);
     }
