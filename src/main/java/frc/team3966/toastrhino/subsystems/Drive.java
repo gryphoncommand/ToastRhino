@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotMap;
 import frc.team3966.toastrhino.RobotModule;
 import frc.team3966.toastrhino.commands.TankDrive;
+import jaci.openrio.toast.core.Environment;
 
 public class Drive extends Subsystem {
 
@@ -58,12 +59,12 @@ public class Drive extends Subsystem {
       this.encoders = false;
       this.pidcontrollers = false;
       RobotModule.logger.error("Encoder Link Broken");
-      DriverStation.reportError("Encoders DISCONNECTED", false);
+      if (Environment.isEmbedded()) DriverStation.reportError("Encoders DISCONNECTED", false);
     } catch (Exception ex) {
       this.encoders = false;
       this.pidcontrollers = false;
       RobotModule.logger.error("Exception initiating encoders.");
-      DriverStation.reportError("Encoders OFFLINE", false);
+      if (Environment.isEmbedded()) DriverStation.reportError("Encoders OFFLINE", false);
     }
 
     if (this.pidcontrollers) {

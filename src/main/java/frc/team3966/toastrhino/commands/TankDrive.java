@@ -1,9 +1,8 @@
 package frc.team3966.toastrhino.commands;
 
-import frc.team3966.toastrhino.RobotModule;
-
 import edu.wpi.first.wpilibj.command.Command;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team3966.toastrhino.RobotModule;
 
 /**
  *
