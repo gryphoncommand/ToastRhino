@@ -25,6 +25,7 @@ import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 
 public class RobotModule extends IterativeModule {
+	
 
   public static Logger logger;
 
