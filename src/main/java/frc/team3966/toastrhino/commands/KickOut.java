@@ -35,6 +35,7 @@ public class KickOut extends Command {
     if (doThis) {
     	//your code does this
     }
+    lastTime = ctime;
   }
 
   // Make this return true when this Command no longer needs to run execute()
