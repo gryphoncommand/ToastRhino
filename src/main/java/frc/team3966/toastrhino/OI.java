@@ -1,8 +1,9 @@
 package frc.team3966.toastrhino;
 
-import frc.team3966.toastrhino.util.XboxController;
-
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.team3966.toastrhino.util.XboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -29,6 +30,7 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
+  public Button switchPIDbutton = new JoystickButton(controller, 10);
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
@@ -37,5 +39,6 @@ public class OI {
   // Start the command when the button is released  and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
 }
 

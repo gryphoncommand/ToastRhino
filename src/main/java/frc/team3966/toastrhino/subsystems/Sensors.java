@@ -36,9 +36,10 @@ public class Sensors extends Subsystem {
     SmartDashboard.putNumber("PDP Total Amps", PDP.getTotalCurrent());
   }
 
-  public void dash_navx() {
+  public void dash_submodule_navigation() {
     SmartDashboard.putNumber("Degrees C", RobotModule.navigation.getTempC());
     SmartDashboard.putNumber("Angle", RobotModule.navigation.getAngle());
+    SmartDashboard.putNumber("Compass Heading", RobotModule.navigation.getCompassHeading());
     SmartDashboard.putNumber("Yaw", RobotModule.navigation.getYaw());
     SmartDashboard.putNumber("Roll", RobotModule.navigation.getRoll());
     SmartDashboard.putNumber("Pitch", RobotModule.navigation.getPitch());
@@ -49,10 +50,15 @@ public class Sensors extends Subsystem {
     SmartDashboard.putBoolean("Calibrating", RobotModule.navigation.isCalibrating());
     SmartDashboard.putBoolean("Magnetic Disturbance", RobotModule.navigation.isMagneticDisturbance());
   }
+  
+  public void dash_submodule_drive() {
+    RobotModule.drive.dash_all();
+  }
 
   public void dash_all() {
     dash_accel();
     dash_power();
-    dash_navx();
+    dash_submodule_navigation();
+    dash_submodule_drive();
   }
 }

@@ -12,13 +12,15 @@ import frc.team3966.toastrhino.commands.GyroMatch;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
+import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.Shoot;
 import frc.team3966.toastrhino.commands.Square;
+import frc.team3966.toastrhino.commands.SwitchPID;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.subsystems.Sensors;
-import frc.team3966.toastrhino.subsystems.Shooter;
+import frc.team3966.toastrhino.subsystems.Arm;
 import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 
@@ -27,7 +29,7 @@ public class RobotModule extends IterativeModule {
   public static Logger logger;
 
   public static Drive drive;
-  public static Shooter shooter;
+  public static Arm arm;
   public static Sensors sensors;
   public static Navigation navigation;
   public static OI oi;
@@ -37,6 +39,8 @@ public class RobotModule extends IterativeModule {
   Command autonomousCommand;
   Command TankDrive;
   Command ShootCommand;
+  Command resetNav;
+  Command switchPID;
   SendableChooser chooser;
 
   @Override
@@ -57,13 +61,17 @@ public class RobotModule extends IterativeModule {
 
     // Subsystems
     drive = new Drive();
-    shooter = new Shooter();
+    arm = new Arm();
     navigation = new Navigation();
     sensors = new Sensors();
 
     // Commands
     TankDrive = new TankDrive();
     ShootCommand = new Shoot();
+    resetNav = new ResetNavigation();
+    switchPID = new SwitchPID();
+    oi.switchPIDbutton.whenPressed(switchPID);
+    resetNav.setRunWhenDisabled(true);
 
     // Autonomous options
     chooser = new SendableChooser();
@@ -75,6 +83,8 @@ public class RobotModule extends IterativeModule {
     chooser.addObject("Move in Square", new Square());
     SmartDashboard.putData("Auto mode", chooser);
 
+    SmartDashboard.putData("Reset Navigation", resetNav);
+    //SmartDashboard.putData("Switch PID", switchPID);
     SmartDashboard.putBoolean("Initialized", true);
     SmartDashboard.putBoolean("DB/LED 0", true);
 
@@ -98,6 +108,7 @@ public class RobotModule extends IterativeModule {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putData("Reset Navigation", resetNav);
     sensors.dash_all();
   }
 

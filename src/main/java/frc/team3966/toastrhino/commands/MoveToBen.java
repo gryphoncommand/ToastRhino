@@ -73,7 +73,7 @@ public class MoveToBen extends Command {
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
     SmartDashboard.putData("Rotater PID", Rotater);
     
-    if (Math.abs(Rotater.getError()) < 2) {
+    if (Math.abs(Rotater.getError()) > 2) {
       Rotater.enable();
       Rotater.setSetpoint(this.getAngleToOrigin());
     } else {

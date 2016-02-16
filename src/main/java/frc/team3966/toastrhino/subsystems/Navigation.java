@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team3966.toastrhino.RobotModule;
+import jaci.openrio.toast.core.Environment;
 
 /**
  *
@@ -20,7 +22,6 @@ public class Navigation extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new MySpecialCommand());
-    SmartDashboard.putBoolean("NavX Online", false);
   }
 
   public void initNavX() {
@@ -29,23 +30,30 @@ public class Navigation extends Subsystem {
       /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
       navx = new AHRS(SPI.Port.kMXP);
-      navx.resetDisplacement();
-      navx.reset();
-      navx.zeroYaw();
+      this.resetAll();
       SmartDashboard.putBoolean("NavX Online", true);
     } catch (UnsatisfiedLinkError ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
+      RobotModule.logger.error("NavX link broken.");
     } catch (Exception ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
-      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+      RobotModule.logger.error("Exception initiating NavX.");
+      DriverStation.reportError("Error instantiating navX-MXP: " + ex.getMessage(), true);
     }
   }
 
   private void warn() {
     if (!warned) {
-      DriverStation.reportError("NavX NOT ONLINE!", false);
+      RobotModule.logger.warn("Attempted to access nonexistant NavX");
+      if (Environment.isEmbedded()) DriverStation.reportError("NavX NOT ONLINE!", false);
       warned = true;
     }
+  }
+  
+  public void resetAll() {
+    navx.resetDisplacement();
+    navx.reset();
+    navx.zeroYaw();
   }
   
   public boolean isCalibrating() {
@@ -77,6 +85,13 @@ public class Navigation extends Subsystem {
     else {
       this.warn();
       return 180;
+    }
+  }
+  public double getCompassHeading() {
+    if (navx != null) return navx.getCompassHeading();
+    else {
+      this.warn();
+      return 0.0;
     }
   }
   public double getYaw() {
