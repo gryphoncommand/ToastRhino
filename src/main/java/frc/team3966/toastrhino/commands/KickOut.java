@@ -10,7 +10,7 @@ import frc.team3966.toastrhino.RobotModule;
 public class KickOut extends Command {
 
   public static final double maxTime = .25;//max time, in seconds
-  public static final double converFactor = Math.pow(10, -6);
+  public static final double converFactor = Math.pow(10, -9);
   public boolean doThis = true;
   public double time = 0;
   private long lastTime = 0; //dont touch :P
