@@ -1,6 +1,5 @@
 package frc.team3966.toastrhino.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,12 +23,10 @@ public class SwitchPID extends Command {
       RobotMap.usePID = false;
       SmartDashboard.putBoolean("PID Control?", RobotMap.usePID);
       RobotModule.logger.info("PID is OFF");
-      DriverStation.reportError("PID is now OFF", false);
     } else {
       RobotMap.usePID = true;
       SmartDashboard.putBoolean("PID Control?", RobotMap.usePID);
       RobotModule.logger.info("PID is ON");
-      DriverStation.reportError("PID is now ON", false);
     }
   }
 

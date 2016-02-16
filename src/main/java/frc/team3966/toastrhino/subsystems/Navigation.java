@@ -2,11 +2,9 @@ package frc.team3966.toastrhino.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
-import jaci.openrio.toast.core.Environment;
 
 /**
  *
@@ -38,14 +36,12 @@ public class Navigation extends Subsystem {
     } catch (Exception ex ) {
       SmartDashboard.putBoolean("NavX Online", false);
       RobotModule.logger.error("Exception initiating NavX.");
-      DriverStation.reportError("Error instantiating navX-MXP: " + ex.getMessage(), true);
     }
   }
 
   private void warn() {
     if (!warned) {
       RobotModule.logger.warn("Attempted to access nonexistant NavX");
-      if (Environment.isEmbedded()) DriverStation.reportError("NavX NOT ONLINE!", false);
       warned = true;
     }
   }

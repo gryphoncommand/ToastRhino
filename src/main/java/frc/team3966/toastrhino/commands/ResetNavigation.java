@@ -1,6 +1,5 @@
 package frc.team3966.toastrhino.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import frc.team3966.toastrhino.RobotModule;
@@ -20,7 +19,6 @@ public class ResetNavigation extends Command {
   protected void initialize() {
     RobotModule.navigation.resetAll();
     RobotModule.logger.info("Reset NavX values to Zero.");
-    DriverStation.reportError("NavX set to Zero.", false);
   }
 
   // Called repeatedly when this Command is scheduled to run
