@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
-import frc.team3966.toastrhino.commands.GyroMatch;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
@@ -25,7 +24,6 @@ import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 
 public class RobotModule extends IterativeModule {
-	
 
   public static Logger logger;
 
@@ -71,14 +69,12 @@ public class RobotModule extends IterativeModule {
     ShootCommand = new Shoot();
     resetNav = new ResetNavigation();
     switchPID = new SwitchPID();
-    oi.switchPIDbutton.whenPressed(switchPID);
     resetNav.setRunWhenDisabled(true);
 
     // Autonomous options
     chooser = new SendableChooser();
     chooser.addObject("Chase Ball", new ChaseBall());
     chooser.addObject("Jump Scared", new JumpScare());
-    chooser.addObject("Match Gyro", new GyroMatch());
     chooser.addObject("Move To Ben", new MoveToBen());
     chooser.addObject("Move To Cade", new MoveToCade());
     chooser.addObject("Move in Square", new Square());
