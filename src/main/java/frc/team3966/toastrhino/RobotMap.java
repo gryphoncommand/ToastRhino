@@ -43,6 +43,7 @@ public class RobotMap {
   // ArmAim height encoder
   public static final int AencH = 8;
   public static final int AencL = 9;
+  public static final int ArmHeightMax = 490;
 
   // Joysticks
   public static final int cstick = 0;
