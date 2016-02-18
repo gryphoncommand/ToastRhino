@@ -21,7 +21,10 @@ public class ArmControl extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-    RobotModule.armBallGrab.grab((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0);
+    RobotModule.armBallGrab.grab(
+        ((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0) - // Right trigger to fire out
+        ((RobotModule.oi.controller.getRawAxis(3) + 1.0) / 4.0)   // Left trigger to suck up (half speed)
+        );
     RobotModule.armAim.Amotor(RobotModule.oi.controller.getRawAxis(2));
   }
 
