@@ -97,7 +97,7 @@ public class RobotModule extends IterativeModule {
    */
   @Override
   public void disabledInit(){
-    //if (TankDrive != null) TankDrive.cancel();
+    if (TankDrive != null) TankDrive.cancel();
     drive.doNothing();
     logger.info("Disabled.");
   }
@@ -158,7 +158,7 @@ public class RobotModule extends IterativeModule {
     // this line or comment it out.
     if (autonomousCommand != null) autonomousCommand.cancel();
     if (TankDrive != null) TankDrive.start();
-    //if (ShootCommand != null ) ShootCommand.start();
+    if (ShootCommand != null ) ShootCommand.start();
   }
 
   /**

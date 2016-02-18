@@ -38,7 +38,7 @@ public class RobotMap {
   public static final int SLmotor = 4; // Arm left.
   public static final int SRmotor = 5; // Arm right.
   public static final int Amotor = 6; // Arm up/down.
-  public static final int Fspike = 7; // Push ball out.
+  public static final int KickMotor = 7; // Push ball out.
   
   // Arm height encoder
   public static final int AencH = 8;

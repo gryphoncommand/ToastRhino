@@ -21,7 +21,9 @@ public class Shoot extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-    RobotModule.logger.info("No arm to use!");
+    RobotModule.arm.Smotors((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0);
+    RobotModule.arm.Amotor(RobotModule.oi.controller.getRawAxis(2));
+    RobotModule.arm.KickMotor(RobotModule.oi.controller.getRawAxis(0));
   }
 
   // Make this return true when this Command no longer needs to run execute()
