@@ -12,7 +12,7 @@ public class ArmControl extends Command {
   NetworkTable GRIPtable;
 
   public ArmControl() {
-    requires(RobotModule.arm);
+    requires(RobotModule.armAim);
   }
 
   // Called just before this Command runs the first time
@@ -21,8 +21,8 @@ public class ArmControl extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-    RobotModule.arm.Smotors((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0);
-    RobotModule.arm.Amotor(RobotModule.oi.controller.getRawAxis(2));
+    RobotModule.armBallGrab.grab((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0);
+    RobotModule.armAim.Amotor(RobotModule.oi.controller.getRawAxis(2));
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -34,13 +34,13 @@ public class RobotMap {
   public static final double driveI = 0.0;
   public static final double driveD = 0.01;
 
-  // Arm and arm
-  public static final int SLmotor = 4; // Arm left.
-  public static final int SRmotor = 5; // Arm right.
-  public static final int Amotor = 6; // Arm up/down.
+  // ArmAim and armAim
+  public static final int SLmotor = 4; // ArmAim left.
+  public static final int SRmotor = 5; // ArmAim right.
+  public static final int Amotor = 6; // ArmAim up/down.
   public static final int KickMotor = 7; // Push ball out.
   
-  // Arm height encoder
+  // ArmAim height encoder
   public static final int AencH = 8;
   public static final int AencL = 9;
 

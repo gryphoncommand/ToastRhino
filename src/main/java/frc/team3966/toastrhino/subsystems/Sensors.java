@@ -56,7 +56,7 @@ public class Sensors extends Subsystem {
   }
   
   public void dash_submodule_arm() {
-    RobotModule.arm.dash_all();
+    RobotModule.armAim.dash_all();
   }
   
   public void dash_submodule_armKicker() {

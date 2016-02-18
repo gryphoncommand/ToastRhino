@@ -20,7 +20,8 @@ import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.subsystems.Sensors;
-import frc.team3966.toastrhino.subsystems.Arm;
+import frc.team3966.toastrhino.subsystems.ArmAim;
+import frc.team3966.toastrhino.subsystems.ArmBallGrab;
 import frc.team3966.toastrhino.subsystems.ArmKicker;
 import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
@@ -30,8 +31,9 @@ public class RobotModule extends IterativeModule {
   public static Logger logger;
 
   public static Drive drive;
-  public static Arm arm;
+  public static ArmAim armAim;
   public static ArmKicker armKicker;
+  public static ArmBallGrab armBallGrab;
   public static Sensors sensors;
   public static Navigation navigation;
   public static OI oi;
@@ -64,8 +66,9 @@ public class RobotModule extends IterativeModule {
 
     // Subsystems
     drive = new Drive();
-    arm = new Arm();
+    armAim = new ArmAim();
     armKicker = new ArmKicker();
+    armBallGrab = new ArmBallGrab();
     navigation = new Navigation();
     sensors = new Sensors();
 
