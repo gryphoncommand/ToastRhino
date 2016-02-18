@@ -58,6 +58,10 @@ public class Sensors extends Subsystem {
   public void dash_submodule_arm() {
     RobotModule.arm.dash_all();
   }
+  
+  public void dash_submodule_armKicker() {
+    RobotModule.armKicker.dash_all();
+  }
 
   public void dash_all() {
     dash_accel();
@@ -65,5 +69,6 @@ public class Sensors extends Subsystem {
     dash_submodule_navigation();
     dash_submodule_drive();
     dash_submodule_arm();
+    dash_submodule_armKicker();
   }
 }

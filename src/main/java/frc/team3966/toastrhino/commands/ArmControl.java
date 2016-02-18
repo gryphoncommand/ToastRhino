@@ -7,11 +7,11 @@ import frc.team3966.toastrhino.RobotModule;
 /**
  *
  */
-public class Shoot extends Command {
+public class ArmControl extends Command {
 
   NetworkTable GRIPtable;
 
-  public Shoot() {
+  public ArmControl() {
     requires(RobotModule.arm);
   }
 
@@ -23,7 +23,6 @@ public class Shoot extends Command {
   protected void execute() {
     RobotModule.arm.Smotors((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0);
     RobotModule.arm.Amotor(RobotModule.oi.controller.getRawAxis(2));
-    RobotModule.arm.KickMotor(RobotModule.oi.controller.getRawAxis(0));
   }
 
   // Make this return true when this Command no longer needs to run execute()

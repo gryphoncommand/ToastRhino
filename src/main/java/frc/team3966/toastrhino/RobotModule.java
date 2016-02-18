@@ -1,6 +1,6 @@
 package frc.team3966.toastrhino;
 
-//import frc.team3966.toastrhino.commands.Shoot;
+//import frc.team3966.toastrhino.commands.ArmControl;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -9,10 +9,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.JumpScare;
+import frc.team3966.toastrhino.commands.KickOut;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
-import frc.team3966.toastrhino.commands.Shoot;
+import frc.team3966.toastrhino.commands.ArmControl;
 import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.SwitchPID;
 import frc.team3966.toastrhino.commands.TankDrive;
@@ -20,6 +21,7 @@ import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.subsystems.Sensors;
 import frc.team3966.toastrhino.subsystems.Arm;
+import frc.team3966.toastrhino.subsystems.ArmKicker;
 import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 
@@ -29,6 +31,7 @@ public class RobotModule extends IterativeModule {
 
   public static Drive drive;
   public static Arm arm;
+  public static ArmKicker armKicker;
   public static Sensors sensors;
   public static Navigation navigation;
   public static OI oi;
@@ -37,7 +40,8 @@ public class RobotModule extends IterativeModule {
 
   Command autonomousCommand;
   Command TankDrive;
-  Command ShootCommand;
+  Command ManualArmControl;
+  Command KickOut;
   Command resetNav;
   Command switchPID;
   SendableChooser chooser;
@@ -61,15 +65,18 @@ public class RobotModule extends IterativeModule {
     // Subsystems
     drive = new Drive();
     arm = new Arm();
+    armKicker = new ArmKicker();
     navigation = new Navigation();
     sensors = new Sensors();
 
     // Commands
     TankDrive = new TankDrive();
-    ShootCommand = new Shoot();
+    ManualArmControl = new ArmControl();
+    KickOut = new KickOut();
     resetNav = new ResetNavigation();
     switchPID = new SwitchPID();
     resetNav.setRunWhenDisabled(true);
+    RobotModule.oi.FireButton.whenPressed(KickOut);
 
     // Autonomous options
     chooser = new SendableChooser();
@@ -158,7 +165,7 @@ public class RobotModule extends IterativeModule {
     // this line or comment it out.
     if (autonomousCommand != null) autonomousCommand.cancel();
     if (TankDrive != null) TankDrive.start();
-    if (ShootCommand != null ) ShootCommand.start();
+    if (ManualArmControl != null ) ManualArmControl.start();
   }
 
   /**
