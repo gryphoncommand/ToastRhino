@@ -25,7 +25,7 @@ public class ArmControl extends Command {
         ((RobotModule.oi.controller.getRawAxis(4) + 1.0) / 2.0) - // Right trigger to fire out
         ((RobotModule.oi.controller.getRawAxis(3) + 1.0) / 4.0)   // Left trigger to suck up (half speed)
         );
-    RobotModule.armAim.Amotor(RobotModule.oi.controller.getRawAxis(2));
+    RobotModule.armAim.setHeight(RobotModule.oi.controller.getRawAxis(2));
   }
 
   // Make this return true when this Command no longer needs to run execute()
