@@ -2,6 +2,7 @@ package frc.team3966.toastrhino.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,7 +27,7 @@ public class ArmAim extends Subsystem {
     }
     @Override
     public void pidWrite(double output) {
-      RobotModule.armAim.setAmotor(output / (RobotMap.ArmHeightMax / 4.0));
+      super.set(output / 2.0);
     }
   }
 
@@ -35,10 +36,16 @@ public class ArmAim extends Subsystem {
   public ArmAim() {
     try {
       Aenc = new Encoder(RobotMap.AencH, RobotMap.AencL);
-      armHeight = new PIDController(10.0, 0.1, 1.0, Aenc, Amotor);
+      armHeight = new PIDController(0.5, 0.0, 0.0, Aenc, Amotor);
+      Aenc.setPIDSourceType(PIDSourceType.kDisplacement);
+      armHeight.setContinuous(false);
+      Aenc.reset();
+      Aenc.setReverseDirection(true);
+      armHeight.enable();
     } catch (UnsatisfiedLinkError ex) {
       RobotModule.logger.error("Arm encoder no link.");
     }
+    Amotor.setInverted(true);
 
   }
 
@@ -58,6 +65,6 @@ public class ArmAim extends Subsystem {
   }
 
   public void setHeight(double speed) {
-    if (armHeight != null) Amotor.set(speed);
+    if (armHeight != null) armHeight.setSetpoint(speed);
   }
 }
