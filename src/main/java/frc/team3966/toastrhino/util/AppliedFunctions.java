@@ -6,17 +6,20 @@ package frc.team3966.toastrhino.util;
 
 public class AppliedFunctions {
 	/* constants */
-	final float gravity = 9.81f; // m per s^2
-	final float goalHeight = 2.159f; // m
-
-	/* ArmAim constants */
-	final float initialv = 5.0f; // m per s
-	final float initialDistance = 5.0f; // m
-	final short firstmeasure_px = 250; // in pixels
-	final float firstmeasure_length = 10.0f; // meters
+	final static float gravity = 9.81f; // m per s^2
+	final static float goalHeight = 2.159f; // m
+	final static double maxShooterEncoderInput = 0;
+	final static double minShooterEncoderInput = -500;
+	final static double degreesAtEncoderMin = -22;
+	final static double degreesAtEncoderMax = 145;
+	/* Arm constants */
+	final static float initialv = 5.0f; // m per s
+	final static float initialDistance = 5.0f; // m
+	final static short firstmeasure_px = 250; // in pixels
+	final static float firstmeasure_length = 10.0f; // meters
 
 	//returns the radians that the "gun" should rotate to. Starts at 0
-	public float getShootRadians(float distance) {
+	public static float getShootRadians(float distance) {
 		float radical = 0.0f;
 		radical += FastArithmetic.pow_f(initialv, (short) 4);
 		radical -= gravity * (gravity * FastArithmetic.pow_f(distance, (short) 2)
@@ -27,8 +30,18 @@ public class AppliedFunctions {
 	}
 
 	//gets distance from pixels high. Requires initial measurement. Needs to be tweaked for different camera positions.
-	public float getDistance(short pixels) {
+	public static float getDistance(short pixels) {
 		return (firstmeasure_px * firstmeasure_length) / (pixels);
+	}
+	
+	public static double getShootingAngle(double motorInput) { //returns shooter's pitch
+		if (motorInput < minShooterEncoderInput) { //capping lower values
+			return getShootingAngle(minShooterEncoderInput);
+		}
+		if (motorInput > maxShooterEncoderInput) { //capping larger values
+			return getShootingAngle(maxShooterEncoderInput);
+		}
+		return motorInput * (degreesAtEncoderMax - degreesAtEncoderMin) / (maxShooterEncoderInput - minShooterEncoderInput) + degreesAtEncoderMax;
 	}
 
 }
