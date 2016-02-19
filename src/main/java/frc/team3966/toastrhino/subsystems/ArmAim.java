@@ -18,6 +18,8 @@ public class ArmAim extends Subsystem {
   // here. Call these from Commands.
 
   Encoder Aenc;
+  
+  private boolean PIDenabled = true;
 
   PIDController armHeight;
 
@@ -65,6 +67,13 @@ public class ArmAim extends Subsystem {
   }
 
   public void setHeight(double speed) {
-    if (armHeight != null) armHeight.setSetpoint(speed);
+    if (armHeight != null && PIDenabled) armHeight.setSetpoint(speed);
+    else if (PIDenabled == false) {
+      setAmotor(speed);
+    }
+  }
+  
+  public void enablePID(boolean enabled) {
+    PIDenabled = enabled;
   }
 }
