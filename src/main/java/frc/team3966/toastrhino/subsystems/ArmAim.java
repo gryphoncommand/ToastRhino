@@ -76,9 +76,9 @@ public class ArmAim extends Subsystem {
   public void enablePID(boolean enabled) {
     PIDenabled = enabled;
     if (PIDenabled) {
-      armHeight.enable();
+      if (armHeight != null) armHeight.enable();
     } else {
-      armHeight.disable();
+      if (armHeight != null) armHeight.disable();
     }
   }
 }
