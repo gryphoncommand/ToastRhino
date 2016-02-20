@@ -47,6 +47,7 @@ public class RobotMap {
 
   // Joysticks
   public static final int cstick = 0;
+  public static int cstick2 = 1;
 
   // Encoder full speed
   public static double topspeed = 2500;

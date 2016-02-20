@@ -18,6 +18,7 @@ public class OI {
   // Button button = new JoystickButton(stick, buttonNumber);
 
   public Joystick controller = new XboxController(RobotMap.cstick);
+  public Joystick controller2 = new XboxController(RobotMap.cstick2);
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to

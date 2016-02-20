@@ -26,9 +26,9 @@ public class KickOut extends Command {
   protected void execute() {
     // Do some stuff
     if (System.nanoTime() < (startTime + (maxTime * convertFactor))) {
-      RobotModule.armKicker.KickMotor(-0.3);
+      RobotModule.armKicker.KickMotor(-0.5);
     } else if (System.nanoTime() < (startTime + (maxTime * 2 * convertFactor))) {
-      RobotModule.armKicker.KickMotor(0.3);
+      RobotModule.armKicker.KickMotor(0.5);
     } else if (System.nanoTime() > (startTime + (maxTime * 2 * convertFactor))) {
       RobotModule.armKicker.KickMotor(0);
     }

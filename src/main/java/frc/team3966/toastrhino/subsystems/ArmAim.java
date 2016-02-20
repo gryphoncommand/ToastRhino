@@ -29,7 +29,7 @@ public class ArmAim extends Subsystem {
     }
     @Override
     public void pidWrite(double output) {
-      super.set(output / 2.0);
+      super.set(output / 300.0);
     }
   }
 
@@ -38,11 +38,12 @@ public class ArmAim extends Subsystem {
   public ArmAim() {
     try {
       Aenc = new Encoder(RobotMap.AencH, RobotMap.AencL);
-      armHeight = new PIDController(0.5, 0.0, 0.0, Aenc, Amotor);
-      Aenc.setPIDSourceType(PIDSourceType.kDisplacement);
+      armHeight = new PIDController(0.1, 0.0, 0.0, Aenc, Amotor);
+      Aenc.setPIDSourceType(PIDSourceType.kRate);
+      armHeight.setOutputRange(-400, 400);
       armHeight.setContinuous(false);
       Aenc.reset();
-      Aenc.setReverseDirection(true);
+      Aenc.setReverseDirection(false);
       armHeight.enable();
     } catch (UnsatisfiedLinkError ex) {
       RobotModule.logger.error("Arm encoder no link.");
@@ -66,8 +67,8 @@ public class ArmAim extends Subsystem {
     Amotor.set(speed);
   }
 
-  public void setHeight(double speed) {
-    if (armHeight != null && PIDenabled) armHeight.setSetpoint(speed);
+  public void setHeightRelative(double speed) {
+    if (armHeight != null && PIDenabled) armHeight.setSetpoint(speed * 200);
     else if (PIDenabled == false) {
       setAmotor(speed);
     }
