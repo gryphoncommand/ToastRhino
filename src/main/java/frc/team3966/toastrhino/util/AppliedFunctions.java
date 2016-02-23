@@ -1,15 +1,15 @@
 package frc.team3966.toastrhino.util;
 /*
  * all functions that relate to the real world, translating those into basic math functions
- * 
+ *  a
  */
 
 public class AppliedFunctions {
 	/* constants */
 	final static float gravity = 9.81f; // m per s^2
 	final static float goalHeight = 2.159f; // m
-	final static double maxShooterEncoderInput = 0;
-	final static double minShooterEncoderInput = -500;
+	final static double maxShooterEncoderInput = 500;
+	final static double minShooterEncoderInput = 0;
 	final static double degreesAtEncoderMin = -22;
 	final static double degreesAtEncoderMax = 145;
 	/* Arm constants */
