@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.*;
  * @version 1.0
  * @since Jan 26, 2014
  */
-public class XboxController extends Joystick {
+public class PS4Controller extends Joystick {
 
-  public XboxController(int port) {
+  public PS4Controller(int port) {
     super(port);
   }
 
@@ -22,7 +22,7 @@ public class XboxController extends Joystick {
    * @return
    *   The state of the button
    */
-  public boolean getButton(XboxController.Button inputButton) {
+  public boolean getButton(PS4Controller.Button inputButton) {
     return this.getRawButton(inputButton.value);
   }
 

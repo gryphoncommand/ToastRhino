@@ -3,7 +3,7 @@ package frc.team3966.toastrhino;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.team3966.toastrhino.util.XboxController;
+import frc.team3966.toastrhino.util.PS4Controller;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,8 +17,8 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
 
-  public Joystick controller = new XboxController(RobotMap.cstick);
-  public Joystick controller2 = new XboxController(RobotMap.cstick2);
+  public Joystick controller = new PS4Controller(RobotMap.cstick);
+  public Joystick controller2 = new PS4Controller(RobotMap.cstick2);
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
