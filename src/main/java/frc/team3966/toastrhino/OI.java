@@ -32,7 +32,7 @@ public class OI {
   // button.whenPressed(new ExampleCommand());
   public Button switchPIDbutton = new JoystickButton(controller, 10);
   
-  public Button FireButton = new JoystickButton(controller, 6);
+  public Button FireButton = new JoystickButton(controller, PS4Controller.R1);
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.

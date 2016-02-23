@@ -8,30 +8,31 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class PS4Controller extends Joystick {
     
-    public static final int SQUARE = 0;
-    public static final int X = 1;
-    public static final int CIRCLE = 2;
-    public static final int TRIANGLE = 3;
-    public static final int L1 = 4;
-    public static final int R1 = 5;
-    public static final int L2 = 6;
-    public static final int R2 = 7;
-    public static final int SHARE = 8;
-    public static final int OPTIONS = 9;
-    public static final int L3 = 10;
-    public static final int R3 = 11;
-    public static final int PS = 12;
-    public static final int PAD = 13;
+    //TODO
+    public static final int SQUARE = -1;
+    public static final int X = -1;
+    public static final int CIRCLE = -1;
+    public static final int TRIANGLE = -1;
+    public static final int L1 = -1;
+    public static final int R1 = 6;
+    public static final int L2 = -1;
+    public static final int R2 = -1;
+    public static final int SHARE = -1;
+    public static final int OPTIONS = -1;
+    public static final int L3 = -1;
+    public static final int R3 = -1;
+    public static final int PS = -1;
+    public static final int PAD = -1;
     
-    
-    public static final int LEFT_X = 1;
-    public static final int LEFT_Y = 2;
-    public static final int RIGHT_X = 3;
-    public static final int RIGHT_Y = 4;
-    public static final int L2_AXIS = 5;
-    public static final int R2_AXIS = 6;
-    public static final int D_PAD_X = 7;
-    public static final int D_PAD_Y = 8;
+    //TODO
+    public static final int LEFT_X = -1;
+    public static final int LEFT_Y = 1;
+    public static final int RIGHT_X = -1;
+    public static final int RIGHT_Y = 5;
+    public static final int L2_AXIS = 3;
+    public static final int R2_AXIS = 4;
+    public static final int D_PAD_X = -1;
+    public static final int D_PAD_Y = -1;
     
     
     public PS4Controller(int port) {
@@ -196,5 +197,21 @@ public class PS4Controller extends Joystick {
      */
     public boolean getPadButton() {
         return getRawButton(PAD);
+    }
+    
+    /**
+     * Read the value of the right joystick's Y axis.
+     * @return the value of the right joystick's Y axis.
+     */
+    public double getRightTriggerAxis() {
+        return getRawAxis(R2_AXIS);
+    }
+    
+    /**
+     * Read the value of the right joystick's Y axis.
+     * @return the value of the right joystick's Y axis.
+     */
+    public double getLeftTriggerAxis() {
+        return getRawAxis(L2_AXIS);
     }
 }

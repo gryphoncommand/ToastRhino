@@ -46,7 +46,7 @@ public class ArmAim extends Subsystem {
       Aenc.setReverseDirection(false);
       armHeight.enable();
     } catch (UnsatisfiedLinkError ex) {
-      RobotModule.logger.error("Arm encoder no link.");
+      RobotModule.logger.error("Arm encoder link broken.");
     }
     Amotor.setInverted(true);
 

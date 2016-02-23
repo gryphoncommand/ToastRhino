@@ -56,7 +56,7 @@ public class Drive extends Subsystem {
       RobotMap.usePID = false;
       this.encoders = false;
       this.pidcontrollers = false;
-      RobotModule.logger.error("Encoder Link Broken");
+      RobotModule.logger.error("Encoder link broken");
     } catch (Exception ex) {
       this.encoders = false;
       this.pidcontrollers = false;
