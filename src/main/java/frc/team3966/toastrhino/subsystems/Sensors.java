@@ -33,7 +33,7 @@ public class Sensors extends Subsystem {
 
   public void dash_power() {
     SmartDashboard.putNumber("PDP Voltage", PDP.getVoltage());
-    SmartDashboard.putNumber("PDP Total Amps", PDP.getTotalCurrent());
+    //SmartDashboard.putNumber("PDP Total Amps", PDP.getTotalCurrent());
   }
 
   public void dash_submodule_navigation() {

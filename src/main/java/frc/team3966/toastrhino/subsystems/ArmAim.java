@@ -54,7 +54,7 @@ public class ArmAim extends Subsystem {
 
   public void dash_all() {
     SmartDashboard.putData("Amotor", Amotor);
-    if (Aenc != null) SmartDashboard.putData("ArmHeight", Aenc);
+    if (Aenc != null) SmartDashboard.putData("Arm Encoder", Aenc);
     if (armHeight != null) SmartDashboard.putData("ArmPID", armHeight);
   }
 

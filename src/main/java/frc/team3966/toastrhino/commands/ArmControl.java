@@ -28,9 +28,9 @@ public class ArmControl extends Command {
         );
     //*
     if (RobotModule.oi.controller.getPOV() == 0) {
-      RobotModule.armAim.setHeightRelative(1.0);
-    } else if (RobotModule.oi.controller.getPOV() == 180) {
       RobotModule.armAim.setHeightRelative(-1.0);
+    } else if (RobotModule.oi.controller.getPOV() == 180) {
+      RobotModule.armAim.setHeightRelative(1.0);
     } else {
       RobotModule.armAim.setHeightRelative(0.0);
     }
