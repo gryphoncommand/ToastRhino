@@ -27,9 +27,9 @@ public class ArmControl extends Command {
         ((RobotModule.oi.controller.getLeftTriggerAxis() + 1.0) / 4.0)   // Left trigger to suck up (half speed)
         );
     
-    if (RobotModule.oi.controller.getPOV() == 0) {
+    if (RobotModule.oi.controller.getR1Button()) {
       RobotModule.armAim.setAmotor(-1.0);
-    } else if (RobotModule.oi.controller.getPOV() == 180) {
+    } else if (RobotModule.oi.controller.getL1Button()) {
       RobotModule.armAim.setAmotor(1.0);
     } else {
       RobotModule.armAim.setAmotor(0.0);
