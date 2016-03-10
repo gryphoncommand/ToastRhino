@@ -19,7 +19,7 @@ public class ArmAim extends Subsystem {
 
   Encoder Aenc;
   
-  private boolean PIDenabled = true;
+  private boolean PIDenabled = false;
 
   PIDController armHeight;
 
@@ -36,7 +36,7 @@ public class ArmAim extends Subsystem {
   VictorSP Amotor = new armMotor(RobotMap.Amotor);
 
   public ArmAim() {
-    try {
+/*    try {
       Aenc = new Encoder(RobotMap.AencH, RobotMap.AencL);
       armHeight = new PIDController(0.1, 0.0, 0.0, Aenc, Amotor);
       Aenc.setPIDSourceType(PIDSourceType.kRate);
@@ -45,9 +45,9 @@ public class ArmAim extends Subsystem {
       Aenc.reset();
       Aenc.setReverseDirection(false);
       armHeight.enable();
-    } catch (UnsatisfiedLinkError ex) {
+    } catch (UnsatisfiedLinkError ex) {  */
       RobotModule.logger.error("Arm encoder link broken.");
-    }
+//    }
     Amotor.setInverted(true);
 
   }
@@ -63,7 +63,7 @@ public class ArmAim extends Subsystem {
     //setDefaultCommand(new MySpecialCommand());
   }
 
-  protected void setAmotor(double speed) {
+  public void setAmotor(double speed) {
     Amotor.set(speed);
   }
 
