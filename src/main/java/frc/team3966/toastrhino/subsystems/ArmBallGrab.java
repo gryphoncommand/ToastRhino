@@ -35,6 +35,8 @@ public class ArmBallGrab extends Subsystem {
   public void dash_all() {
     SmartDashboard.putData("SLmotor", SLmotor);
     SmartDashboard.putData("SRmotor", SRmotor);
+    SmartDashboard.putData("SLinput", SLinput);
+    SmartDashboard.putData("SRinput", SRinput);
     SmartDashboard.putData("SLcounter", SLcounter);
     SmartDashboard.putData("SRcounter", SRcounter);
   }
