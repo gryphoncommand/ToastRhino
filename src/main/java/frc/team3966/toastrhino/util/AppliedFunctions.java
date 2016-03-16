@@ -8,10 +8,10 @@ public class AppliedFunctions {
 	/* constants */
 	final static float gravity = 9.81f; // m per s^2
 	final static float goalHeight = 2.159f; // m
-	final static double maxShooterEncoderInput = 500;
-	final static double minShooterEncoderInput = 0;
-	final static double degreesAtEncoderMin = -22;
-	final static double degreesAtEncoderMax = 145;
+	final static double maxShooterEncoderInput = 62.5;
+	final static double minShooterEncoderInput = 89.5;
+	final static double degreesAtEncoderMin = 135.5;
+	final static double degreesAtEncoderMax = -17;
 	/* Arm constants */
 	final static float initialv = 5.0f; // m per s
 	final static float initialDistance = 5.0f; // m
