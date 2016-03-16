@@ -22,7 +22,7 @@ public class ArmAim extends Subsystem {
   Encoder Aenc;
 
   //arm "encoder"
-  Potentiometer p = new AnalogPotentiometer(2, 100, 0);
+  Potentiometer pot = new AnalogPotentiometer(2, 100, 0);
   
   private boolean PIDenabled = false;
 
@@ -48,7 +48,7 @@ public class ArmAim extends Subsystem {
 
   public void dash_all() {
     SmartDashboard.putData("Amotor", Amotor);
-    SmartDashboard.putNumber("Arm Potentiometer", p.pidGet());
+    SmartDashboard.putNumber("Arm Potentiometer", pot.pidGet());
     if (armHeight != null) SmartDashboard.putData("ArmPID", armHeight);
   }
 
