@@ -1,5 +1,8 @@
 package frc.team3966.toastrhino.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogTrigger;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,6 +18,15 @@ public class ArmBallGrab extends Subsystem {
   
   VictorSP SLmotor = new VictorSP(RobotMap.SLmotor);
   VictorSP SRmotor = new VictorSP(RobotMap.SRmotor);
+  
+  AnalogInput SLinput = new AnalogInput(0);
+  AnalogInput SRinput = new AnalogInput(1);
+  
+  AnalogTrigger SLtrigger = new AnalogTrigger(SLinput);
+  AnalogTrigger SRtrigger = new AnalogTrigger(SRinput);
+  
+  Counter SLcounter = new Counter(SLtrigger);
+  Counter SRcounter = new Counter(SRtrigger);
 
   public ArmBallGrab() {
     
@@ -23,6 +35,8 @@ public class ArmBallGrab extends Subsystem {
   public void dash_all() {
     SmartDashboard.putData("SLmotor", SLmotor);
     SmartDashboard.putData("SRmotor", SRmotor);
+    SmartDashboard.putData("SLcounter", SLcounter);
+    SmartDashboard.putData("SRcounter", SRcounter);
   }
 
   public void initDefaultCommand() {
