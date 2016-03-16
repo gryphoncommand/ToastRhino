@@ -20,8 +20,7 @@ public class ArmAim extends Subsystem {
   // here. Call these from Commands.
 
   Encoder Aenc;
-  
-  
+
   //arm "encoder"
   Potentiometer p = new AnalogPotentiometer(2, 100, 0);
   
@@ -42,26 +41,14 @@ public class ArmAim extends Subsystem {
   VictorSP Amotor = new armMotor(RobotMap.Amotor);
 
   public ArmAim() {
-/*    try {
-      Aenc = new Encoder(RobotMap.AencH, RobotMap.AencL);
-      armHeight = new PIDController(0.1, 0.0, 0.0, Aenc, Amotor);
-      Aenc.setPIDSourceType(PIDSourceType.kRate);
-      armHeight.setOutputRange(-400, 400);
-      armHeight.setContinuous(false);
-      Aenc.reset();
-      Aenc.setReverseDirection(false);
-      armHeight.enable();
-    } catch (UnsatisfiedLinkError ex) {  */
-      RobotModule.logger.error("Arm encoder link broken.");
-//    }
+
     Amotor.setInverted(true);
 
   }
 
   public void dash_all() {
     SmartDashboard.putData("Amotor", Amotor);
-    SmartDashboard.putNumber("Potentiometer", p.pidGet());
-    if (Aenc != null) SmartDashboard.putData("Arm Encoder", Aenc);
+    SmartDashboard.putNumber("Arm Potentiometer", p.pidGet());
     if (armHeight != null) SmartDashboard.putData("ArmPID", armHeight);
   }
 
