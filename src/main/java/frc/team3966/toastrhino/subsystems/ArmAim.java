@@ -1,6 +1,9 @@
 package frc.team3966.toastrhino.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.AnalogTrigger;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -25,6 +28,9 @@ public class ArmAim extends Subsystem {
   Potentiometer pot = new AnalogPotentiometer(2, 100, 0);
   
   private boolean PIDenabled = false;
+  
+  boolean AnalogInputs = false;
+  AnalogInput HallBackInput;
 
   PIDController armHeight;
 
@@ -41,13 +47,22 @@ public class ArmAim extends Subsystem {
   VictorSP Amotor = new armMotor(RobotMap.Amotor);
 
   public ArmAim() {
-
+    try {
+      HallBackInput = new AnalogInput(3);
+      AnalogInputs = true;
+    } catch (UnsatisfiedLinkError e) {
+      RobotModule.logger.warn("Hall Effect no Link");;
+      AnalogInputs = false;
+    }
     Amotor.setInverted(true);
 
   }
 
   public void dash_all() {
     SmartDashboard.putData("Amotor", Amotor);
+    if (AnalogInputs) {
+      SmartDashboard.putData("Back Hall", HallBackInput);
+    }
     SmartDashboard.putNumber("Arm Potentiometer", pot.pidGet());
     if (armHeight != null) SmartDashboard.putData("ArmPID", armHeight);
   }
