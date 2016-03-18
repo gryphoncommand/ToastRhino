@@ -54,7 +54,7 @@ public class ArmAim extends Subsystem {
       RobotModule.logger.warn("Hall Effect no Link");;
       AnalogInputs = false;
     }
-    Amotor.setInverted(true);
+    Amotor.setInverted(false);
 
   }
 
