@@ -13,6 +13,7 @@ import frc.team3966.toastrhino.commands.KickOut;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
+import frc.team3966.toastrhino.commands.AimControl;
 import frc.team3966.toastrhino.commands.ArmControl;
 import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.SwitchPID;
@@ -46,6 +47,7 @@ public class RobotModule extends IterativeModule {
   Command KickOut;
   Command resetNav;
   Command switchPID;
+  Command aimControl;
   SendableChooser chooser;
 
   @Override
@@ -79,6 +81,7 @@ public class RobotModule extends IterativeModule {
     resetNav = new ResetNavigation();
     switchPID = new SwitchPID();
     resetNav.setRunWhenDisabled(true);
+    aimControl = new AimControl();
     RobotModule.oi.FireButton.whenPressed(KickOut);
 
     // Autonomous options
@@ -88,6 +91,7 @@ public class RobotModule extends IterativeModule {
     chooser.addObject("Move To Ben", new MoveToBen());
     chooser.addObject("Move To Cade", new MoveToCade());
     chooser.addObject("Move in Square", new Square());
+    chooser.addObject("Aim Control", aimControl);
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putData("Reset Navigation", resetNav);
