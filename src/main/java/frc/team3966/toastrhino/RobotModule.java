@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.KickOut;
+import frc.team3966.toastrhino.commands.MoveForward;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
@@ -91,6 +92,7 @@ public class RobotModule extends IterativeModule {
     chooser.addObject("Move To Ben", new MoveToBen());
     chooser.addObject("Move To Cade", new MoveToCade());
     chooser.addObject("Move in Square", new Square());
+    chooser.addObject("Move Forward", new MoveForward());
     chooser.addObject("Aim Control", aimControl);
     SmartDashboard.putData("Auto mode", chooser);
 
