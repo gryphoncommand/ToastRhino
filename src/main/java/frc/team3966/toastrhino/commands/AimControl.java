@@ -49,15 +49,7 @@ public class AimControl extends Command {
 			}
 	    double distanceFromGoal = AppliedFunctions.getDistance(centerY); //m
 	    SmartDashboard.putNumber("Distance from goal", distanceFromGoal);
-	    
-
-		short firstmeasure_px = 23; // in pixels, how tall the contour is
-		double firstmeasure_length = 3.5814f; // meters
-		double tapeHeight = 0.349; // meters
-	    double focalLength = firstmeasure_px * firstmeasure_length / tapeHeight;
-	    
-	    double distanceFromGoalrand = (tapeHeight * focalLength)/height;
-	    SmartDashboard.putNumber("Distance from goal (rand)", distanceFromGoalrand);
+	   
 	    
 	    
 	    

@@ -16,8 +16,10 @@ public class AppliedFunctions {
 	
 	/* Arm constants */
 	final static float initialv = 5.0f; // m per s
-	final static short firstmeasure_px = 23; // in pixels, how tall the contour is
-	final static float firstmeasure_length = 3.5814f; // meters
+	final static float measure_pix_0 = 16; ///center y
+	final static float measure_m_0 = 1.9812f;//meters away
+	final static float measure_pix_1 = 93; ///center y
+	final static float measure_m_1 = 3.7846f;//meters away
 
 	//returns the radians that the "gun" should rotate to. Starts at 0
 	public static float getShootRadians(float distance) {
@@ -31,8 +33,8 @@ public class AppliedFunctions {
 	}
 
 	//gets distance from pixels high. Requires initial measurement. Needs to be tweaked for different camera positions.
-	public static double getDistance(double pixels) {
-		return firstmeasure_length - ((firstmeasure_px - pixels) * firstmeasure_length) / (pixels);
+	public static double getDistance(double centerY) {
+		return (centerY - measure_pix_0) * ((measure_m_1 - measure_m_0) / (measure_pix_1 - measure_pix_0)) + measure_m_0;
 	}
 	
 	public static double getShootingAngle(double motorInput) { //returns shooter's pitch
