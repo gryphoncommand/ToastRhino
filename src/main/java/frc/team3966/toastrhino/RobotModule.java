@@ -87,12 +87,12 @@ public class RobotModule extends IterativeModule {
 
     // Autonomous options
     chooser = new SendableChooser();
-    chooser.addObject("Chase Ball", new ChaseBall());
-    chooser.addObject("Jump Scared", new JumpScare());
-    chooser.addObject("Move To Ben", new MoveToBen());
-    chooser.addObject("Move To Cade", new MoveToCade());
-    chooser.addObject("Move in Square", new Square());
     chooser.addObject("Move Forward", new MoveForward());
+    //chooser.addObject("Chase Ball", new ChaseBall());
+    //chooser.addObject("Jump Scared", new JumpScare());
+    //chooser.addObject("Move To Ben", new MoveToBen());
+    //chooser.addObject("Move To Cade", new MoveToCade());
+    //chooser.addObject("Move in Square", new Square());
     chooser.addObject("Aim Control", aimControl);
     SmartDashboard.putData("Auto mode", chooser);
 
