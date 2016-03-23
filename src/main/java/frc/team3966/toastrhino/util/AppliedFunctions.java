@@ -20,7 +20,8 @@ public class AppliedFunctions {
 	final static float measure_m_0 = 1.9812f;//meters away
 	final static float measure_pix_1 = 93; ///center y
 	final static float measure_m_1 = 3.7846f;//meters away
-
+	
+	
 	//returns the radians that the "gun" should rotate to. Starts at 0
 	public static float getShootRadians(float distance) {
 		float radical = 0.0f;
