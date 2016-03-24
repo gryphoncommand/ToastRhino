@@ -82,7 +82,9 @@ public class ArmAim extends Subsystem {
   }
   
   public void setHeightRelative(double speed) {
-    if (armHeight != null && PIDenabled) armHeight.setSetpoint(speed * 200);
+    if (armHeight != null && PIDenabled) {
+      armHeight.setSetpoint(speed * 120);
+    }
     else if (PIDenabled == false) {
       setAmotor(speed);
     }
