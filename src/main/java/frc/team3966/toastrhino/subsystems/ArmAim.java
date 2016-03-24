@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -55,6 +56,7 @@ public class ArmAim extends Subsystem {
     Amotor.setInverted(false);
     try {
       armHeight = new PIDController(1.0, 0.01, 0.5, pot, Amotor);
+      pot.setPIDSourceType(PIDSourceType.kRate);
       PIDenabled = true;
     } catch (Error e) {
       RobotModule.logger.error("PIDController Could not be enabled");
@@ -83,10 +85,27 @@ public class ArmAim extends Subsystem {
   
   public void setHeightRelative(double speed) {
     if (armHeight != null && PIDenabled) {
+      if (pot.getPIDSourceType() != PIDSourceType.kRate) { // Change modes to rate
+        pot.setPIDSourceType(PIDSourceType.kRate);
+      }
       armHeight.setSetpoint(speed * 60);
     }
     else if (PIDenabled == false) {
       setAmotor(speed);
+    }
+  }
+  
+  public void setHeightAbsolute(double setpoint) {
+    if (armHeight != null && PIDenabled) {
+      if (pot.getPIDSourceType() != PIDSourceType.kDisplacement) { // Change modes to displacement
+        pot.setPIDSourceType(PIDSourceType.kDisplacement);
+      }
+      armHeight.setSetpoint(setpoint);
+    }
+    else if (PIDenabled == false) {
+      RobotModule.logger.warn("Tried to set arm absolute height without PID");
+      RobotModule.logger.warn("Setting Amotor to 0.0 for safety.");
+      setAmotor(0.0);
     }
   }
   
