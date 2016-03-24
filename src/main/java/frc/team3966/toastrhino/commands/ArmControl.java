@@ -3,6 +3,7 @@ package frc.team3966.toastrhino.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import frc.team3966.toastrhino.RobotModule;
+import frc.team3966.toastrhino.util.AppliedFunctions;
 
 /**
  *
@@ -46,6 +47,11 @@ public class ArmControl extends Command {
       RobotModule.armAim.setAmotor(0.0);
     }
 
+    if (RobotModule.oi.controller.getTriangleButton()) {
+    	RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMax); //Max or min... Cant remember
+    } else if (RobotModule.oi.controller.getCircleButton()) {
+    	RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMin); //Max or min... Cant remember
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

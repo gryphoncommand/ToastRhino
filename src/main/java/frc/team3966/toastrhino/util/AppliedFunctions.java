@@ -6,20 +6,20 @@ package frc.team3966.toastrhino.util;
 
 public class AppliedFunctions {
 	/* constants */
-	final static float gravity = 9.81f; // m per s^2
-	final static float goalHeight = 1.905f; // m //Should be 2.159. Our test goal is 1.905 m, change this at competition
-	final static double maxShooterEncoderInput = 62.5;
-	final static double minShooterEncoderInput = 89.5;
-	final static double degreesAtEncoderMin = 135.5;
-	final static double degreesAtEncoderMax = -17;
+	public final static float gravity = 9.81f; // m per s^2
+	public final static float goalHeight = 1.905f; // m //Should be 2.159. Our test goal is 1.905 m, change this at competition
+	public final static double maxShooterEncoderInput = 62.5;
+	public final static double minShooterEncoderInput = 89.5;
+	public final static double degreesAtEncoderMin = 135.5;
+	public final static double degreesAtEncoderMax = -17;
 	
 	
 	/* Arm constants */
-	final static float initialv = 5.0f; // m per s
-	final static float measure_pix_0 = 16; ///center y
-	final static float measure_m_0 = 1.9812f;//meters away
-	final static float measure_pix_1 = 93; ///center y
-	final static float measure_m_1 = 3.7846f;//meters away
+	public final static float initialv = 5.0f; // m per s
+	public final static float measure_pix_0 = 16; ///center y
+	public final static float measure_m_0 = 1.9812f;//meters away
+	public final static float measure_pix_1 = 93; ///center y
+	public final static float measure_m_1 = 3.7846f;//meters away
 	
 	
 	//returns the radians that the "gun" should rotate to. Starts at 0
