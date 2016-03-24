@@ -27,7 +27,7 @@ public class ArmAim extends Subsystem {
   //arm "encoder"
   Potentiometer pot = new AnalogPotentiometer(2, 100, 0);
   
-  private boolean PIDenabled = false;
+  private boolean PIDenabled = true;
   
   boolean AnalogInputs = false;
   AnalogInput HallBackInput;
