@@ -14,6 +14,7 @@ import frc.team3966.toastrhino.commands.MoveForward;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
+import frc.team3966.toastrhino.commands.RotateToGoalButton;
 import frc.team3966.toastrhino.commands.AimControl;
 import frc.team3966.toastrhino.commands.ArmControl;
 import frc.team3966.toastrhino.commands.Square;
@@ -49,6 +50,7 @@ public class RobotModule extends IterativeModule {
   Command resetNav;
   Command switchPID;
   Command aimControl;
+  Command rotateToGoal;
   SendableChooser chooser;
 
   @Override
@@ -74,16 +76,20 @@ public class RobotModule extends IterativeModule {
     armBallGrab = new ArmBallGrab();
     navigation = new Navigation();
     sensors = new Sensors();
-
+    
     // Commands
     TankDrive = new TankDrive();
     ManualArmControl = new ArmControl();
-    KickOut = new KickOut();
     resetNav = new ResetNavigation();
     switchPID = new SwitchPID();
     resetNav.setRunWhenDisabled(true);
     aimControl = new AimControl();
+    // Kicker on button press
+    KickOut = new KickOut();
     RobotModule.oi.FireButton.whenPressed(KickOut);
+    // Rotate to Goal on button press
+    rotateToGoal = new RotateToGoalButton();
+    RobotModule.oi.RotateToGoalButton.whenPressed(rotateToGoal);
 
     // Autonomous options
     chooser = new SendableChooser();
