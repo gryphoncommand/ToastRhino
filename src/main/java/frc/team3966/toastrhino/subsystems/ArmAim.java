@@ -105,7 +105,6 @@ public class ArmAim extends Subsystem {
     }
     else if (enablePID == false) {
       RobotModule.logger.warn("Tried to set arm absolute height without PID");
-      RobotModule.logger.warn("Setting Amotor to 0.0 for safety.");
       setAmotor(0.0);
     }
   }
