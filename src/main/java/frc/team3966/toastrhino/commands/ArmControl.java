@@ -22,19 +22,30 @@ public class ArmControl extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-    RobotModule.armBallGrab.grab(
-        ((RobotModule.oi.controller.getRightTriggerAxis() + 1.0) / 2.0) -// Right trigger to fire out
-        ((RobotModule.oi.controller.getLeftTriggerAxis() + 1.0) / 4.0)   // Left trigger to suck up (half speed)
-        );
-    
-    if (RobotModule.oi.controller.getR1Button()) {
-      RobotModule.armAim.setAmotor(-1.0);
-    } else if (RobotModule.oi.controller.getL1Button()) {
-      RobotModule.armAim.setAmotor(1.0);
+    if (RobotModule.oi.controller.getL2Button() || RobotModule.oi.controller.getR2Button() ) {
+      RobotModule.armBallGrab.grab(
+          ((RobotModule.oi.controller.getRightTriggerAxis() + 1.0) / 2.0) -// Right trigger to fire out
+          ((RobotModule.oi.controller.getLeftTriggerAxis() + 1.0) / 4.0)   // Left trigger to suck up (half speed)
+          );
     } else {
+      RobotModule.armBallGrab.grab(
+          ((RobotModule.oi.controller2.getRightTriggerAxis() + 1.0) / 2.0) -// Right trigger to fire out
+          ((RobotModule.oi.controller2.getLeftTriggerAxis() + 1.0) / 4.0)   // Left trigger to suck up (half speed)
+          );
+    }
+
+    if (RobotModule.oi.controller.getR1Button()) { // Master Controller Right
+      RobotModule.armAim.setAmotor(-1.0);
+    } else if (RobotModule.oi.controller.getL1Button()) { // Master Controller Left
+      RobotModule.armAim.setAmotor(1.0);
+    } else if (RobotModule.oi.controller2.getR1Button()) { // Controller 2 Right
+      RobotModule.armAim.setAmotor(-1.0);
+    } else if (RobotModule.oi.controller2.getL1Button()) { // Controller 2 Left
+      RobotModule.armAim.setAmotor(1.0);
+    } else { // When none of the buttons are pressed.
       RobotModule.armAim.setAmotor(0.0);
     }
-    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
