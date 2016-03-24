@@ -71,10 +71,10 @@ public class Drive extends Subsystem {
       BLctrl = new PIDController(RobotMap.driveP, RobotMap.driveI, RobotMap.driveD, BLenc, BLmotor);
     }
 
-    FRmotor.setInverted(false);
-    BRmotor.setInverted(false);
-    FLmotor.setInverted(true);
-    BLmotor.setInverted(true);
+    FRmotor.setInverted(true);
+    BRmotor.setInverted(true);
+    FLmotor.setInverted(false);
+    BLmotor.setInverted(false);
 
     if (this.encoders) {
       // Right vs left
