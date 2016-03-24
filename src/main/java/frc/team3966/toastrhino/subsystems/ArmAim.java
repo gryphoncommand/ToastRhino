@@ -22,12 +22,10 @@ public class ArmAim extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  Encoder Aenc;
-
   //arm "encoder"
   Potentiometer pot = new AnalogPotentiometer(2, 100, 0);
   
-  private boolean PIDenabled = true;
+  private boolean PIDenabled = false;
   
   boolean AnalogInputs = false;
   AnalogInput HallBackInput;
@@ -55,7 +53,12 @@ public class ArmAim extends Subsystem {
       AnalogInputs = false;
     }
     Amotor.setInverted(false);
-    armHeight = new PIDController(10.0, 0.1, 1.0, Aenc, Amotor);
+    try {
+      armHeight = new PIDController(10.0, 0.1, 1.0, pot, Amotor);
+      PIDenabled = true;
+    } catch (Error e) {
+      PIDenabled = false;
+    }
   }
 
   public void dash_all() {
