@@ -22,15 +22,13 @@ public class MoveForward extends Command {
   // Called just before this Command runs the first time
   protected void initialize() {
     startTime = System.nanoTime();
+    RobotModule.armAim.setHeightAbsolute(20.0);
     RobotModule.drive.doNothing();
   }
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     // Do some stuff
-	  if (RobotModule.armAim.getPot() <= AppliedFunctions.minShooterEncoderInput + 10) {
-		  RobotModule.armAim.setHeightAbsolute(AppliedFunctions.minShooterEncoderInput + 20);
-	  }
     if (System.nanoTime() < (startTime + (maxTime * convertFactor))) {
       // Time before maxTime is over
       RobotModule.drive.TankDrive(0.7, 0.7);
