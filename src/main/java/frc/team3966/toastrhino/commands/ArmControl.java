@@ -28,7 +28,7 @@ public class ArmControl extends Command {
           ((RobotModule.oi.controller.getRightTriggerAxis() + 1.0) / 2.0) -// Right trigger to fire out
           ((RobotModule.oi.controller.getLeftTriggerAxis() + 1.0) / 4.0)   // Left trigger to suck up (half speed)
           );
-    } else {
+    } else if (RobotModule.oi.controller2.getL2Button() || RobotModule.oi.controller2.getR2Button() ) {
       RobotModule.armBallGrab.grab(
           ((RobotModule.oi.controller2.getRightTriggerAxis() + 1.0) / 2.0) -// Right trigger to fire out
           ((RobotModule.oi.controller2.getLeftTriggerAxis() + 1.0) / 4.0)   // Left trigger to suck up (half speed)
