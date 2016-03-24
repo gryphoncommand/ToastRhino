@@ -64,4 +64,8 @@ public class ArmBallGrab extends Subsystem {
     SLmotor.set(-speed);
     SRmotor.set(speed);
   }
+
+  public void doNothing() {
+    grab(0.0);
+  }
 }

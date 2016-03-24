@@ -26,7 +26,7 @@ public class ArmAim extends Subsystem {
   //arm "encoder"
   Potentiometer pot = new AnalogPotentiometer(2, 100, -20);
   
-  private boolean PIDenabled = false;
+  private boolean enablePID = false;
   
   boolean AnalogInputs = false;
   AnalogInput HallBackInput;
@@ -56,11 +56,12 @@ public class ArmAim extends Subsystem {
     Amotor.setInverted(false);
     try {
       armHeight = new PIDController(1.0, 0.01, 0.5, pot, Amotor);
-      pot.setPIDSourceType(PIDSourceType.kRate);
-      PIDenabled = true;
+      pot.setPIDSourceType(PIDSourceType.kDisplacement); // Can only be displacement!
+      armHeight.setAbsoluteTolerance(2.0);
+      enablePID = true;
     } catch (Error e) {
       RobotModule.logger.error("PIDController Could not be enabled");
-      PIDenabled = false;
+      enablePID = false;
     }
   }
 
@@ -77,32 +78,32 @@ public class ArmAim extends Subsystem {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new MySpecialCommand());
   }
-  //
 
   public void setAmotor(double speed) {
     Amotor.set(speed);
   }
   
   public void setHeightRelative(double speed) {
-    if (armHeight != null && PIDenabled) {
-      if (pot.getPIDSourceType() != PIDSourceType.kRate) { // Change modes to rate
-        pot.setPIDSourceType(PIDSourceType.kRate);
+    if (armHeight != null && enablePID) {
+      if (armHeight.onTarget()) { // Change modes to rate
+        armHeight.setSetpoint(armHeight.getSetpoint() + speed);
+      } else if (!armHeight.onTarget()) {
+        // Let the PID controller catch back up.
       }
-      armHeight.setSetpoint(speed * 60);
     }
-    else if (PIDenabled == false) {
+    else if (enablePID == false) {
       setAmotor(speed);
     }
   }
   
   public void setHeightAbsolute(double setpoint) {
-    if (armHeight != null && PIDenabled) {
-      if (pot.getPIDSourceType() != PIDSourceType.kDisplacement) { // Change modes to displacement
-        pot.setPIDSourceType(PIDSourceType.kDisplacement);
+    if (armHeight != null && enablePID) {
+      if (!armHeight.isEnabled()) { // Change modes to displacement
+        armHeight.enable();
       }
       armHeight.setSetpoint(setpoint);
     }
-    else if (PIDenabled == false) {
+    else if (enablePID == false) {
       RobotModule.logger.warn("Tried to set arm absolute height without PID");
       RobotModule.logger.warn("Setting Amotor to 0.0 for safety.");
       setAmotor(0.0);
@@ -110,11 +111,15 @@ public class ArmAim extends Subsystem {
   }
   
   public void enablePID(boolean enabled) {
-    PIDenabled = enabled;
-    if (PIDenabled) {
+    enablePID = enabled;
+    if (enablePID) {
       if (armHeight != null) armHeight.enable();
     } else {
       if (armHeight != null) armHeight.disable();
     }
+  }
+
+  public void doNothing() {
+    setAmotor(0.0);
   }
 }
