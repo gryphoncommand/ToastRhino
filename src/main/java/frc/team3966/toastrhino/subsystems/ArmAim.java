@@ -55,7 +55,7 @@ public class ArmAim extends Subsystem {
       AnalogInputs = false;
     }
     Amotor.setInverted(false);
-
+    armHeight = new PIDController(10.0, 0.1, 1.0, Aenc, Amotor);
   }
 
   public void dash_all() {

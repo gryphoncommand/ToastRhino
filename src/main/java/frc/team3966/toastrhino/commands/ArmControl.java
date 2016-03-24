@@ -36,15 +36,15 @@ public class ArmControl extends Command {
     }
 
     if (RobotModule.oi.controller.getR1Button()) { // Master Controller Right
-      RobotModule.armAim.setAmotor(-1.0);
+      RobotModule.armAim.setHeightRelative(-1.0);
     } else if (RobotModule.oi.controller.getL1Button()) { // Master Controller Left
-      RobotModule.armAim.setAmotor(1.0);
+      RobotModule.armAim.setHeightRelative(1.0);
     } else if (RobotModule.oi.controller2.getR1Button()) { // Controller 2 Right
-      RobotModule.armAim.setAmotor(-1.0);
+      RobotModule.armAim.setHeightRelative(-1.0);
     } else if (RobotModule.oi.controller2.getL1Button()) { // Controller 2 Left
-      RobotModule.armAim.setAmotor(1.0);
+      RobotModule.armAim.setHeightRelative(1.0);
     } else { // When none of the buttons are pressed.
-      RobotModule.armAim.setAmotor(0.0);
+      RobotModule.armAim.setHeightRelative(0.0);
     }
     
     if (RobotModule.oi.controller.getTriangleButton()) {
