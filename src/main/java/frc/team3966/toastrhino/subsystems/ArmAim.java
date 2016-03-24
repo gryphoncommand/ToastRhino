@@ -57,6 +57,7 @@ public class ArmAim extends Subsystem {
       armHeight = new PIDController(10.0, 0.1, 1.0, pot, Amotor);
       PIDenabled = true;
     } catch (Error e) {
+      RobotModule.logger.error("PIDController Could not be enabled");
       PIDenabled = false;
     }
   }
