@@ -39,7 +39,7 @@ public class ArmAim extends Subsystem {
     }
     @Override
     public void pidWrite(double output) {
-      super.set(output / 2.0);
+      super.set(output);
     }
   }
 
@@ -57,7 +57,7 @@ public class ArmAim extends Subsystem {
     try {
       armHeight = new PIDController(1.0, 0.01, 0.5, pot, Amotor);
       pot.setPIDSourceType(PIDSourceType.kDisplacement); // Can only be displacement!
-      armHeight.setAbsoluteTolerance(2.0);
+      armHeight.setAbsoluteTolerance(1.0);
       enablePID = true;
     } catch (Error e) {
       RobotModule.logger.error("PIDController Could not be enabled");
@@ -89,10 +89,12 @@ public class ArmAim extends Subsystem {
   
   public void setHeightRelative(double speed) {
     if (armHeight != null && enablePID) {
-      if (armHeight.onTarget()) { // Change modes to rate
-        armHeight.setSetpoint(armHeight.getSetpoint() + speed);
-      } else if (!armHeight.onTarget()) {
+      if (armHeight.getSetpoint() < 0.0) { // Change modes to rate
+        armHeight.setSetpoint(0.0);
+      } else if (armHeight.getError() > 20.0) {
         // Let the PID controller catch back up.
+      } else {
+        armHeight.setSetpoint(armHeight.getSetpoint() + (speed / 2));
       }
     }
     else if (enablePID == false) {
