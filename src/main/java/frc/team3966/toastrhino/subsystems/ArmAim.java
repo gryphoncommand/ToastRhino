@@ -78,6 +78,10 @@ public class ArmAim extends Subsystem {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new MySpecialCommand());
   }
+  
+  public double getPot() {
+    return pot.get();
+  }
 
   public void setAmotor(double speed) {
     Amotor.set(speed);
