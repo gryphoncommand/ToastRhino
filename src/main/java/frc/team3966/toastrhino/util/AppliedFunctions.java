@@ -45,7 +45,17 @@ public class AppliedFunctions {
 		if (motorInput > maxShooterEncoderInput) { //capping larger values
 			return getShootingAngle(maxShooterEncoderInput);
 		}
-		return motorInput * (degreesAtEncoderMax - degreesAtEncoderMin) / (maxShooterEncoderInput - minShooterEncoderInput) + degreesAtEncoderMax;
+		return (motorInput - minShooterEncoderInput) * (degreesAtEncoderMax - degreesAtEncoderMin) / (maxShooterEncoderInput - minShooterEncoderInput) + degreesAtEncoderMin;
+	}
+	
+	public static double getEncoderFromDegrees(double degrees) { //returns encoder for a degree specifies
+		if (degrees < degreesAtEncoderMin) { //capping lower values
+			return getEncoderFromDegrees(degreesAtEncoderMin);
+		}
+		if (degrees > degreesAtEncoderMax) { //capping larger values
+			return getEncoderFromDegrees(degreesAtEncoderMax);
+		}
+		return (degrees - degreesAtEncoderMin) * (maxShooterEncoderInput - minShooterEncoderInput) / (degreesAtEncoderMax - degreesAtEncoderMin) + minShooterEncoderInput;
 	}
 
 }
