@@ -46,12 +46,13 @@ public class ArmControl extends Command {
     } else { // When none of the buttons are pressed.
       RobotModule.armAim.setAmotor(0.0);
     }
-
+    
     if (RobotModule.oi.controller.getTriangleButton()) {
-    	RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMax); //Max or min... Cant remember
+      RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMax); //Max or min... Cant remember
     } else if (RobotModule.oi.controller.getCircleButton()) {
-    	RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMin); //Max or min... Cant remember
+      RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMin); //Max or min... Cant remember
     }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
