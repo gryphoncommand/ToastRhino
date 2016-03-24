@@ -23,7 +23,7 @@ public class ArmAim extends Subsystem {
   // here. Call these from Commands.
 
   //arm "encoder"
-  Potentiometer pot = new AnalogPotentiometer(2, 100, 0);
+  Potentiometer pot = new AnalogPotentiometer(2, 100, -20);
   
   private boolean PIDenabled = false;
   
@@ -38,7 +38,7 @@ public class ArmAim extends Subsystem {
     }
     @Override
     public void pidWrite(double output) {
-      super.set(output / 300.0);
+      super.set(output / 2.0);
     }
   }
 
@@ -54,7 +54,7 @@ public class ArmAim extends Subsystem {
     }
     Amotor.setInverted(false);
     try {
-      armHeight = new PIDController(10.0, 0.1, 1.0, pot, Amotor);
+      armHeight = new PIDController(1.0, 0.01, 0.5, pot, Amotor);
       PIDenabled = true;
     } catch (Error e) {
       RobotModule.logger.error("PIDController Could not be enabled");
@@ -83,7 +83,7 @@ public class ArmAim extends Subsystem {
   
   public void setHeightRelative(double speed) {
     if (armHeight != null && PIDenabled) {
-      armHeight.setSetpoint(speed * 120);
+      armHeight.setSetpoint(speed * 60);
     }
     else if (PIDenabled == false) {
       setAmotor(speed);

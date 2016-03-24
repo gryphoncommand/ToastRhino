@@ -87,6 +87,7 @@ public class RobotModule extends IterativeModule {
     // Kicker on button press
     KickOut = new KickOut();
     RobotModule.oi.FireButton.whenPressed(KickOut);
+    RobotModule.oi.FireButton2.whenPressed(KickOut);
     // Rotate to Goal on button press
     rotateToGoal = new RotateToGoalButton();
     RobotModule.oi.RotateToGoalButton.whenPressed(rotateToGoal);

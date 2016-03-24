@@ -33,6 +33,7 @@ public class OI {
   //public Button switchPIDbutton = new JoystickButton(controller, 10);
   
   public Button FireButton = new JoystickButton(controller, PS4Controller.X);
+  public Button FireButton2 = new JoystickButton(controller2, PS4Controller.X);
 
   public Button RotateToGoalButton = new JoystickButton(controller2, PS4Controller.SQUARE);
   
