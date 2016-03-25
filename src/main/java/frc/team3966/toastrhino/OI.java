@@ -35,7 +35,10 @@ public class OI {
   public Button FireButton = new JoystickButton(controller, PS4Controller.X);
   public Button FireButton2 = new JoystickButton(controller2, PS4Controller.X);
 
-  public Button RotateToGoalButton = new JoystickButton(controller2, PS4Controller.SQUARE);
+  //public Button RotateToGoalButton = new JoystickButton(controller2, PS4Controller.SQUARE);
+  
+  public Button ArmBrakeButton = new JoystickButton(controller2, PS4Controller.TRIANGLE);
+  public Button ArmGroundButton = new JoystickButton(controller2, PS4Controller.CIRCLE);
   
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
