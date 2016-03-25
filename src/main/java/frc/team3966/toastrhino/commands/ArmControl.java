@@ -50,9 +50,7 @@ public class ArmControl extends Command {
     }
     
     if (RobotModule.oi.controller.getTriangleButton()) {
-      RobotModule.armAim.setHeightAbsolute(AppliedFunctions.minShooterEncoderInput); //Max or min... Cant remember
-    } else if (RobotModule.oi.controller.getCircleButton()) {
-      RobotModule.armAim.setHeightAbsolute(AppliedFunctions.maxShooterEncoderInput); //Max or min... Cant remember
+      RobotModule.armAim.setHeightAbsolute(60); // Near Ground level
     }
 
   }
