@@ -55,7 +55,7 @@ public class ArmAim extends Subsystem {
     }
     Amotor.setInverted(false);
     try {
-      armHeight = new PIDController(1.0, 0.01, 0.5, pot, Amotor);
+      armHeight = new PIDController(0.9, 0.001, 0.01, pot, Amotor);
       pot.setPIDSourceType(PIDSourceType.kDisplacement); // Can only be displacement!
       armHeight.setAbsoluteTolerance(1.0);
       enablePID = true;
