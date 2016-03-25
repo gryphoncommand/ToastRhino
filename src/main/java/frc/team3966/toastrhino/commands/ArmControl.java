@@ -50,9 +50,9 @@ public class ArmControl extends Command {
     }
     
     if (RobotModule.oi.controller.getTriangleButton()) {
-      RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMax); //Max or min... Cant remember
+      RobotModule.armAim.setHeightAbsolute(AppliedFunctions.minShooterEncoderInput); //Max or min... Cant remember
     } else if (RobotModule.oi.controller.getCircleButton()) {
-      RobotModule.armAim.setHeightRelative(AppliedFunctions.degreesAtEncoderMin); //Max or min... Cant remember
+      RobotModule.armAim.setHeightAbsolute(AppliedFunctions.maxShooterEncoderInput); //Max or min... Cant remember
     }
 
   }
