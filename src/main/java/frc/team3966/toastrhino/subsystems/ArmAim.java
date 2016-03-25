@@ -91,7 +91,7 @@ public class ArmAim extends Subsystem {
     if (armHeight != null && enablePID) {
       if (armHeight.getSetpoint() < 0.0) { // Change modes to rate
         armHeight.setSetpoint(0.0);
-      } else if (armHeight.getError() > 20.0) {
+      } else if (armHeight.getError() > 30.0) {
         // Let the PID controller catch back up.
       } else {
         armHeight.setSetpoint(armHeight.getSetpoint() + (speed / 2));
