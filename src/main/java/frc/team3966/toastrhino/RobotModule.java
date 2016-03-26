@@ -11,6 +11,7 @@ import frc.team3966.toastrhino.commands.ChaseBall;
 import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.KickOut;
 import frc.team3966.toastrhino.commands.MoveForward;
+import frc.team3966.toastrhino.commands.MoveLowGoalStraight;
 import frc.team3966.toastrhino.commands.MoveToBen;
 import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
@@ -48,7 +49,7 @@ public class RobotModule extends IterativeModule {
   Command autonomousCommand;
   Command TankDrive;
   Command ManualArmControl;
-  Command KickOut;
+  public Command KickOut; // Allow this command to be called by other commands
   Command resetNav;
   Command switchPID;
   Command aimControl;
@@ -104,6 +105,7 @@ public class RobotModule extends IterativeModule {
     // Autonomous options
     chooser = new SendableChooser();
     chooser.addObject("Move Forward", new MoveForward());
+    chooser.addObject("Low Goal Straight", new MoveLowGoalStraight());
     //chooser.addObject("Chase Ball", new ChaseBall());
     //chooser.addObject("Jump Scared", new JumpScare());
     //chooser.addObject("Move To Ben", new MoveToBen());
