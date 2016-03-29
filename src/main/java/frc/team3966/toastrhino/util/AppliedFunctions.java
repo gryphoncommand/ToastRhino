@@ -57,5 +57,10 @@ public class AppliedFunctions {
 		}
 		return (degrees - degreesAtEncoderMin) * (maxShooterEncoderInput - minShooterEncoderInput) / (degreesAtEncoderMax - degreesAtEncoderMin) + minShooterEncoderInput;
 	}
+	
+	//Gets requested pot val from centery, using the data on slack that ben asked for
+	public static double getPotValueFromCenterY(double centerY) {
+		return 0.107395 * centerY + 28.4392;
+	}
 
 }
