@@ -62,5 +62,10 @@ public class AppliedFunctions {
 	public static double getPotValueFromCenterY(double centerY) {
 		return 0.107395 * centerY + 28.4392;
 	}
+	
+	//gets what centerX should be to be in line
+	public static double getActualCenter(double distance) {
+		return 116;
+	}
 
 }
