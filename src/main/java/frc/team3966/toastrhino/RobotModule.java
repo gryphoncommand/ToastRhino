@@ -24,6 +24,7 @@ import frc.team3966.toastrhino.commands.Square;
 import frc.team3966.toastrhino.commands.SwitchPID;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
+import frc.team3966.toastrhino.subsystems.GRIP;
 import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.subsystems.Sensors;
 import frc.team3966.toastrhino.subsystems.ArmAim;
@@ -43,6 +44,7 @@ public class RobotModule extends IterativeModule {
   public static Sensors sensors;
   public static Navigation navigation;
   public static OI oi;
+  public static GRIP grip;
 
   NetworkTable table;
 
@@ -84,6 +86,7 @@ public class RobotModule extends IterativeModule {
     armBallGrab = new ArmBallGrab();
     navigation = new Navigation();
     sensors = new Sensors();
+    grip = new GRIP();
     
     // Commands
     TankDrive = new TankDrive();
