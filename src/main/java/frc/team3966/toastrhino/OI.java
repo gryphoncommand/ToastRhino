@@ -39,6 +39,7 @@ public class OI {
   
   public Button ArmBrakeButton = new JoystickButton(controller2, PS4Controller.TRIANGLE);
   public Button ArmGroundButton = new JoystickButton(controller2, PS4Controller.CIRCLE);
+  public Button ArmAutoAim = new JoystickButton(controller2, PS4Controller.SQUARE);
   
   // Run the command while the button is being held down and interrupt it once
   // the button is released.

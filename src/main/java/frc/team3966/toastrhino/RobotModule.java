@@ -7,21 +7,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team3966.toastrhino.commands.ChaseBall;
-import frc.team3966.toastrhino.commands.JumpScare;
 import frc.team3966.toastrhino.commands.KickOut;
 import frc.team3966.toastrhino.commands.MoveForward;
 import frc.team3966.toastrhino.commands.MoveLowGoalStraight;
-import frc.team3966.toastrhino.commands.MoveToBen;
-import frc.team3966.toastrhino.commands.MoveToCade;
 import frc.team3966.toastrhino.commands.ResetNavigation;
-import frc.team3966.toastrhino.commands.RotateToGoalButton;
 import frc.team3966.toastrhino.commands.AimControl;
 import frc.team3966.toastrhino.commands.ArmBrake;
 import frc.team3966.toastrhino.commands.ArmControl;
 import frc.team3966.toastrhino.commands.ArmGround;
-import frc.team3966.toastrhino.commands.Square;
-import frc.team3966.toastrhino.commands.SwitchPID;
+import frc.team3966.toastrhino.commands.AutoAimVertical;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.GRIP;
@@ -53,13 +47,13 @@ public class RobotModule extends IterativeModule {
   Command ManualArmControl;
   public Command KickOut; // Allow this command to be called by other commands
   Command resetNav;
-  Command switchPID;
   Command aimControl;
   Command rotateToGoal;
   
   // Arm Position Commands
   Command armBrake;
   Command armGround;
+  Command autoAimVertical;
   
   SendableChooser chooser;
 
@@ -92,7 +86,6 @@ public class RobotModule extends IterativeModule {
     TankDrive = new TankDrive();
     ManualArmControl = new ArmControl();
     resetNav = new ResetNavigation();
-    switchPID = new SwitchPID();
     resetNav.setRunWhenDisabled(true);
     aimControl = new AimControl();
     // Kicker on button press
@@ -104,16 +97,13 @@ public class RobotModule extends IterativeModule {
     RobotModule.oi.ArmBrakeButton.whenPressed(armBrake);
     armGround = new ArmGround();
     RobotModule.oi.ArmGroundButton.whenPressed(armGround);
+    autoAimVertical = new AutoAimVertical();
+    RobotModule.oi.ArmAutoAim.whenPressed(autoAimVertical);
 
     // Autonomous options
     chooser = new SendableChooser();
     chooser.addObject("Move Forward", new MoveForward());
     chooser.addObject("Low Goal Straight", new MoveLowGoalStraight());
-    //chooser.addObject("Chase Ball", new ChaseBall());
-    //chooser.addObject("Jump Scared", new JumpScare());
-    //chooser.addObject("Move To Ben", new MoveToBen());
-    //chooser.addObject("Move To Cade", new MoveToCade());
-    //chooser.addObject("Move in Square", new Square());
     chooser.addObject("Aim Control", aimControl);
     SmartDashboard.putData("Auto mode", chooser);
 
@@ -136,6 +126,7 @@ public class RobotModule extends IterativeModule {
   public void disabledInit(){
     if (TankDrive != null) TankDrive.cancel();
     drive.doNothing();
+    armAim.doNothing();
     logger.info("Disabled.");
   }
 
