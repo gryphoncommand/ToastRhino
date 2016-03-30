@@ -7,23 +7,23 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team3966.toastrhino.commands.KickOut;
-import frc.team3966.toastrhino.commands.MoveForward;
-import frc.team3966.toastrhino.commands.MoveLowGoalStraight;
-import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.AimControl;
 import frc.team3966.toastrhino.commands.ArmBrake;
 import frc.team3966.toastrhino.commands.ArmControl;
 import frc.team3966.toastrhino.commands.ArmGround;
 import frc.team3966.toastrhino.commands.AutoAimVertical;
+import frc.team3966.toastrhino.commands.KickOut;
+import frc.team3966.toastrhino.commands.MoveForward;
+import frc.team3966.toastrhino.commands.MoveLowGoalStraight;
+import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.TankDrive;
+import frc.team3966.toastrhino.subsystems.ArmAim;
+import frc.team3966.toastrhino.subsystems.ArmBallGrab;
+import frc.team3966.toastrhino.subsystems.ArmKicker;
 import frc.team3966.toastrhino.subsystems.Drive;
 import frc.team3966.toastrhino.subsystems.GRIP;
 import frc.team3966.toastrhino.subsystems.Navigation;
 import frc.team3966.toastrhino.subsystems.Sensors;
-import frc.team3966.toastrhino.subsystems.ArmAim;
-import frc.team3966.toastrhino.subsystems.ArmBallGrab;
-import frc.team3966.toastrhino.subsystems.ArmKicker;
 import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 
@@ -49,12 +49,12 @@ public class RobotModule extends IterativeModule {
   Command resetNav;
   Command aimControl;
   Command rotateToGoal;
-  
+
   // Arm Position Commands
   Command armBrake;
   Command armGround;
   Command autoAimVertical;
-  
+
   SendableChooser chooser;
 
   @Override
@@ -81,7 +81,7 @@ public class RobotModule extends IterativeModule {
     navigation = new Navigation();
     sensors = new Sensors();
     grip = new GRIP();
-    
+
     // Commands
     TankDrive = new TankDrive();
     ManualArmControl = new ArmControl();
