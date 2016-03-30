@@ -125,6 +125,11 @@ public class ArmAim extends Subsystem {
   }
 
   public void doNothing() {
-    setAmotor(0.0);
+    if (armHeight != null && enablePID) {
+      // Stops arm by setting PID to current position
+      armHeight.setSetpoint(pot.pidGet());
+    } else {
+      setAmotor(0.0);
+    }
   }
 }
