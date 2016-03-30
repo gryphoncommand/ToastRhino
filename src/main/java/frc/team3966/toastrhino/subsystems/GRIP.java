@@ -1,6 +1,7 @@
 package frc.team3966.toastrhino.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team3966.toastrhino.RobotModule;
 
@@ -8,10 +9,16 @@ import frc.team3966.toastrhino.RobotModule;
  *
  */
 public class GRIP extends Subsystem {
+	
+	private double lastGoodValue = 100.0;
 
   // What is GRIP Table?
   // Init table:
+	  NetworkTable GRIPtable;
   
+	  public GRIP() {
+		  GRIPtable = NetworkTable.getTable("GRIP/goal");
+	  }
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -23,6 +30,19 @@ public class GRIP extends Subsystem {
   
   public double getCenterY() {
     // Load Grip values from the network table
+	  double[] GRIPcenterY = GRIPtable.getNumberArray("centerY");
+	  double centerY = 0;
+	  if (GRIPcenterY.length == 1) {
+		  centerY = GRIPcenterY[0];
+	  } else if (GRIPcenterY.length > 1) {
+		  for (double i : GRIPcenterY) {
+			  centerY += i;
+		  }
+		  centerY /= (double)GRIPcenterY.length;
+		  lastGoodValue = centerY;
+	  } else {
+		  return lastGoodValue;
+	  }
     /*
     if (one value in array) {
       return thatvalue;
@@ -39,7 +59,7 @@ public class GRIP extends Subsystem {
     }
     
      */
-    return 0.0; // actualvalue pls
+    return centerY; // actualvalue pls
   }
 
 }
