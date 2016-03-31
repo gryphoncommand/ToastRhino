@@ -60,7 +60,7 @@ public class AutoAimHorizontal extends Command {
     Rotater.setInputRange(0, 320);
     Rotater.setOutputRange(-180.0, 180.0);
     Rotater.setContinuous(false);
-    Rotater.setAbsoluteTolerance(5);
+    Rotater.setAbsoluteTolerance(3);
     Rotater.enable();
   }
 
@@ -70,25 +70,26 @@ public class AutoAimHorizontal extends Command {
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
     if (System.nanoTime() < (startTime + (maxTime * convertFactor))) { // During time, PID the drive rotation
       Rotater.setSetpoint(AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal()));
-    } else if (System.nanoTime() > (startTime + (maxTime * 2 * convertFactor))) {
+    } else if (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
       Rotater.disable();
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
-    return (System.nanoTime() > (startTime + (maxTime * 2 * convertFactor)));
+    return (System.nanoTime() > (startTime + (maxTime * convertFactor)));
   }
 
   // Called once after isFinished returns true
   protected void end() {
     // Set things to zero.
-    RobotModule.armKicker.KickMotor(0.0);
+    Rotater.disable();
+    RobotModule.drive.doNothing();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   protected void interrupted() {
-    RobotModule.armKicker.KickMotor(0.0);
+    RobotModule.drive.doNothing();
   }
 }
