@@ -15,9 +15,9 @@ public class AutoHighGoal extends Command {
 
   public AutoHighGoal() {
     requires(RobotModule.drive);
-    requires(RobotModule.armAim);
-    requires(RobotModule.armBallGrab);
-    requires(RobotModule.navigation);
+    //requires(RobotModule.armAim);
+    //requires(RobotModule.armBallGrab);
+    //requires(RobotModule.navigation);
   }
 
   // Called just before this Command runs the first time
@@ -36,15 +36,19 @@ public class AutoHighGoal extends Command {
       // Over defense
       RobotModule.drive.TankDrive(0.7, 0.7);
     } else if (System.nanoTime() < (startTime + ( 2.7 * convertFactor))) { // Time to stop
+      RobotModule.logger.info("Forward!");
       RobotModule.drive.doNothing();
     } else if (System.nanoTime() < (startTime + ( 4.0 * convertFactor))) { // Give autoaim time
+      RobotModule.logger.info("AutoAim!");
       RobotModule.autoAim();
-    } else if (System.nanoTime() < (startTime + ( 5.0 * convertFactor))) { // 
+    } else if (System.nanoTime() < (startTime + ( 5.0 * convertFactor))) { // Fire!
       RobotModule.drive.doNothing();
+      RobotModule.logger.info("Spin up!");
       RobotModule.armBallGrab.grab(1.0);
     } else if (System.nanoTime() < (startTime + ( 6.0 * convertFactor))) {
       RobotModule.armBallGrab.grab(1.0);
       if (kicked == false) {
+        RobotModule.logger.info("Kick!");
         RobotModule.kickOut();
         kicked = true;
       }
@@ -53,11 +57,18 @@ public class AutoHighGoal extends Command {
       RobotModule.armBallGrab.grab(0.0);
     }
     
+    if (this.isFinished()) RobotModule.logger.info("AutoHighGoal Done.");
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
-    return (System.nanoTime() > (startTime + ( 10 * convertFactor)));
+    if ((System.nanoTime() > (startTime + ( 15 * convertFactor)))) {
+      RobotModule.logger.info("AutoHighGoal Done.");
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
