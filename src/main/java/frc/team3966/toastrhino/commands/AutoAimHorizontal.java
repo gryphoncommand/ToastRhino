@@ -48,7 +48,7 @@ public class AutoAimHorizontal extends Command {
   }
   
   public AutoAimHorizontal() {
-    requires(RobotModule.drive);
+    //requires(RobotModule.drive);
   }
 
   // Called just before this Command runs the first time
@@ -77,7 +77,10 @@ public class AutoAimHorizontal extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
-    return (System.nanoTime() > (startTime + (maxTime * convertFactor)));
+    if  (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
+      RobotModule.logger.info("Finished AutoAim Horizontal");
+      return true;
+    } else return false;
   }
 
   // Called once after isFinished returns true

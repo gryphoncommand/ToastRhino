@@ -27,6 +27,7 @@ public class AutoAimVertical extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
+    RobotModule.logger.info("AutoAimed Vertical");
     return true;
   }
 

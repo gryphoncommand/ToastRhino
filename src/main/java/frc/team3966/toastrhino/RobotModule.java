@@ -216,6 +216,7 @@ public class RobotModule extends IterativeModule {
     autoAimVertical.start();
     autoAimHorizontal.start();
   }
+  
   public static void kickOut() {
     kickOut.start();
   }

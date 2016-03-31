@@ -14,7 +14,7 @@ public class AutoHighGoal extends Command {
   boolean kicked = false;
 
   public AutoHighGoal() {
-    requires(RobotModule.drive);
+    //requires(RobotModule.drive);
     //requires(RobotModule.armAim);
     //requires(RobotModule.armBallGrab);
     //requires(RobotModule.navigation);
@@ -74,12 +74,14 @@ public class AutoHighGoal extends Command {
   // Called once after isFinished returns true
   protected void end() {
     // Set things to zero.
+    RobotModule.logger.info("AutoHighGoal Done.");
     RobotModule.drive.doNothing();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   protected void interrupted() {
+    RobotModule.logger.info("AutoAimHigh Interrupted.");
     RobotModule.drive.doNothing();
   }
 }
