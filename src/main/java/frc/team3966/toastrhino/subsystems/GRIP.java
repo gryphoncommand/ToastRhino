@@ -48,23 +48,12 @@ public class GRIP extends Subsystem {
     } else {
       return lastGoodValueY;
     }
-    /*
-    if (one value in array) {
-      return thatvalue;
-    } else if (zero values in array) {
-      // Did not find goal, use last good value
-      if (lastGoodValue != null) {
-        return lastGoodValue;
-      } else {
-        // Return a reasonable middle-ground number (needs testing)
-        return 100.0;
-      }
-    } else if (multiple values in array) {
-      return average(values);
-    }
-
-     */
     return centerY; // actualvalue pls
+  }
+  
+  // Uses centerY to calulate value
+  public double getDistanceToGoal() { // Returns in inches
+    return 0.5808 * getCenterY() + 32.799;
   }
   
   public double getCenterX() {
