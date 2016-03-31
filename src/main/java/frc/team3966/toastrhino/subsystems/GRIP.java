@@ -10,7 +10,9 @@ import frc.team3966.toastrhino.RobotModule;
  */
 public class GRIP extends Subsystem {
 
-  private double lastGoodValue = 100.0;
+  private double lastGoodValueY = 100.0;
+
+  private double lastGoodValueX = 100.0;
 
   // What is GRIP Table?
   // Init table:
@@ -42,9 +44,9 @@ public class GRIP extends Subsystem {
         centerY += i;
       }
       centerY /= (double)GRIPcenterY.length;
-      lastGoodValue = centerY;
+      lastGoodValueY = centerY;
     } else {
-      return lastGoodValue;
+      return lastGoodValueY;
     }
     /*
     if (one value in array) {
@@ -77,9 +79,9 @@ public class GRIP extends Subsystem {
 	      for (double i : GRIPcenterX) {
 	    	  if (i > max) max = i; //gets rightmost contour... Todo... Use largest
 	      }
-	      lastGoodValue = centerX;
+	      lastGoodValueX = centerX;
 	    } else {
-	      return lastGoodValue;
+	      return lastGoodValueX;
 	    }
 	    return centerX; // actualvalue pls
 	  }
