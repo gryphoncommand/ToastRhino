@@ -7,13 +7,13 @@ import frc.team3966.toastrhino.util.AppliedFunctions;
 /**
  *
  */
-public class MoveLowGoalStraight extends Command {
+public class AutoForwardAndDrop extends Command {
 
   public static final double maxTime = 3; // Base interval time (3 seconds is best.)
   public static final double convertFactor = Math.pow(10, 9);
   private static double startTime = 0; //dont touch :P
 
-  public MoveLowGoalStraight() {
+  public AutoForwardAndDrop() {
     requires(RobotModule.drive);
     requires(RobotModule.armAim);
     requires(RobotModule.armBallGrab);

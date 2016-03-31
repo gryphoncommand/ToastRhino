@@ -11,10 +11,11 @@ import frc.team3966.toastrhino.commands.AimControl;
 import frc.team3966.toastrhino.commands.ArmBrake;
 import frc.team3966.toastrhino.commands.ArmControl;
 import frc.team3966.toastrhino.commands.ArmGround;
+import frc.team3966.toastrhino.commands.AutoAimHorizontal;
 import frc.team3966.toastrhino.commands.AutoAimVertical;
 import frc.team3966.toastrhino.commands.KickOut;
 import frc.team3966.toastrhino.commands.MoveForward;
-import frc.team3966.toastrhino.commands.MoveLowGoalStraight;
+import frc.team3966.toastrhino.commands.AutoForwardAndDrop;
 import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.ArmAim;
@@ -45,7 +46,7 @@ public class RobotModule extends IterativeModule {
   Command autonomousCommand;
   Command TankDrive;
   Command ManualArmControl;
-  public Command KickOut; // Allow this command to be called by other commands
+  public static Command kickOut; // Allow this command to be called by other commands
   Command resetNav;
   Command aimControl;
   Command rotateToGoal;
@@ -53,7 +54,8 @@ public class RobotModule extends IterativeModule {
   // Arm Position Commands
   Command armBrake;
   Command armGround;
-  Command autoAimVertical;
+  public static Command autoAimVertical;
+  public static Command autoAimHorizontal;
 
   SendableChooser chooser;
 
@@ -89,21 +91,23 @@ public class RobotModule extends IterativeModule {
     resetNav.setRunWhenDisabled(true);
     aimControl = new AimControl();
     // Kicker on button press
-    KickOut = new KickOut();
-    RobotModule.oi.FireButton.whenPressed(KickOut);
-    RobotModule.oi.FireButton2.whenPressed(KickOut);
+    kickOut = new KickOut();
+    RobotModule.oi.FireButton.whenPressed(kickOut);
+    RobotModule.oi.FireButton2.whenPressed(kickOut);
     // Rotate to Goal on button press
     armBrake = new ArmBrake();
     RobotModule.oi.ArmBrakeButton.whenPressed(armBrake);
     armGround = new ArmGround();
     RobotModule.oi.ArmGroundButton.whenPressed(armGround);
     autoAimVertical = new AutoAimVertical();
+    autoAimHorizontal = new AutoAimHorizontal();
     RobotModule.oi.ArmAutoAim.whenPressed(autoAimVertical);
+    RobotModule.oi.ArmAutoAim.whenPressed(autoAimHorizontal);
 
     // Autonomous options
     chooser = new SendableChooser();
     chooser.addObject("Move Forward", new MoveForward());
-    chooser.addObject("Low Goal Straight", new MoveLowGoalStraight());
+    chooser.addObject("Low Goal Straight", new AutoForwardAndDrop());
     chooser.addObject("Aim Control", aimControl);
     SmartDashboard.putData("Auto mode", chooser);
 
@@ -205,5 +209,13 @@ public class RobotModule extends IterativeModule {
   public void testPeriodic() {
     LiveWindow.run();
     sensors.dash_all();
+  }
+
+  public static void autoAim() { // Starts the autoaim commands
+    autoAimVertical.start();
+    autoAimHorizontal.start();
+  }
+  public static void kickOut() {
+    kickOut.start();
   }
 }
