@@ -60,21 +60,15 @@ public class GRIP extends Subsystem {
   public double getCenterX() {
 	    // Load Grip values from the network table
 	    double[] GRIPcenterX = GRIPtable.getNumberArray("centerX", blank);
+	    double[] GRIParea = GRIPtable.getNumberArray("area", blank);
 	    
-	    double centerX = 0;
-	    if (GRIPcenterX.length == 1) {
-	      centerX = GRIPcenterX[0];
-        lastGoodValueX = centerX;
-	    } else if (GRIPcenterX.length > 1) {
-	    	double max = 0;
-	      for (double i : GRIPcenterX) {
-	    	  if (i > max) max = i; //gets rightmost contour... Todo... Use largest
-	      }
-	      lastGoodValueX = centerX;
-	    } else {
-	      return lastGoodValueX;
+	    int indexUsed = 0;
+	    double max = 0;
+	    for (int i = 0; i < GRIParea.length; i++) {
+	    	if (GRIParea[i] > max) indexUsed = i;
 	    }
-	    return centerX; // actualvalue pls
+	    
+	    return GRIPcenterX[indexUsed];
 	  }
 
 }
