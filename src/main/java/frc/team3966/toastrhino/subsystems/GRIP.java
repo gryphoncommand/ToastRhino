@@ -39,6 +39,7 @@ public class GRIP extends Subsystem {
     double centerY = 0;
     if (GRIPcenterY.length == 1) {
       centerY = GRIPcenterY[0];
+      lastGoodValueY = centerY;
     } else if (GRIPcenterY.length > 1) {
       for (double i : GRIPcenterY) {
         centerY += i;
@@ -63,6 +64,7 @@ public class GRIP extends Subsystem {
 	    double centerX = 0;
 	    if (GRIPcenterX.length == 1) {
 	      centerX = GRIPcenterX[0];
+        lastGoodValueX = centerX;
 	    } else if (GRIPcenterX.length > 1) {
 	    	double max = 0;
 	      for (double i : GRIPcenterX) {
