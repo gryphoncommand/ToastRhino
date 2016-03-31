@@ -22,7 +22,7 @@ public class AutoAimVertical extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     // Do some stuff
-    RobotModule.armAim.setHeightAbsolute(AppliedFunctions.getPotValueFromCenterY(RobotModule.grip.getCenterY()));
+    RobotModule.armAim.setHeightAbsolute(AppliedFunctions.getPotValueFromCenterY(RobotModule.grip.getCenterY()) - 4.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
