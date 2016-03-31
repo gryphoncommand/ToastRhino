@@ -67,5 +67,13 @@ public class AppliedFunctions {
 	public static double getActualCenter(double distance) {
 		return 116;
 	}
-
+	
+	public static double getShooterCenterXUsingDistance(double distance) {
+		double dist1 = 1; //m of first measure
+		double pix1 = 160; //Pixels at first measure
+		double dist2 = 2; //m of second
+		double pix2 = 170; //pixels of second measure
+		
+		return (distance - dist1) * (pix2 - pix1) / (dist2 - dist1) + pix1;
+	}
 }

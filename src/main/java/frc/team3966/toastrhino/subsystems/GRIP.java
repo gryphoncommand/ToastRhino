@@ -64,5 +64,24 @@ public class GRIP extends Subsystem {
      */
     return centerY; // actualvalue pls
   }
+  
+  public double getCenterX() {
+	    // Load Grip values from the network table
+	    double[] GRIPcenterX = GRIPtable.getNumberArray("centerX", blank);
+	    
+	    double centerX = 0;
+	    if (GRIPcenterX.length == 1) {
+	      centerX = GRIPcenterX[0];
+	    } else if (GRIPcenterX.length > 1) {
+	    	double max = 0;
+	      for (double i : GRIPcenterX) {
+	    	  if (i > max) max = i; //gets rightmost contour... Todo... Use largest
+	      }
+	      lastGoodValue = centerX;
+	    } else {
+	      return lastGoodValue;
+	    }
+	    return centerX; // actualvalue pls
+	  }
 
 }
