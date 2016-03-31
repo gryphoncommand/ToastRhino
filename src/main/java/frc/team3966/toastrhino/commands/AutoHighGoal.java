@@ -23,7 +23,7 @@ public class AutoHighGoal extends Command {
   // Called just before this Command runs the first time
   protected void initialize() {
     startTime = System.nanoTime();
-    RobotModule.armAim.setHeightAbsolute(20.0);
+    RobotModule.armAim.setHeightAbsolute(30.0);
     RobotModule.drive.doNothing();
     
     kicked = false;
