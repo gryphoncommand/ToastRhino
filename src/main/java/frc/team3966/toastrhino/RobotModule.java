@@ -103,7 +103,7 @@ public class RobotModule extends IterativeModule {
     autoAimVertical = new AutoAimVertical();
     autoAimHorizontal = new AutoAimHorizontal();
     RobotModule.oi.ArmAutoAim.whenPressed(autoAimVertical);
-    RobotModule.oi.ArmAutoAim.whenPressed(autoAimHorizontal);
+    //RobotModule.oi.ArmAutoAim.whenPressed(autoAimHorizontal);
 
     // Autonomous options
     chooser = new SendableChooser();

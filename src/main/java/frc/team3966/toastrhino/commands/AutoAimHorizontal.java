@@ -73,7 +73,9 @@ public class AutoAimHorizontal extends Command {
       desiredCenterX = AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal());
       currentCenterX = RobotModule.grip.getCenterX();
       degreeError = (currentCenterX - desiredCenterX) / 4.0;
-      Rotater.setSetpoint(RobotModule.navigation.getYaw() + degreeError);
+      Rotater.setSetpoint(
+          (RobotModule.navigation.getYaw() + degreeError)
+          );
     } else if (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
       Rotater.disable();
     }
