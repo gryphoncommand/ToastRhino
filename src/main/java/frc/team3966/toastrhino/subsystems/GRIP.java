@@ -62,13 +62,22 @@ public class GRIP extends Subsystem {
 	    double[] GRIPcenterX = GRIPtable.getNumberArray("centerX", blank);
 	    double[] GRIParea = GRIPtable.getNumberArray("area", blank);
 	    
-	    int indexUsed = 0;
-	    double max = 0;
-	    for (int i = 0; i < GRIParea.length; i++) {
-	    	if (GRIParea[i] > max) indexUsed = i;
+	    double centerX = 0;
+	    if (GRIPcenterX.length == 1) {
+	      centerX = GRIPcenterX[0];
+        lastGoodValueX = centerX;
+	    } else if (GRIPcenterX.length > 1) {
+		    int indexUsed = 0;
+		    double max = 0;
+		    for (int i = 0; i < GRIParea.length; i++) {
+		    	if (GRIParea[i] > max) indexUsed = i;
+		    }
+		    lastGoodValueX = GRIPcenterX[indexUsed];
+	      return GRIPcenterX[indexUsed];
+	    } else {
+	      return lastGoodValueX;
 	    }
-	    
-	    return GRIPcenterX[indexUsed];
+	    return centerX; // actualvalue pls
 	  }
 
 }
