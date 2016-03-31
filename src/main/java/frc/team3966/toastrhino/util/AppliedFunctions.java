@@ -8,7 +8,7 @@ public class AppliedFunctions {
 	/* constants */
 	public final static float gravity = 9.81f; // m per s^2
 	public final static float goalHeight = 1.905f; // m //Should be 2.159. Our test goal is 1.905 m, change this at competition
-	public final static double maxShooterEncoderInput = 80;
+	public final static double maxShooterEncoderInput = 65;
 	public final static double minShooterEncoderInput = 0;
 	public final static double degreesAtEncoderMin = 135.5;
 	public final static double degreesAtEncoderMax = -17;
@@ -58,22 +58,18 @@ public class AppliedFunctions {
 		return (degrees - degreesAtEncoderMin) * (maxShooterEncoderInput - minShooterEncoderInput) / (degreesAtEncoderMax - degreesAtEncoderMin) + minShooterEncoderInput;
 	}
 	
-	//Gets requested pot val from centery, using the data on slack that ben asked for
+	// Get desired arm setpoint for vertical aim
 	public static double getPotValueFromCenterY(double centerY) {
 		return 0.107395 * centerY + 28.4392;
 	}
 	
-	//gets what centerX should be to be in line
+	// gets camera center
 	public static double getActualCenter(double distance) {
-		return 116;
+		return 320 / 2;
 	}
 	
-	public static double getShooterCenterXUsingDistance(double distance) {
-		double dist1 = 1; //m of first measure
-		double pix1 = 160; //Pixels at first measure
-		double dist2 = 2; //m of second
-		double pix2 = 170; //pixels of second measure
-		
-		return (distance - dist1) * (pix2 - pix1) / (dist2 - dist1) + pix1;
+	// gets what centerX should be in line with robot, not camera
+	public static double getShooterCenterXUsingDistance(double distance) { // Input is in Inches
+		return 0.1174 * distance + 130.476; // INCHES
 	}
 }
