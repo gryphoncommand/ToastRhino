@@ -10,9 +10,9 @@ import frc.team3966.toastrhino.RobotModule;
  */
 public class GRIP extends Subsystem {
 
-  private double lastGoodValueY = 100.0;
+  private double lastGoodValueY = 120.0;
 
-  private double lastGoodValueX = 100.0;
+  private double lastGoodValueX = 150.0;
 
   // What is GRIP Table?
   // Init table:
