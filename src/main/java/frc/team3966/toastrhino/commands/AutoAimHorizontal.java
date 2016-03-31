@@ -14,10 +14,11 @@ import frc.team3966.toastrhino.util.AppliedFunctions;
  */
 public class AutoAimHorizontal extends Command {
 
-  public static final double maxTime = .5; // Absolute max time we take control of robot drive
+  public static final double maxTime = 2.0; // Absolute max time we take control of robot drive
   public static final double convertFactor = Math.pow(10, 9);
   private long startTime = 0; //dont touch :P
   private PIDController Rotater;
+  double desiredCenterX, currentCenterX, degreeError;
 
   public class RobotYaw implements PIDSource {
     @Override
@@ -25,7 +26,7 @@ public class AutoAimHorizontal extends Command {
       return this.get();
     }
     public double get() {
-      return RobotModule.grip.getCenterX();
+      return RobotModule.navigation.getYaw();
     }
     @Override
     public void setPIDSourceType(PIDSourceType pidSource) {
@@ -40,7 +41,7 @@ public class AutoAimHorizontal extends Command {
   public class OutputRotation implements PIDOutput {
     @Override
     public void pidWrite(double output) {
-      this.set(output / 180.0);
+      this.set(output / 160.0);
     }
     public void set(double output) {
       RobotModule.drive.Rotate(output);
@@ -48,7 +49,7 @@ public class AutoAimHorizontal extends Command {
   }
   
   public AutoAimHorizontal() {
-    //requires(RobotModule.drive);
+    requires(RobotModule.drive);
   }
 
   // Called just before this Command runs the first time
@@ -56,11 +57,11 @@ public class AutoAimHorizontal extends Command {
     startTime = System.nanoTime();
     RobotModule.drive.Rotate(0.0);;
     
-    Rotater = new PIDController(10, 0.1, 1.0, new RobotYaw(), new OutputRotation());
-    Rotater.setInputRange(0, 320);
+    Rotater = new PIDController(10.0, 0.1, 1.0, new RobotYaw(), new OutputRotation());
+    Rotater.setInputRange(-180.0, 180.0);
     Rotater.setOutputRange(-180.0, 180.0);
-    Rotater.setContinuous(false);
-    Rotater.setAbsoluteTolerance(3);
+    Rotater.setContinuous(true);
+    Rotater.setAbsoluteTolerance(5);
     Rotater.enable();
   }
 
@@ -69,7 +70,10 @@ public class AutoAimHorizontal extends Command {
     // Do some stuff
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
     if (System.nanoTime() < (startTime + (maxTime * convertFactor))) { // During time, PID the drive rotation
-      Rotater.setSetpoint(AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal()));
+      desiredCenterX = AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal());
+      currentCenterX = RobotModule.grip.getCenterX();
+      degreeError = (currentCenterX - desiredCenterX) / 4.0;
+      Rotater.setSetpoint(RobotModule.navigation.getYaw() + degreeError);
     } else if (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
       Rotater.disable();
     }
