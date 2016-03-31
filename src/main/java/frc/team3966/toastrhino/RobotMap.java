@@ -51,6 +51,7 @@ public class RobotMap {
 
   // Encoder full speed
   public static double topspeed = 2500;
+  public static double potOffset = -11;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

@@ -1,6 +1,7 @@
 package frc.team3966.toastrhino.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.team3966.toastrhino.RobotMap;
 import frc.team3966.toastrhino.RobotModule;
 import frc.team3966.toastrhino.util.AppliedFunctions;
 
@@ -22,7 +23,8 @@ public class AutoAimVertical extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     // Do some stuff
-    RobotModule.armAim.setHeightAbsolute(AppliedFunctions.getPotValueFromCenterY(RobotModule.grip.getCenterY()) - 4.0);
+    RobotModule.armAim.setHeightAbsolute(AppliedFunctions.getPotValueFromCenterY(RobotModule.grip.getCenterY())
+        + RobotMap.potOffset);
   }
 
   // Make this return true when this Command no longer needs to run execute()

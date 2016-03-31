@@ -24,7 +24,7 @@ public class ArmAim extends Subsystem {
   // here. Call these from Commands.
 
   //arm "encoder"
-  Potentiometer pot = new AnalogPotentiometer(2, 100, -24);
+  Potentiometer pot = new AnalogPotentiometer(2, 100, -20 + RobotMap.potOffset);
   
   private boolean enablePID = false;
   
