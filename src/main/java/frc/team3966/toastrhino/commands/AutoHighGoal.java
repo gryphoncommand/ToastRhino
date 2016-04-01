@@ -35,24 +35,24 @@ public class AutoHighGoal extends Command {
     if (System.nanoTime() < (startTime + (2.0 * convertFactor))) {
       // Over defense
       RobotModule.drive.TankDrive(0.9, 0.9);
-    } else if (System.nanoTime() < (startTime + ( 2.7 * convertFactor))) { // Time to stop
+    } else if (System.nanoTime() < (startTime + ( 2.5 * convertFactor))) { // Time to stop
       RobotModule.logger.info("Forward!");
       RobotModule.drive.doNothing();
-    } else if (System.nanoTime() < (startTime + ( 4.0 * convertFactor))) { // Give autoaim time
+    } else if (System.nanoTime() < (startTime + ( 8.5 * convertFactor))) { // Give autoaim time
       RobotModule.logger.info("AutoAim!");
       RobotModule.autoAim();
-    } else if (System.nanoTime() < (startTime + ( 5.0 * convertFactor))) { // Fire!
+    } else if (System.nanoTime() < (startTime + ( 10.0 * convertFactor))) { // Fire!
       RobotModule.drive.doNothing();
       RobotModule.logger.info("Spin up!");
       RobotModule.armBallGrab.grab(1.0);
-    } else if (System.nanoTime() < (startTime + ( 6.0 * convertFactor))) {
+    } else if (System.nanoTime() < (startTime + ( 11.0 * convertFactor))) {
       RobotModule.armBallGrab.grab(1.0);
       if (kicked == false) {
         RobotModule.logger.info("Kick!");
         RobotModule.kickOut();
         kicked = true;
       }
-    } else if (System.nanoTime() > (startTime + ( 10.0 * convertFactor))) {
+    } else if (System.nanoTime() > (startTime + ( 14.0 * convertFactor))) {
       RobotModule.drive.doNothing();
       RobotModule.armBallGrab.grab(0.0);
     }
