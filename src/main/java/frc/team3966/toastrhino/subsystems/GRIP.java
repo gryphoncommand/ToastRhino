@@ -22,6 +22,11 @@ public class GRIP extends Subsystem {
 
   public GRIP() {
     GRIPtable = NetworkTable.getTable("GRIP/goal");
+    try {
+    	GRIPtable.globalDeleteAll();
+    } catch (Exception e) {
+    	RobotModule.logger.error("Error deleting GRIP network tables: " + e.getMessage());
+    }
   }
 
   // Put methods for controlling this subsystem
