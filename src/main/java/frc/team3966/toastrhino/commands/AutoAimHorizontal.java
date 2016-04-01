@@ -37,7 +37,7 @@ public class AutoAimHorizontal extends Command {
       return PIDSourceType.kDisplacement;
     }
   }
-  
+
   public class OutputRotation implements PIDOutput {
     @Override
     public void pidWrite(double output) {
@@ -47,7 +47,7 @@ public class AutoAimHorizontal extends Command {
       RobotModule.drive.Rotate(output);
     }
   }
-  
+
   public AutoAimHorizontal() {
     requires(RobotModule.drive);
   }
@@ -56,7 +56,7 @@ public class AutoAimHorizontal extends Command {
   protected void initialize() {
     startTime = System.nanoTime();
     RobotModule.drive.Rotate(0.0);;
-    
+
     Rotater = new PIDController(10.0, 0.1, 1.0, new RobotYaw(), new OutputRotation());
     Rotater.setInputRange(-180.0, 180.0);
     Rotater.setOutputRange(-180.0, 180.0);
@@ -69,22 +69,20 @@ public class AutoAimHorizontal extends Command {
   protected void execute() {
     // Do some stuff
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
-    if (System.nanoTime() < (startTime + (maxTime * convertFactor))) { // During time, PID the drive rotation
-      desiredCenterX = AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal());
-      currentCenterX = RobotModule.grip.getCenterX();
-      degreeError = (currentCenterX - desiredCenterX) / 4.0;
-      Rotater.setSetpoint(
-          (RobotModule.navigation.getYaw() + degreeError)
-          );
-    } else if (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
-      Rotater.disable();
-    }
+
+    desiredCenterX = AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal());
+    currentCenterX = RobotModule.grip.getCenterX();
+    degreeError = (currentCenterX - desiredCenterX) / 4.0;
+    Rotater.setSetpoint(
+        (RobotModule.navigation.getYaw() + degreeError)
+        );
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
-    if  (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
-      RobotModule.logger.info("Finished AutoAim Horizontal");
+    if (Rotater.onTarget()) {
+      RobotModule.logger.info("Finished AutoAim Horizontal - On target");
       return true;
     } else return false;
   }
