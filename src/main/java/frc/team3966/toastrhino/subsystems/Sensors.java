@@ -66,6 +66,10 @@ public class Sensors extends Subsystem {
   public void dash_submodule_armBallGrab() {
     RobotModule.armBallGrab.dash_all();
   }
+  
+  public void dash_submodule_grip() {
+    RobotModule.grip.dash_all();
+  }
 
   public void dash_all() {
     dash_accel();
