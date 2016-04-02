@@ -41,7 +41,7 @@ public class AutoAimHorizontal extends Command {
   public class OutputRotation implements PIDOutput {
     @Override
     public void pidWrite(double output) {
-      this.set(output / 160.0);
+      this.set(output / 230.0);
     }
     public void set(double output) {
       RobotModule.drive.Rotate(output);
@@ -83,6 +83,7 @@ public class AutoAimHorizontal extends Command {
   protected boolean isFinished() {
     if (Rotater.onTarget()) {
       RobotModule.logger.info("Finished AutoAim Horizontal - On target");
+      Rotater.disable();
       return true;
     } else return false;
   }
@@ -98,5 +99,6 @@ public class AutoAimHorizontal extends Command {
   // subsystems is scheduled to run
   protected void interrupted() {
     RobotModule.drive.doNothing();
+    Rotater.disable();
   }
 }
