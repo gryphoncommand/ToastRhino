@@ -14,7 +14,8 @@ import frc.team3966.toastrhino.commands.ArmGround;
 import frc.team3966.toastrhino.commands.AutoAimHorizontal;
 import frc.team3966.toastrhino.commands.AutoAimVertical;
 import frc.team3966.toastrhino.commands.KickOut;
-import frc.team3966.toastrhino.commands.MoveForward;
+import frc.team3966.toastrhino.commands.AutoMoveForward;
+import frc.team3966.toastrhino.commands.AutoUnderLowBar;
 import frc.team3966.toastrhino.commands.AutoForwardAndDrop;
 import frc.team3966.toastrhino.commands.AutoHighGoal;
 import frc.team3966.toastrhino.commands.AutoHighGoalNoMove;
@@ -108,10 +109,11 @@ public class RobotModule extends IterativeModule {
 
     // Autonomous options
     chooser = new SendableChooser();
-    chooser.addObject("Move Forward", new MoveForward());
+    chooser.addObject("Move Forward", new AutoMoveForward());
     chooser.addObject("Low Goal Straight", new AutoForwardAndDrop());
     chooser.addObject("High Goal Shoot", new AutoHighGoal());
-    chooser.addObject("High Goal Shoot Ella", new AutoHighGoalNoMove());
+    chooser.addObject("Under Low Bar", new AutoUnderLowBar());
+    chooser.addObject("Target & Shoot", new AutoHighGoalNoMove());
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putData("Reset Navigation", resetNav);
