@@ -17,6 +17,7 @@ import frc.team3966.toastrhino.commands.KickOut;
 import frc.team3966.toastrhino.commands.MoveForward;
 import frc.team3966.toastrhino.commands.AutoForwardAndDrop;
 import frc.team3966.toastrhino.commands.AutoHighGoal;
+import frc.team3966.toastrhino.commands.AutoHighGoalNoMove;
 import frc.team3966.toastrhino.commands.ResetNavigation;
 import frc.team3966.toastrhino.commands.TankDrive;
 import frc.team3966.toastrhino.subsystems.ArmAim;
@@ -110,6 +111,7 @@ public class RobotModule extends IterativeModule {
     chooser.addObject("Move Forward", new MoveForward());
     chooser.addObject("Low Goal Straight", new AutoForwardAndDrop());
     chooser.addObject("High Goal Shoot", new AutoHighGoal());
+    chooser.addObject("High Goal Shoot Ella", new AutoHighGoalNoMove());
     SmartDashboard.putData("Auto mode", chooser);
 
     SmartDashboard.putData("Reset Navigation", resetNav);

@@ -17,7 +17,7 @@ public class RobotMap {
   public static final int BRmotor = 1;
   public static final int FLmotor = 2;
   public static final int BLmotor = 3;
-  
+
   // All 4 motors encoders
   public static final int FRencH = 0;
   public static final int BRencH = 4;
@@ -27,7 +27,7 @@ public class RobotMap {
   public static final int BLencH = 6;
   public static final int FLencL = 3;
   public static final int BLencL = 7;
-  
+
   // Drive PID settings
   public static boolean usePID = false;
   public static final double driveP = 1.0;
@@ -39,7 +39,7 @@ public class RobotMap {
   public static final int SRmotor = 5; // ArmAim right.
   public static final int Amotor = 6; // ArmAim up/down.
   public static final int KickMotor = 7; // Push ball out.
-  
+
   // ArmAim height encoder
   public static final int AencH = 8;
   public static final int AencL = 9;
@@ -51,7 +51,7 @@ public class RobotMap {
 
   // Encoder full speed
   public static double topspeed = 2500;
-  public static double potOffset = -25;
+  public static double potOffset = 0;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
