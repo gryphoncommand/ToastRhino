@@ -41,7 +41,7 @@ public class AutoAimHorizontal extends Command {
   public class OutputRotation implements PIDOutput {
     @Override
     public void pidWrite(double output) {
-      this.set(output / 230.0);
+      this.set(output / 160.0);
     }
     public void set(double output) {
       RobotModule.drive.Rotate(output);
@@ -71,11 +71,15 @@ public class AutoAimHorizontal extends Command {
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
 
     desiredCenterX = AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal());
+    SmartDashboard.putNumber("AutoHorizontal desiredCenterX", desiredCenterX);
     currentCenterX = RobotModule.grip.getCenterX();
-    degreeError = (currentCenterX - desiredCenterX) / 4.0;
+    SmartDashboard.putNumber("AutoHorizontal currentCenterX", currentCenterX);
+    degreeError = - (currentCenterX - desiredCenterX) / 4.0;
+    SmartDashboard.putNumber("AutoHorizontal Degree Error", degreeError);
     Rotater.setSetpoint(
         (RobotModule.navigation.getYaw() + degreeError)
         );
+    SmartDashboard.putData("AutoHorizontal Rotater", Rotater);
 
   }
 
