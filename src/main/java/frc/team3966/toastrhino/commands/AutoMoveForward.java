@@ -7,13 +7,13 @@ import frc.team3966.toastrhino.util.AppliedFunctions;
 /**
  *
  */
-public class MoveForward extends Command {
+public class AutoMoveForward extends Command {
 
-  public static final double maxTime = 3; //max time, in seconds
+  public static final double maxTime = 2; //max time, in seconds
   public static final double convertFactor = Math.pow(10, 9);
   private static double startTime = 0; //dont touch :P
 
-  public MoveForward() {
+  public AutoMoveForward() {
     requires(RobotModule.drive);
     requires(RobotModule.armAim);
     requires(RobotModule.navigation);
@@ -31,7 +31,7 @@ public class MoveForward extends Command {
     // Do some stuff
     if (System.nanoTime() < (startTime + (maxTime * convertFactor))) {
       // Time before maxTime is over
-      RobotModule.drive.TankDrive(0.7, 0.7);
+      RobotModule.drive.TankDrive(0.9, 0.9);
     } else if (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
       // After maxTime is over
       RobotModule.drive.doNothing();
