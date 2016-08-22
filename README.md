@@ -21,4 +21,5 @@ If you haven't already, you can deploy [Toast](https://github.com/Open-RIO/Toast
 2. Install Gradle plugin for Netbeans (Go to `Tools -> Plugins -> Available Plugins` and search `Gradle JavaEE`. Install that plugin, restart netbeans).
 3. Install FRC Netbeans plugin (Go to `Tools -> Plugins -> Settings` and click `Add` for name, use something like `FRC Plugins`, and for the url, use `http://first.wpi.edu/FRC/java/netbeans/update/Release/updates.xml` Restart netbeans).
 4. Go to `Tools -> Options -> Miscellaneous -> FRC Configuration` and set `Team Number` to `3966`.
-5. Now you can click the large green button in Netbeans, and it runs `gradlew clean build`
+5. Open the repo using `File -> Open Project`
+6. Now you can click the large green button in Netbeans, and it runs `gradlew clean build`
