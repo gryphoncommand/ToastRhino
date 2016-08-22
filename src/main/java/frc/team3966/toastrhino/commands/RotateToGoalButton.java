@@ -20,18 +20,18 @@ public class RotateToGoalButton extends Command {
   
   // This is a dummy class to get our wanted angle for the PIDController.
   public class RobotYaw implements PIDSource {
-    @Override
+    //@Override
     public double pidGet() {
       return this.get();
     }
     public double get() {
       return RobotModule.navigation.getYaw();
     }
-    @Override
+    //@Override
     public void setPIDSourceType(PIDSourceType pidSource) {
       RobotModule.logger.info("Set PID source type." + pidSource.toString());
     }
-    @Override
+    //@Override
     public PIDSourceType getPIDSourceType() {
       return PIDSourceType.kDisplacement;
     }
@@ -39,7 +39,7 @@ public class RotateToGoalButton extends Command {
   
   // The same kind of dummy class, but to output to rotation
   public class OutputRotation implements PIDOutput {
-    @Override
+    //@Override
     public void pidWrite(double output) {
       this.set(output / 180.0);
     }

@@ -21,25 +21,25 @@ public class AutoAimHorizontal extends Command {
   double desiredCenterX, currentCenterX, degreeError;
 
   public class RobotYaw implements PIDSource {
-    @Override
+    //@Override
     public double pidGet() {
       return this.get();
     }
     public double get() {
       return RobotModule.navigation.getYaw();
     }
-    @Override
+    //@Override
     public void setPIDSourceType(PIDSourceType pidSource) {
       RobotModule.logger.info("Set PID source type." + pidSource.toString());
     }
-    @Override
+    //@Override
     public PIDSourceType getPIDSourceType() {
       return PIDSourceType.kDisplacement;
     }
   }
 
   public class OutputRotation implements PIDOutput {
-    @Override
+    //@Override
     public void pidWrite(double output) {
       this.set(output / 160.0);
     }
