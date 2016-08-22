@@ -21,6 +21,8 @@ tmp/
 run/
 .gradle/
 gradle/.launch/
+*.gradle
+/.nb-gradle/
 
 # OS Files
 .DS_Store
@@ -38,3 +40,4 @@ Thumbs.db
 
 # directory for XML generated after running junit tests through ant
 junit/
+/.nb-gradle/
