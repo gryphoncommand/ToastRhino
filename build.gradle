@@ -37,8 +37,9 @@ gradlerio.team = "3966"                                 //Your FRC team number (
 gradlerio.deployFile = "toast/modules/${archivesBaseName}.jar"
 
 dependencies {
+  //compile name: 'STEMpunks-lib'
   compile group: 'jaci.openrio.toast', name: 'Toast', version: '2.4.10'    //Change this line to update Toast
-  compile name: 'STEMpunks-lib'
   compile fileTree(dir: 'libs/', include: '*.jar')
   toastLibrary fileTree(dir: 'libs/', include: '*.jar')
+  toastLibrary fileTree(dir: 'modules/', include: '*.jar')
 }
