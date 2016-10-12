@@ -27,11 +27,3 @@ If you haven't already, you can deploy [Toast](https://github.com/Open-RIO/Toast
 3. Go to `Tools -> Options -> Miscellaneous -> FRC Configuration` and set `Team Number` to `3966`.
 4. Open the repo using `File -> Open Project`
 5. Now you can click the large green button in Netbeans, and it runs `gradlew clean build`
-
-This also uses our Library (https://github.com/LN-STEMpunks/STEMpunks-lib). You do not need to clone it, and I would recommend not cloning it.
-
-A few of us are on that team which handles the lib, but most aren't, so don't clone it unless you need to.
-
-This should have the most updated Jar available (in modules/STEMpunks-lib.jar) If not, tell me (Cade Brown), have me build and update this repo's jar.
-
-Then you should clone the newest version.

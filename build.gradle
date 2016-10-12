@@ -10,12 +10,9 @@ buildscript {
     name = "GradleRIO"
     url = "http://dev.imjac.in/maven"
   }
-  flatDir {
-      dirs 'modules'
-  }
   }
   dependencies {
-    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '4.4.3', classifier: 'Toast'			//Change this line if you wish to Update GradleRIO
+    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '4.4.3', classifier: 'Toast'            //Change this line if you wish to Update GradleRIO
   }
 }
 
@@ -37,9 +34,7 @@ gradlerio.team = "3966"                                 //Your FRC team number (
 gradlerio.deployFile = "toast/modules/${archivesBaseName}.jar"
 
 dependencies {
-  //compile name: 'STEMpunks-lib'
   compile group: 'jaci.openrio.toast', name: 'Toast', version: '2.4.10'    //Change this line to update Toast
   compile fileTree(dir: 'libs/', include: '*.jar')
   toastLibrary fileTree(dir: 'libs/', include: '*.jar')
-  toastLibrary fileTree(dir: 'modules/', include: '*.jar')
 }
