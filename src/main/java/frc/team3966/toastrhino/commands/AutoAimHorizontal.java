@@ -70,7 +70,7 @@ public class AutoAimHorizontal extends Command {
     // Do some stuff
     SmartDashboard.putNumber("Rotation Needed", Rotater.getError());
 
-    desiredCenterX = AppliedFunctions.getShooterCenterXUsingDistance(RobotModule.grip.getDistanceToGoal());
+    desiredCenterX = AppliedFunctions.getShooterCenterX();
     SmartDashboard.putNumber("AutoHorizontal desiredCenterX", desiredCenterX);
     currentCenterX = RobotModule.grip.getCenterX();
     SmartDashboard.putNumber("AutoHorizontal currentCenterX", currentCenterX);

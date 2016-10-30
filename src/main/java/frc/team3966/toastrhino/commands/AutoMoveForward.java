@@ -22,16 +22,17 @@ public class AutoMoveForward extends Command {
   // Called just before this Command runs the first time
   protected void initialize() {
     startTime = System.nanoTime();
-    RobotModule.armAim.setHeightAbsolute(20.0);
+    //RobotModule.armAim.setHeightAbsolute(20.0);
     RobotModule.drive.doNothing();
   }
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
+    //return;
     // Do some stuff
     if (System.nanoTime() < (startTime + (maxTime * convertFactor))) {
       // Time before maxTime is over
-      RobotModule.drive.TankDrive(0.9, 0.9);
+      RobotModule.drive.TankDrive(0.8, 0.8);
     } else if (System.nanoTime() > (startTime + (maxTime * convertFactor))) {
       // After maxTime is over
       RobotModule.drive.doNothing();
@@ -41,6 +42,9 @@ public class AutoMoveForward extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {
+    //we need to short circuit to disable
+    //return true;
+    //Normal
     return (System.nanoTime() > (startTime + (maxTime * convertFactor)));
   }
 

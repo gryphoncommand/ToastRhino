@@ -32,7 +32,7 @@ public class AutoHighGoal extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     // Do some stuff
-    if (System.nanoTime() < (startTime + (2.0 * convertFactor))) {
+    /*if (System.nanoTime() < (startTime + (2.0 * convertFactor))) {
       // Over defense
       RobotModule.drive.TankDrive(0.9, 0.9);
     } else if (System.nanoTime() < (startTime + ( 2.5 * convertFactor))) { // Time to stop
@@ -58,7 +58,7 @@ public class AutoHighGoal extends Command {
     }
     
     if (this.isFinished()) RobotModule.logger.info("AutoHighGoal Done.");
-    
+    */ 
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -100,12 +100,16 @@ public class RobotModule extends IterativeModule {
     // Rotate to Goal on button press
     armBrake = new ArmBrake();
     RobotModule.oi.ArmBrakeButton.whenPressed(armBrake);
+    RobotModule.oi.ArmBrakeButton2.whenPressed(armBrake);
     armGround = new ArmGround();
     RobotModule.oi.ArmGroundButton.whenPressed(armGround);
+    RobotModule.oi.ArmGroundButton2.whenPressed(armGround);
     autoAimVertical = new AutoAimVertical();
     autoAimHorizontal = new AutoAimHorizontal();
     RobotModule.oi.ArmAutoAim.whenPressed(autoAimVertical);
+    RobotModule.oi.ArmAutoAim2.whenPressed(autoAimVertical);
     RobotModule.oi.ArmAutoAimHorizontal.whileHeld(autoAimHorizontal);
+    RobotModule.oi.ArmAutoAimHorizontal2.whileHeld(autoAimHorizontal);
 
     // Autonomous options
     chooser = new SendableChooser();
@@ -158,20 +162,11 @@ public class RobotModule extends IterativeModule {
    */
   @Override
   public void autonomousInit() {
-    autonomousCommand = (Command) chooser.getSelected();
-
-    /* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-      switch(autoSelected) {
-      case "My Auto":
-        autonomousCommand = new MyAutoCommand();
-        break;
-      case "Default Auto":
-      default:
-        autonomousCommand = new ExampleCommand();
-        break;
-      } */
+    //autonomousCommand = (Command) chooser.getSelected();
 
     // schedule the autonomous command (example)
+    //Move forward for autonomous
+    autonomousCommand = new AutoMoveForward(); 
     if (autonomousCommand != null) autonomousCommand.start();
     if (TankDrive != null) TankDrive.cancel();
     logger.info("Autonomous.");

@@ -21,7 +21,7 @@ public class AimControl extends Command {
 
   // Called just before this Command runs the first time
   protected void initialize() {
-    //RobotModule.armAim.enablePID(true);
+    RobotModule.armAim.enablePID(false);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,8 +47,8 @@ public class AimControl extends Command {
 			} else {
 			  height = 0;
 			}
-	    double distanceFromGoal = AppliedFunctions.getDistance(centerY); //m
-	    SmartDashboard.putNumber("Distance from goal", distanceFromGoal);
+	    //double distanceFromGoal = AppliedFunctions.getDistance(centerY); //m
+	    //SmartDashboard.putNumber("Distance from goal", distanceFromGoal);
 	   
 	    
 	    

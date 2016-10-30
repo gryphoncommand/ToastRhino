@@ -72,6 +72,9 @@ public class Sensors extends Subsystem {
   }
 
   public void dash_all() {
+    SmartDashboard.putNumber("GRIP CenterX", RobotModule.grip.getCenterX());
+    SmartDashboard.putNumber("GRIP CenterY", RobotModule.grip.getCenterY());
+
     dash_accel();
     dash_power();
     dash_submodule_navigation();

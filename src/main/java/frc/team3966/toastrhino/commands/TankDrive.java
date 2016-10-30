@@ -23,7 +23,12 @@ public class TankDrive extends Command {
   protected void execute() {
     //RobotModule.drive.TankDrive(RobotModule.oi.controller.getRawAxis(5), RobotModule.oi.controller.getRawAxis(1));
     // Note that "up" is negative on the axis
-    RobotModule.drive.TankDrive(-RobotModule.oi.controller.getRightStickY(), -RobotModule.oi.controller.getLeftStickY());
+    double lDrive = -RobotModule.oi.controller.getLeftStickY();
+    double rDrive = -RobotModule.oi.controller.getRightStickY();
+    
+    if (Math.abs(lDrive) < .1) lDrive = -RobotModule.oi.controller2.getLeftStickY();
+    if (Math.abs(rDrive) < .1) rDrive = -RobotModule.oi.controller2.getRightStickY();
+    RobotModule.drive.TankDrive(rDrive, lDrive);
   }
 
   // Make this return true when this Command no longer needs to run execute()

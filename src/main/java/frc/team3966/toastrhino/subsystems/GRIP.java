@@ -86,8 +86,8 @@ public class GRIP extends Subsystem {
 	  }
 
   public void dash_all() {
-    SmartDashboard.putNumber("GRIP CenterY", getCenterY());
-    SmartDashboard.putNumber("GRIP CenterX", getCenterX());
+    SmartDashboard.putNumber("Contour CenterY", getCenterY());
+    SmartDashboard.putNumber("Contour CenterX", getCenterX());
   }
 
 }

@@ -84,7 +84,7 @@ public class ArmAim extends Subsystem {
   }
 
   public void setAmotor(double speed) {
-    Amotor.set(speed);
+    Amotor.set(speed * .75);
   }
   
   public void setHeightRelative(double speed) {
